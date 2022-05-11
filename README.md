@@ -1,0 +1,2 @@
+# eodc
+Curso de muestreo para encuestas de origen destino impartido en el PUEC, UNAM
