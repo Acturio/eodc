@@ -1,0 +1,54 @@
+--- 
+title: "Análisis Muestral de Encuestas Origen-Destino"
+author: "Act. Arturo Bringas"
+documentclass: book
+bibliography: [book.bib, packages.bib]
+# url: your book url like https://bookdown.org/yihui/bookdown
+# cover-image: path to the social sharing image like images/cover.jpg
+description: |
+  This is a minimal example of using the bookdown package to write a book.
+  The HTML output format for this example is bookdown::gitbook,
+  set in the _output.yml file.
+link-citations: yes
+site: bookdown::bookdown_site
+---
+
+# Introducción
+
+## Objetivo
+
+El objetivo de estas sesiones es presentar de modo general la metodología estadística de muestreo para crear muestras representantivas de una población que permitan hacer inferencia sobre sus características. En las siguientes clases abordaremos los pasos para diseñar una muestra aleatoria, así como los pasos necesarios para realizar las estimaciones estadísticas a partir de los elementos observados en la muestra.
+
+**Requisitos:**
+
+> Computadora con al menos 4Gb Ram. 
+
+> Instalación de R con al menos versión 4.1.0
+
+> Instalación de Rstudio con al menos versión 1.4
+
+
+## Instructor
+
+**ACT. ARTURO BRINGAS** 
+
+**LinkedIn:** [arturo-bringas](https://www.linkedin.com/in/arturo-bringas/)
+**Email:** act.arturo.b@ciencias.unam.mx
+
+Actuario, egresado de la Facultad de Ciencias y Maestría en Ciencia de Datos, ITAM. 
+Experiencia en modelos predictivos y de clasificación de machine learning aplicado a seguros, deportes y movilidad internacional. Es jefe de departamento en Investigación Aplicada y Opinión de la UNAM, donde realiza estudios estadísticos de impacto social. Es consultor para empresas y organizaciones como GNP, El Universal, UNAM, Sinnia, la Organización de las Naciones Unidas Contra la Droga y el Delito (UNODC), entre otros. Actualmente es profesor de *ciencia de datos y machine learning* en AMAT y se desempeña como consultor independiente en diferentes proyectos contribuyendo a empresas en temas de machine learning, estadística, series de tiempo, visualización de datos y análisis geoespacial.
+
+```{r echo=FALSE,fig.align='center'}
+knitr::include_graphics("img/00-presentacion/arturo.png")
+```
+
+
+## Recursos y dinámica de clase
+
+En esta clase estaremos usando: 
+
+* R [da click aquí si aún no lo descargas](https://cran.r-project.org/)
+* RStudio [da click aquí también](https://www.rstudio.com/products/rstudio/download/)
+* [Google Drive]()
+* Notas de clase [Revisame si quieres aprender]() 
+

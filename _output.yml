@@ -1,0 +1,18 @@
+bookdown::gitbook:
+  css: style.css
+  config:
+    toc:
+      before: |
+        <li><a href="./"><img src="img/00-presentacion/logo_puec.jpg" width="240" height="300"></a></li|
+        |:-:|  
+        <center> Muestreo en encuestas de Origen-Destino </center>
+      after: |
+        <li><a href="./"><img src="img/00-presentacion/logo_unam.png" width="240"></a></li>
+    download: ["pdf"]
+bookdown::pdf_book:
+  output_dir: 'docs'
+  includes:
+    in_header: preamble.tex
+  latex_engine: xelatex
+  citation_package: natbib
+  keep_tex: yes
