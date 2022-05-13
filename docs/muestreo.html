@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 2 Muestreo | Análisis Muestral de Encuestas Origen-Destino</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.26.3 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 2 Muestreo | Análisis Muestral de Encuestas Origen-Destino" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 2 Muestreo | Análisis Muestral de Encuestas Origen-Destino" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Act. Arturo Bringas" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"><img src="img/00-presentacion/logo_puec.jpg" width="240" height="300"></a></li|
+|:-:|  
+<center> Muestreo en encuestas de Origen-Destino </center>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> url: your book url like <span>https://bookdown.org/yihui/bookdown</span></a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#objetivo"><i class="fa fa-check"></i><b>1.1</b> Objetivo</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#instructor"><i class="fa fa-check"></i><b>1.2</b> Instructor</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#recursos-y-dinámica-de-clase"><i class="fa fa-check"></i><b>1.3</b> Recursos y dinámica de clase</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="muestreo.html"><a href="muestreo.html"><i class="fa fa-check"></i><b>2</b> Muestreo</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="muestreo.html"><a href="muestreo.html#qué-es-y-para-qué-sirve-muestreo"><i class="fa fa-check"></i><b>2.1</b> ¿Qué es y para qué sirve muestreo?</a></li>
+<li class="chapter" data-level="2.2" data-path="muestreo.html"><a href="muestreo.html#ventajas-e-importancia-de-utilizar-muestreo-en-el-mundo-corporativo"><i class="fa fa-check"></i><b>2.2</b> Ventajas e importancia de utilizar muestreo en el mundo corporativo</a></li>
+<li class="chapter" data-level="2.3" data-path="muestreo.html"><a href="muestreo.html#qué-se-requiere-para-formular-un-problema-de-muestreo"><i class="fa fa-check"></i><b>2.3</b> ¿Qué se requiere para formular un problema de muestreo?</a></li>
+<li class="chapter" data-level="2.4" data-path="muestreo.html"><a href="muestreo.html#tipos-de-muestreo"><i class="fa fa-check"></i><b>2.4</b> Tipos de muestreo</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="muestreo.html"><a href="muestreo.html#muestreo-no-probabilístico"><i class="fa fa-check"></i><b>2.4.1</b> Muestreo no probabilístico</a></li>
+<li class="chapter" data-level="2.4.2" data-path="muestreo.html"><a href="muestreo.html#muestreo-probabilístico"><i class="fa fa-check"></i><b>2.4.2</b> Muestreo probabilístico</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="muestreo.html"><a href="muestreo.html#instrumentos-de-captura-de-datos"><i class="fa fa-check"></i><b>2.5</b> Instrumentos de captura de datos</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="muestreo.html"><a href="muestreo.html#tipos-de-encuestas-según-la-forma-de-aplicación"><i class="fa fa-check"></i><b>2.5.1</b> Tipos de encuestas según la forma de aplicación</a></li>
+<li class="chapter" data-level="2.5.2" data-path="muestreo.html"><a href="muestreo.html#tipos-de-encuestas-según-sus-objetivos"><i class="fa fa-check"></i><b>2.5.2</b> Tipos de encuestas según sus objetivos</a></li>
+<li class="chapter" data-level="2.5.3" data-path="muestreo.html"><a href="muestreo.html#tipos-de-encuestas-según-las-preguntas"><i class="fa fa-check"></i><b>2.5.3</b> Tipos de encuestas según las preguntas</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="muestreo.html"><a href="muestreo.html#tamaño-de-muestra"><i class="fa fa-check"></i><b>2.6</b> Tamaño de muestra</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="muestreo.html"><a href="muestreo.html#implementación-en-r"><i class="fa fa-check"></i><b>2.6.1</b> Implementación en R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="./"><img src="img/00-presentacion/logo_unam.png" width="240"></a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Análisis Muestral de Encuestas Origen-Destino</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="muestreo" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Capítulo 2</span> Muestreo<a href="muestreo.html#muestreo" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="qué-es-y-para-qué-sirve-muestreo" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> ¿Qué es y para qué sirve muestreo?<a href="muestreo.html#qué-es-y-para-qué-sirve-muestreo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>El muestreo es el proceso de seleccionar un conjunto de individuos de una población con el fin de estudiarlos y poder caracterizar el total de la población. Nos ayuda a <strong>obtener información fiable de la población a partir de una muestra</strong> de la que extrae inferencias estadísticas con un margen de error medido en términos de probabilidades. En otras palabras, en una investigación por muestreo podremos estudiar el comportamiento y las opiniones de toda una población analizando únicamente una parte de esta, teniendo en cuenta que <strong>siempre existirá un margen de error</strong> a la hora de realizar dichos cálculos.</p>
+<p><img src="img/01-muestreo/1-1-1-muestreo.jpg" width="450pt" height="450pt" style="display: block; margin: auto;" /></p>
+<p>El aumento del uso de las técnicas de muestreo en la investigación es claro porque es un procedimiento
+que <strong>cuesta mucho menos dinero y consume menos tiempo</strong>. Una muestra bien seleccionada de unos cuantos
+miles de individuos puede representar con gran precisión una población de millones.</p>
+<div class="infobox pin">
+<p><strong>¡¡ RECORDAR !!</strong></p>
+<p>En comparación con un censo, una muestra bien diseñada puede lograr estimaciones de <strong>alta calidad, en poco tiempo y a bajo costo</strong> a costa de un <strong>error de muestreo</strong>, el cual puede ser <strong>controlado.</strong></p>
+</div>
+</div>
+<div id="ventajas-e-importancia-de-utilizar-muestreo-en-el-mundo-corporativo" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Ventajas e importancia de utilizar muestreo en el mundo corporativo<a href="muestreo.html#ventajas-e-importancia-de-utilizar-muestreo-en-el-mundo-corporativo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Ventajas</strong></p>
+<ul>
+<li><p><strong>Reducción de costos:</strong> Los costos de un estudio serán menores si los datos de interés se pueden obtener a partir de una muestra de la población. Por ejemplo, cuando se realizan estudios de prevalencia de un evento de interés, es más económico medir una muestra representativa de 1500 sujetos de una población, que el total de individuos que la componen.</p></li>
+<li><p><strong>Eficiencia:</strong> Al trabajar con un número reducido de sujetos de estudio, representativos de la población; el tiempo necesario para conducir el estudio y obtener resultados y conclusiones será notoriamente menor.</p></li>
+</ul>
+<div class="infobox important">
+<p><strong>Importancia</strong></p>
+<p>No es posible ponerse en contacto con toda la población, por lo que solo se incluye una muestra o un subconjunto y se realiza una estimación estadística. <strong>La muestra actúa de manera representativa de toda la población, controlando el márgen de error.</strong></p>
+</div>
+</div>
+<div id="qué-se-requiere-para-formular-un-problema-de-muestreo" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> ¿Qué se requiere para formular un problema de muestreo?<a href="muestreo.html#qué-se-requiere-para-formular-un-problema-de-muestreo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Es requisito fundamental de una buena muestra que las características de interés que existen en la
+población se reflejen en la muestra de la manera más cercana posible.
+Esas características tienen que ver principalmente con el tamaño de la muestra y con la manera de obtenerla.</p>
+<p>Para esto se necesitan definir los siguientes conceptos:</p>
+<ul>
+<li><p><strong>Población objetivo:</strong> Colección completa de todas las unidades que se quieren estudiar.</p></li>
+<li><p><strong>Marco de muestreo:</strong> Listado de elementos que pertenecen a la población objetivo y son elegibles en la muestra.</p></li>
+<li><p><strong>Muestra:</strong> Subconjunto de la población.</p></li>
+<li><p><strong>Unidad de muestreo:</strong> Objeto a ser seleccionado en la muestra que permitirá el acceso a
+la unidad de observación.</p></li>
+<li><p><strong>Unidad de observación:</strong> Objeto sobre el que finalmente se realiza la medición.</p></li>
+<li><p><strong>Variable de interés:</strong> Característica propia de los individuos sobre la que se realiza la
+inferencia para resolver los objetivos de la investigación.</p></li>
+</ul>
+<p>En la teoría de muestreo la variable de interés no se supone como una variable aleatoria sino como una
+cantidad fija o una característica propia de las unidades que componen la población.</p>
+</div>
+<div id="tipos-de-muestreo" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Tipos de muestreo<a href="muestreo.html#tipos-de-muestreo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Una muestra puede ser obtenida de diferentes maneras:</p>
+<ul>
+<li>No probabilística.
+<ul>
+<li>Por cuotas</li>
+<li>Conveniencia</li>
+<li>Bola de nieve</li>
+<li>Discrecional</li>
+</ul></li>
+<li>Probabilística
+<ul>
+<li>Aleatorio Simple</li>
+<li>Sistemático</li>
+<li>Estratificado</li>
+<li>Conglomerados</li>
+<li>Polietápico</li>
+<li>Etc.</li>
+</ul></li>
+</ul>
+<p>A continuación se definen y muestran las diferencias de estas técnicas de muestreo.</p>
+<div id="muestreo-no-probabilístico" class="section level3 hasAnchor" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> Muestreo no probabilístico<a href="muestreo.html#muestreo-no-probabilístico" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Utiliza métodos en que <strong>no interviene el azar</strong>, por lo que se desconoce la probabilidad asociada a cada individuo para formar parte de la muestra. Normalmente estos métodos se utilizan en estudios exploratorios o intencionales, en los cuales no es necesario proyectar los resultados.</p>
+<p>El inconveniente de este método es que <strong>no puede asegurarse la representatividad de la muestra</strong>.</p>
+<p>Los sistemas de muestreo no probabilísticos se clasifican de la siguiente manera:</p>
+<p><img src="img/01-muestreo/1-1-4-tipos-de-muestreo-no-probabilistico.jpg" width="450pt" height="450pt" style="display: block; margin: auto;" /></p>
+<ul>
+<li><strong>Muestreo por cuotas o cupos:</strong> Si se conocen las características de la población a estudiar, <strong>se elegirán los individuos respetando ciertas cuotas por edad, género, zona de residencia, entre otras que habrán sido prefijadas</strong>.
+Primero se realiza una clara división por cuotas (estratos) y posteriormente a cada cuota se aplica un muestreo discrecional.</li>
+</ul>
+<p>Ejemplo: Seleccionar 20 estudiantes de la carrera de ingeniería industrial, que ya hayan cursado el noveno semestre de la carrera y que tengan promedio arriba del 6.5. Se eligen a los primeros 20 que cumplan con estas condiciones.
+Este tipo de muestreo se utiliza especialmente en las encuestas de opinión.</p>
+<p><img src="img/01-muestreo/1-1-4-tipos-de-muestreo-no-probabilistico-cuotas.png" width="450pt" height="250pt" style="display: block; margin: auto;" /></p>
+<ul>
+<li><strong>Muestreo por conveniencia:</strong> Las muestras de la población se seleccionan solo porque <strong>están convenientemente disponibles para el investigador</strong>. Es la técnica de muestreo no probabilística más común, debido a su velocidad, costo-efectividad y facilidad de disponibilidad de la muestra.</li>
+</ul>
+<p>Ejemplo: Utilizar a estudiantes voluntarios que sean conocidos del investigador. El investigador puede enviar la encuesta a los estudiantes y ellos en este caso actuarían como muestra.</p>
+<p><img src="img/01-muestreo/1-1-4-tipos-de-muestreo-no-probabilistico-conveniencia.png" width="450pt" height="250pt" style="display: block; margin: auto;" /></p>
+<ul>
+<li><strong>Muestreo bola de nieve:</strong> Se basa en <strong>referencias de sujetos iniciales para generar sujetos adicionales</strong>, de ahí deriva su nombre. Cuando se aplica este método de muestreo, los miembros del grupo de muestra se reclutan a través de una remisión en cadena. Estos pasos se repiten hasta que se encuentra el tamaño de muestra necesario. Éticamente, no se debe pedir a los participantes del estudio que identifiquen a otros participantes potenciales. Más bien, se les debe pedir que alienten a otros a que participen.</li>
+</ul>
+<p>Este muestreo consiste en dos partes:</p>
+<ol style="list-style-type: decimal">
+<li><p>Identificar sujetos potenciales en la población. A menudo, sólo uno o dos sujetos pueden ser encontrados inicialmente.</p></li>
+<li><p>Pedir a esos sujetos que recluten a otras personas. Los participantes deben ser conscientes de que no tienen que proporcionar ningún otro nombre.</p></li>
+</ol>
+<p>Ejemplo: Realizar estudios con poblaciones marginales, tipos de enfermos, especialistas, etc.</p>
+<p><img src="img/01-muestreo/1-1-4-tipos-de-muestreo-no-probabilistico-bola-nieve.png" width="450pt" height="350pt" style="display: block; margin: auto;" /></p>
+<ul>
+<li><strong>Muestreo discrecional:</strong> La muestra es elegida a partir de un <strong>criterio profesional y puede basarse en la experiencia de investigaciones</strong> realizadas con anterioridad o en el conocimiento que el investigador tiene sobre la población.</li>
+</ul>
+<p>Es difícil estimar cuán cerca de la realidad se encuentra esta estimación. De hecho, la relevancia de los resultados depende de la experiencia del investigador.</p>
+<p>Ejemplo 1: se desea realizar una investigación sobre el comportamiento de los padres con sus hijos. Por lo tanto, el investigador selecciona como muestra a personas que tengan hijos, ya que las considera aptas de conocimiento para formar parte de la investigación.</p>
+<p>Ejemplo 2: Una prueba piloto podría realizarse a través de una muestra conformada por unidades de interés para el investigador que previamente sabe que puede poner a prueba el proceso de medición y los instrumentos de recolección de datos.</p>
+<div class="center infobox important">
+<p>¡¡¡ RECORDAR !!!</p>
+<p>Los diseños de muestra no probabilísticos <strong>NO TIENEN REPRESENTATIVIDAD ESTADÍSTICA</strong>, por lo que <strong>los resultados no pueden generalizarse</strong> al resto de la población.</p>
+</div>
+</div>
+<div id="muestreo-probabilístico" class="section level3 hasAnchor" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span> Muestreo probabilístico<a href="muestreo.html#muestreo-probabilístico" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>El muestreo probabilístico se define como aquél en que <strong>todos los individuos de la población tienen una probabilidad de entrar a formar parte de la muestra</strong>. Los diseños en que interviene el azar producen <strong>muestras representativas</strong> la mayoría de las veces.</p>
+<p>Los sistemas de muestreo probabilísticos de clasifican de la siguiente manera:</p>
+<p><img src="img/01-muestreo/1-1-4-tipos-de-muestreo-probabilistico.jpg" width="450pt" height="450pt" style="display: block; margin: auto;" /></p>
+<ul>
+<li><strong>Muestreo aleatorio simple:</strong> Se caracteriza porque <strong>cada elemento de la población tiene la misma probabilidad de ser escogido para formar parte de la muestra</strong> y todas las posibles muestras tienen la misma probabilidad de ser elegidas. Una vez censado el marco de la población, se asigna un número a cada individuo o elemento y se elige aleatoriamente.</li>
+</ul>
+<p>Para seleccionar una muestra de este tipo se requiere tener en forma de lista todos los elementos que integran la población investigada y utilizar tablas de números aleatorios.</p>
+<p>Ejemplo: A un grupo de 100 personas se les numera de uno a cien y se depositan en una urna 100 canicas a su vez numeradas de uno a cien. Para obtener una muestra aleatoria simple de 20 elementos, tendríamos que sacar 20 canicas numeradas de la urna que nos seleccionarán en forma completamente aleatoria a los 20 elementos escogidos para que opinen sobre un nuevo producto.</p>
+<p><img src="img/01-muestreo/1-1-4-tipos-de-muestreo-probabilistico-mas.png" width="250pt" height="250pt" style="display: block; margin: auto;" /></p>
+<ul>
+<li><strong>Muestreo sistemático:</strong> Es susceptible de ser más preciso que el muestreo aleatorio simple. Se elige un primer elemento del universo y luego se van escogiendo otros <strong>elementos igualmente espaciados a partir del primero</strong>. Consiste en dividir la población en <span class="math inline">\(n\)</span> estratos, compuestos de <span class="math inline">\(k\)</span> unidades.</li>
+</ul>
+<p>Ejemplo: a partir de una lista de 100 establecimientos de comestibles, deseamos seleccionar una muestra probabilística de 25 tiendas. La forma de hacerlo sería:</p>
+<ol style="list-style-type: decimal">
+<li><p>Dividir 100 entre 25 para obtener 4 tiendas que es el salto sistemático.</p></li>
+<li><p>Extraer un número al azar entre 1 y 4. Supóngase que es el número 3 el cual corresponde al primer elemento seleccionado.</p></li>
+<li><p>Se incluyen en la muestra de establecimientos numerados: <span class="math inline">\(3, 7, 11, 15\)</span></p></li>
+</ol>
+<p><img src="img/01-muestreo/1-1-4-tipos-de-muestreo-probabilistico-sistematico.jpg" width="350pt" height="450pt" style="display: block; margin: auto;" /></p>
+<ul>
+<li><strong>Muestreo estratificado:</strong> En este tipo de muestreo <strong>la población de estudio se divide en subgrupos o estratos</strong>, escogiendo posteriormente una muestra al azar de cada estrato. Esta división suele realizarse según una característica que pueda influir sobre los resultados del estudio.</li>
+</ul>
+<p>Si la estratificación se realiza respecto una característica se denomina <em>muestreo estratificado simple</em>, y si se realiza respecto a dos o más características sedenomina <em>muestreo estratificado compuesto</em>.</p>
+<p>Ejemplo: Si existen 5 millones de hipertensos en una población y hay un <span class="math inline">\(35\%\)</span> de pacientes que fuman, podemos estratificar de manera que en nuestra muestra queden representados al igual que en el total de la población, la misma proporción de hipertensos fumadores (<span class="math inline">\(35\%\)</span>) y de no fumadores (<span class="math inline">\(65\%\)</span>).</p>
+<p><img src="img/01-muestreo/1-1-4-tipos-de-muestreo-probabilistico-estratificado.jpg" width="350pt" height="350pt" style="display: block; margin: auto;" /></p>
+<ul>
+<li><strong>Muestreo por conglomerados:</strong> El muestreo por conglomerados nos ayuda cuando es imposible o poco práctico crear un marco de muestreo de una población objetivo debido a que está muy <strong>dispersa geográficamente</strong> y el costo de la recopilación de datos es relativamente alto. Los elementos de la población son seleccionados al azar en forma natural por agrupaciones (clusters). Los elementos del muestreo se seleccionan de la población de manera individual, uno a la vez.</li>
+</ul>
+<p>La heterogeneidad del grupo es fundamental para un buen diseño del muestreo por conglomerados. Por otra parte, los elementos dentro de cada grupo debe ser tan heterogéneos como la población objetivo</p>
+<p>Ejemplo: Una ONG quiere crear una muestra de niños en edad escolar primaria en 5 ciudades vecinas para obtener información sobre su nivel de educación.</p>
+<p><img src="img/01-muestreo/1-1-4-tipos-de-muestreo-probabilistico-conglomerados.png" width="450pt" height="250pt" style="display: block; margin: auto;" /></p>
+<ul>
+<li><p><strong>Muestreo poli-etápico:</strong> Consiste en empezar a muestrear por algo que no constituye el objeto de la investigación (unidades primarias), y obtener una muestra dentro de cada una de ellas (unidades secundarias). Pueden utilizarse sucesivamente tantas etapas como sean necesarias, y en cada una de ellas, una técnica de muestreo diferente. Este método de muestreo se utiliza cuando la población de referencia es muy amplia y dispersa, ya que facilita la realización del estudio.</p></li>
+<li><p><strong>Muestreo proporcional al tamaño de la población (PPT):</strong> Método en el que la probabilidad de selección de una determinada unidad de muestreo es proporcional a su tamaño (generalmente el número de individuos u hogares que contiene la unidad de muestreo). En estas situaciones, si se utilizara el muestreo aleatorio para seleccionar las unidades de muestreo, los individuos de las mayores unidades de muestreo tendrían una probabilidad mucho menor de ser seleccionados que los de las unidades de muestreo más pequeñas</p></li>
+</ul>
+<p>Ejemplo: Elegir primero hospitales y después de haberlos seleccionado, realizamos el muestreo de pacientes dentro de cada hospital.</p>
+</div>
+</div>
+<div id="instrumentos-de-captura-de-datos" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Instrumentos de captura de datos<a href="muestreo.html#instrumentos-de-captura-de-datos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>La <strong>encuesta</strong> es una técnica de recolección de datos que consta de una serie de preguntas estandarizadas hechas a una muestra representativa de la población de la que buscamos obtener información. Es una técnica útil para cualquiera que busque recopilar datos.</p>
+<p>Asociado con cada elemento de la población existe una o más variables de interés. Una encuesta
+permite conseguir información sobre características poblacionales desconocidas llamadas
+<em>parámetros</em>.</p>
+<div id="tipos-de-encuestas-según-la-forma-de-aplicación" class="section level3 hasAnchor" number="2.5.1">
+<h3><span class="header-section-number">2.5.1</span> Tipos de encuestas según la forma de aplicación<a href="muestreo.html#tipos-de-encuestas-según-la-forma-de-aplicación" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><strong>Encuesta por correo:</strong> Consiste en enviar un cuestionario a través del servicio postal para que después de ser respondido, sea regresado al remitente.</li>
+</ul>
+<p><img src="img/01-muestreo/1-1-5-diferentes-formas-de-hacer-muestreo-correo.png" width="450pt" height="250pt" style="display: block; margin: auto;" /></p>
+<ul>
+<li><strong>Encuesta por vía telefónica:</strong> Consiste en realizar el cuestionario a través de una llamada telefónica, en la que el encuestador debe ir capturando las respuestas del encuestado.</li>
+</ul>
+<p><img src="img/01-muestreo/1-1-5-diferentes-formas-de-hacer-muestreo-telefono.png" width="350pt" height="350pt" style="display: block; margin: auto;" /></p>
+<ul>
+<li><strong>Encuesta personal:</strong> Consiste en realizar el cuestionario cara a cara, debe existir una interacción entre encuestador y encuestado, normalmente el encuestador toma nota de las respuestas aunque en ocasiones solo entrega el cuestionario y es el encuestado quien lo llena.</li>
+</ul>
+<p>Una encuesta personal puede ser de dos tipos:</p>
+<blockquote>
+<p>De intercepción: el investigador suele ubicarse en espacios públicos como centros comerciales o parques para hacer una entrevista con preguntas concisas a personas que integran su muestra de estudio.</p>
+</blockquote>
+<blockquote>
+<p>De puerta en puerta: En este tipo de encuestas, el investigador recorre casa por casa y solicita al participante tiempo para poder hacer aplicar el cuestionario.</p>
+</blockquote>
+<p><img src="img/01-muestreo/1-1-5-diferentes-formas-de-hacer-muestreo-encuesta.jpg" width="450pt" height="250pt" style="display: block; margin: auto;" /></p>
+<ul>
+<li><strong>Encuesta online:</strong> Consiste en realizar el cuestionario utilizando el internet como medio de distribución, las encuestas online se caracterizan principalmente por ser económicas.</li>
+</ul>
+<p><img src="img/01-muestreo/1-1-5-diferentes-formas-de-hacer-muestreo-online.jpg" width="450pt" height="250pt" style="display: block; margin: auto;" /></p>
+</div>
+<div id="tipos-de-encuestas-según-sus-objetivos" class="section level3 hasAnchor" number="2.5.2">
+<h3><span class="header-section-number">2.5.2</span> Tipos de encuestas según sus objetivos<a href="muestreo.html#tipos-de-encuestas-según-sus-objetivos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p><strong>Encuestas descriptivas:</strong> estas encuestas buscan crear un registro sobre las actitudes o condiciones presentes dentro de una población en un momento determinado, es decir, en el momento en el que se realiza la encuesta.</p></li>
+<li><p><strong>Encuestas análiticas:</strong> a diferencia de las descriptivas, su objetivo no es documentar un problema sino explicar y describirlo para poder encontrar la mejor solución.</p></li>
+</ul>
+</div>
+<div id="tipos-de-encuestas-según-las-preguntas" class="section level3 hasAnchor" number="2.5.3">
+<h3><span class="header-section-number">2.5.3</span> Tipos de encuestas según las preguntas<a href="muestreo.html#tipos-de-encuestas-según-las-preguntas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p><strong>Respuesta abierta:</strong> estas permiten al encuestado tener la libertad de responder libremente cada pregunta, esto permite obtener respuestas más profundas y también obtener respuestas en las que no se había pensado, sin embargo, el problema de este tipo de encuestas es que es muy difícil de cuantificar, debido a que se deben interpretar las respuestas.</p></li>
+<li><p><strong>Respuesta cerrada:</strong> en este tipo, los encuestados deberán elegir alguna de las posibles opciones, su principal ventaja es que son más fáciles de cuantificar, sin embargo, en ocasiones ninguna de las opciones refleja el pensamiento de los participantes, para ello, siempre es recomendable añadir la opción "<em>otro"</em>.</p></li>
+<li><p><strong>Respuesta continua:</strong> este tipo de respuestas toman un número incontable de valores, por ejemplo:</p>
+<ul>
+<li>Edad</li>
+<li>Salario</li>
+<li>Número de personas que habitan en la casa</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="tamaño-de-muestra" class="section level2 hasAnchor" number="2.6">
+<h2><span class="header-section-number">2.6</span> Tamaño de muestra<a href="muestreo.html#tamaño-de-muestra" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Es imprescindible en una buena estimación conocer el tamaño de muestra adecuado que permitirá controlar o cuantificar el error de muestreo.</p>
+<p>Se presenta a continuación la fórmula estadística que permite conocer el tamaño de muestra necesario para lograr con 95% de confianza (<span class="math inline">\(\alpha\)</span>) un error de muestreo (e).</p>
+<p><span class="math display">\[
+m=\frac{p(1-p)Z_{1-\alpha/2}^2}{e²};
+\]</span>
+<span class="math display">\[n=\frac{m}{1+\frac{m}{N}}\]</span></p>
+<p><strong>Donde:</strong></p>
+<p>N = Es el tamaño de población.</p>
+<p>n = Tamaño de muestra.</p>
+<p>p = Proporción esperada (50% por default).</p>
+<p><span class="math inline">\(Z_{1-\alpha/2}\)</span> = Percentil <span class="math inline">\(\alpha/2\)</span> de la distribución Normal estándar.</p>
+<p>e = Error de muestreo máximo a tolerar.</p>
+<p>En la medida en que se desea disminuir el error de muestreo, es necesario incrementar de manera exponencial el tamaño de muestra. Se presenta a continuación una función creada con <em>R</em> (software estadístico) para conocer el tamaño de muestra de una población. Es necesario indicar los parámetros e hipótesis bajo los cuales se realizará dicho cálculo. Posteriormente, se presenta una gráfica que permite conocer el tamaño de muestra de acuerdo con el error de muestreo a tolerar (suponiendo fijos otros parámetros).</p>
+<div class="infobox pin">
+<p><strong>¡¡ RECORDAR !!</strong></p>
+<p>En la medida en que se desea disminuir el error de muestreo, es necesario incrementar de manera exponencial el tamaño de muestra.</p>
+</div>
+<div id="implementación-en-r" class="section level3 hasAnchor" number="2.6.1">
+<h3><span class="header-section-number">2.6.1</span> Implementación en R<a href="muestreo.html#implementación-en-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="muestreo.html#cb1-1" aria-hidden="true" tabindex="-1"></a>n_muestra <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">e =</span> <span class="fl">0.04</span>, <span class="at">p =</span> <span class="fl">0.5</span>, <span class="at">alpha =</span> <span class="fl">0.95</span>, <span class="at">N =</span> <span class="dv">100000</span>){</span>
+<span id="cb1-2"><a href="muestreo.html#cb1-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-3"><a href="muestreo.html#cb1-3" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">=</span> p<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>p)<span class="sc">*</span>(<span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span> (<span class="dv">1</span><span class="sc">-</span>alpha)<span class="sc">/</span><span class="dv">2</span>)<span class="sc">/</span>e)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb1-4"><a href="muestreo.html#cb1-4" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">=</span> <span class="fu">ceiling</span>(m<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> m<span class="sc">/</span>N)) </span>
+<span id="cb1-5"><a href="muestreo.html#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="muestreo.html#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(n)</span>
+<span id="cb1-7"><a href="muestreo.html#cb1-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><strong>Ejemplo</strong></p>
+<p>Suponiendo un tamaño poblacional de 3 millones de personas, y con 95% de confianza un error máximo a tolerar de 2%, el tamaño de muestra necesario para estimar una proporción es:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="muestreo.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">n_muestra</span>(<span class="at">e =</span> <span class="fl">0.02</span>, <span class="at">p =</span> <span class="fl">0.5</span>, <span class="at">alpha =</span> <span class="fl">0.95</span>, <span class="at">N =</span> <span class="dv">3000000</span>)</span></code></pre></div>
+<pre><code>## [1] 2399</code></pre>
+<p>En este ejemplo, por practicidad se redondea el tamaño de la muestra a 2400 unidades. Veamos ahora una gráfica que permita anañizar la relación existente entre el tamaño de muestra y el error de muestreo.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="muestreo.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb4-2"><a href="muestreo.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb4-3"><a href="muestreo.html#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="muestreo.html#cb4-4" aria-hidden="true" tabindex="-1"></a>tam_muestra <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">error =</span> <span class="fu">seq</span>(<span class="fl">0.02</span>, <span class="fl">0.1</span>, <span class="at">by =</span> <span class="fl">0.001</span>))</span>
+<span id="cb4-5"><a href="muestreo.html#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="muestreo.html#cb4-6" aria-hidden="true" tabindex="-1"></a>tam_muestra <span class="sc">%&gt;%</span> </span>
+<span id="cb4-7"><a href="muestreo.html#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n =</span> <span class="fu">n_muestra</span>(<span class="at">e =</span> error)) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-8"><a href="muestreo.html#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> error, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb4-9"><a href="muestreo.html#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb4-10"><a href="muestreo.html#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb4-11"><a href="muestreo.html#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Relación entre error de muestreo y tamaño de muestra&quot;</span>) <span class="sc">+</span></span>
+<span id="cb4-12"><a href="muestreo.html#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Error de muestreo&quot;</span>) <span class="sc">+</span></span>
+<span id="cb4-13"><a href="muestreo.html#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Tamaño de muestra&quot;</span>)</span></code></pre></div>
+<p><img src="unam22_eodc_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>Ahora analizaremos la relación existente entre el tamaño de muestra y el tamaño poblacional cuando fijamos el error de muestreo en 3.5%.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="muestreo.html#cb5-1" aria-hidden="true" tabindex="-1"></a>tam_muestra <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">N =</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">125000</span>, <span class="at">by =</span> <span class="dv">1000</span>))</span>
+<span id="cb5-2"><a href="muestreo.html#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="muestreo.html#cb5-3" aria-hidden="true" tabindex="-1"></a>tam_muestra <span class="sc">%&gt;%</span> </span>
+<span id="cb5-4"><a href="muestreo.html#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n =</span> <span class="fu">n_muestra</span>(<span class="at">e =</span> <span class="fl">0.035</span>, <span class="at">N =</span> N)) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-5"><a href="muestreo.html#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> N, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb5-6"><a href="muestreo.html#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb5-7"><a href="muestreo.html#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb5-8"><a href="muestreo.html#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">800</span>)) <span class="sc">+</span></span>
+<span id="cb5-9"><a href="muestreo.html#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Relación entre tamaño de población y tamaño de muestra&quot;</span>) <span class="sc">+</span></span>
+<span id="cb5-10"><a href="muestreo.html#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Tamaño de población&quot;</span>) <span class="sc">+</span></span>
+<span id="cb5-11"><a href="muestreo.html#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Tamaño de muestra&quot;</span>)</span></code></pre></div>
+<p><img src="unam22_eodc_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>Se puede apreciar que a mayor tamaño de población es necesario una muestra más grande, sin embargo, no es un comportamiento lineal. Debido a que una de las condiciones de muestreo es que la selección es aleatoria, existe un punto de saturación de información, en donde no se necesita aumentar más el tamaño de muestra (aunque el tamaño de la población siga creciendo)</p>
+<div class="infobox important">
+<p><strong>¡¡ RECORDAR !!</strong></p>
+<p>Para lograr estimaciones representativas de ALTA calidad sobre la población, es indispensable realizar un buen diseño de muestreo, de lo contrario los resultados pueden estar sesgados.</p>
+</div>
+<div class="infobox note">
+<p><strong>EJERCICIO</strong></p>
+<p>Realizar el cálculo del tamaño de muestra necesario para los siguientes escenarios:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Encuesta de opinión a los alumnos de este grupo de clases</p></li>
+<li><p>Encuesta Nacional a población de 18 años y más</p></li>
+<li><p>Encuesta en alcaldía de Gustavo A. Madero en CDMX a personas de 12 años y más</p></li>
+</ol>
+</div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["unam22_eodc.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
