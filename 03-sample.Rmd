@@ -75,7 +75,7 @@ Ahora analizaremos la relación existente entre el tamaño de muestra y el tama�
 
 
 ```{r, warning=F, message=FALSE}
-tam_muestra <- tibble(N = seq(1, 125000, by = 1000))
+tam_muestra <- tibble(N = seq(1, 100000, by = 1000))
 
 tam_muestra %>% 
   mutate(n = n_muestra(e = 0.035, N = N)) %>% 
