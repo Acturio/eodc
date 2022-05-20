@@ -1,4 +1,4 @@
-# Muestreo
+# Tipos de muestras
 
 ## ¿Qué es y para qué sirve muestreo?
 
@@ -241,12 +241,6 @@ knitr::include_graphics("img/01-muestreo/1-1-5-diferentes-formas-de-hacer-muestr
 knitr::include_graphics("img/01-muestreo/1-1-5-diferentes-formas-de-hacer-muestreo-online.jpg")
 ```
 
-### Tipos de encuestas según sus objetivos
-
-* **Encuestas descriptivas:** estas encuestas buscan crear un registro sobre las actitudes o condiciones presentes dentro de una población en un momento determinado, es decir, en el momento en el que se realiza la encuesta. 
-
-* **Encuestas análiticas:** a diferencia de las descriptivas, su objetivo no es documentar un problema sino explicar y describirlo para poder encontrar la mejor solución.
-
 ### Tipos de encuestas según las preguntas
 
 * **Respuesta abierta:** estas permiten al encuestado tener la libertad de responder libremente cada pregunta, esto permite obtener respuestas más profundas y también obtener respuestas en las que no se había pensado, sin embargo, el problema de este tipo de encuestas es que es muy difícil de cuantificar, debido a que se deben interpretar las respuestas.
@@ -259,114 +253,6 @@ knitr::include_graphics("img/01-muestreo/1-1-5-diferentes-formas-de-hacer-muestr
     * Número de personas que habitan en la casa
 
 
-## Tamaño de muestra
-
-Es imprescindible en una buena estimación conocer el tamaño de muestra adecuado que permitirá controlar o cuantificar el error de muestreo.
-
-Se presenta a continuación la fórmula estadística que permite conocer el tamaño de muestra necesario para lograr con 95% de confianza ($\alpha$) un error de muestreo (e).
-
-$$
-m=\frac{p(1-p)Z_{1-\alpha/2}^2}{e²};
-$$
-$$n=\frac{m}{1+\frac{m}{N}}$$
-
-**Donde:**
-
-N = Es el tamaño de población.
-
-n = Tamaño de muestra.
-
-p = Proporción esperada (50% por default).
-
-$Z_{1-\alpha/2}$ = Percentil $\alpha/2$ de la distribución Normal estándar.
-
-e = Error de muestreo máximo a tolerar.
-
-
-En la medida en que se desea disminuir el error de muestreo, es necesario incrementar de manera exponencial el tamaño de muestra. Se presenta a continuación una función creada con *R* (software estadístico) para conocer el tamaño de muestra de una población. Es necesario indicar los parámetros e hipótesis bajo los cuales se realizará dicho cálculo. Posteriormente, se presenta una gráfica que permite conocer el tamaño de muestra de acuerdo con el error de muestreo a tolerar (suponiendo fijos otros parámetros).
-
-::: {.infobox .pin data-latex="{pin}"}
-**¡¡ RECORDAR !!**
-
-En la medida en que se desea disminuir el error de muestreo, es necesario incrementar de manera exponencial el tamaño de muestra.
-:::
-
-### Implementación en R
-
-```{r}
-n_muestra <- function(e = 0.04, p = 0.5, alpha = 0.95, N = 100000){
-  
-  m = p*(1-p)*(qnorm(1- (1-alpha)/2)/e)^2
-  n = ceiling(m/(1 + m/N)) 
-
-  return(n)
-}
-```
-**Ejemplo**
-
-Suponiendo un tamaño poblacional de 3 millones de personas, y con 95% de confianza un error máximo a tolerar de 2%, el tamaño de muestra necesario para estimar una proporción es:
-
-```{r}
-n_muestra(e = 0.02, p = 0.5, alpha = 0.95, N = 3000000)
-```
-
-En este ejemplo, por practicidad se redondea el tamaño de la muestra a 2400 unidades. Veamos ahora una gráfica que permita anañizar la relación existente entre el tamaño de muestra y el error de muestreo.
-
-```{r, warning=F, message=FALSE}
-library(dplyr)
-library(ggplot2)
-
-tam_muestra <- tibble(error = seq(0.02, 0.1, by = 0.001))
-
-tam_muestra %>% 
-  mutate(n = n_muestra(e = error)) %>% 
-  ggplot(aes(x = error, y = n)) +
-  geom_line() +
-  geom_point() +
-  ggtitle("Relación entre error de muestreo y tamaño de muestra") +
-  xlab("Error de muestreo") +
-  ylab("Tamaño de muestra")
-
-```
-
-Ahora analizaremos la relación existente entre el tamaño de muestra y el tamaño poblacional cuando fijamos el error de muestreo en 3.5%.
-
-
-```{r, warning=F, message=FALSE}
-tam_muestra <- tibble(N = seq(1, 125000, by = 1000))
-
-tam_muestra %>% 
-  mutate(n = n_muestra(e = 0.035, N = N)) %>% 
-  ggplot(aes(x = N, y = n)) +
-  geom_line() +
-  geom_point() +
-  ylim(c(0,800)) +
-  ggtitle("Relación entre tamaño de población y tamaño de muestra") +
-  xlab("Tamaño de población") +
-  ylab("Tamaño de muestra")
-
-```
-
-Se puede apreciar que a mayor tamaño de población es necesario una muestra más grande, sin embargo, no es un comportamiento lineal. Debido a que una de las condiciones de muestreo es que la selección es aleatoria, existe un punto de saturación de información, en donde no se necesita aumentar más el tamaño de muestra (aunque el tamaño de la población siga creciendo)
-
-
-::: {.infobox .important data-latex="{important}"}
-**¡¡ RECORDAR !!**
-
-Para lograr estimaciones representativas de ALTA calidad sobre la población, es indispensable realizar un buen diseño de muestreo, de lo contrario los resultados pueden estar sesgados.
-:::
-
-::: {.infobox .note data-latex="{note}"}
-**EJERCICIO**
-
-Realizar el cálculo del tamaño de muestra necesario para los siguientes escenarios:
-
-a) Encuesta de opinión a los alumnos de este grupo de clases
-
-b) Encuesta Nacional a población de 18 años y más
-
-c) Encuesta en alcaldía de Gustavo A. Madero en CDMX a personas de 12 años y más
-:::
 
 
 
