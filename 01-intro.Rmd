@@ -19,7 +19,7 @@ miles de individuos puede representar con gran precisión una población de mill
 En comparación con un censo, una muestra bien diseñada puede lograr estimaciones de **alta calidad, en poco tiempo y a bajo costo** a costa de un **error de muestreo**, el cual puede ser **controlado.**
 :::
 
-## Ventajas e importancia de utilizar muestreo en el mundo corporativo
+## Ventajas e importancia de utilizar muestreo
 
 **Ventajas**
 
@@ -240,17 +240,6 @@ knitr::include_graphics("img/01-muestreo/1-1-5-diferentes-formas-de-hacer-muestr
 ```{r, fig.align='center', out.height='250pt', out.width='450pt', echo=F}
 knitr::include_graphics("img/01-muestreo/1-1-5-diferentes-formas-de-hacer-muestreo-online.jpg")
 ```
-
-### Tipos de encuestas según las preguntas
-
-* **Respuesta abierta:** estas permiten al encuestado tener la libertad de responder libremente cada pregunta, esto permite obtener respuestas más profundas y también obtener respuestas en las que no se había pensado, sin embargo, el problema de este tipo de encuestas es que es muy difícil de cuantificar, debido a que se deben interpretar las respuestas.
-
-* **Respuesta cerrada:** en este tipo, los encuestados deberán elegir alguna de las posibles opciones, su principal ventaja es que son más fáciles de cuantificar, sin embargo, en ocasiones ninguna de las opciones refleja el pensamiento de los participantes, para ello, siempre es recomendable añadir la opción "*otro"*. 
-
-* **Respuesta continua:** este tipo de respuestas toman un número incontable de valores, por ejemplo:
-    * Edad
-    * Salario
-    * Número de personas que habitan en la casa
 
 
 

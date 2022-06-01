@@ -1,16 +1,57 @@
 # Construcción de muestra
 
+## Marco de muestreo
+
+El primer paso consiste en crear un **marco de muestreo**, el cual es el **listado de los posibles elementos a ser seleccionados en la muestra.** Tiene la característica de que todos los elementos deben pertenecer a la población objetivo. Este marco de muestreo podría llegar a tener los siguientes 3 errores:
+
+* **Duplicidad:** Existen elementos repetidos 
+
+* **Sobre-representatividad:** Existen elementos en el marco que no pertenecen a la población objetivo
+
+* **Sub-representatividad:** Existen elementos pertenecientes a la población objetivo que no se encuentran representados en el marco
+
+Ante estos problemas, es necesario realizar una limpieza de los datos disponibles para obtener un conjunto lo más adecuado para extraer estos problemas. A continuación se muestra el proceso de limpieza a seguir usando el software estadístico *R*.
+
+```{r, warning=FALSE, message=FALSE}
+library(readr)
+library(dplyr)
+
+cnpv <- read_csv("data/conjunto_de_datos_ageb_urbana_09_cpv2020.csv", na = c("", NA, "*"))
+cnpv
+```
+Dependiendo de la población objetivo definida por el grupo investigador, será necesario depurar los elementos necesarios. Por ejemplo, si se desea realizar una encuesta exclusivamente en la alcaldía de Gustavo A. Madero en la Ciudad de México, deberemos ejecutar las siguientes instrucciones:
+
+```{r, warning=T}
+marco <- cnpv %>% 
+  mutate(
+    VIVPAR_HAB = as.numeric(VIVPAR_HAB), 
+    POBTOT = as.numeric(POBTOT)) %>% 
+  filter(
+    ENTIDAD == '09', 
+    MUN == '005', 
+    NOM_LOC == "Gustavo A. Madero",
+    P_18YMAS > 20,
+    !is.na(VIVPAR_HAB),
+    VIVPAR_HAB > 10
+    ) %>% 
+  select(ENTIDAD, MUN, NOM_MUN, LOC, 
+         AGEB, MZA, POBTOT, P_18YMAS, VIVPAR_HAB)
+
+marco
+```
+
+
 
 ## Tamaño de muestra
 
 Es imprescindible en una buena estimación conocer el tamaño de muestra adecuado que permitirá controlar o cuantificar el error de muestreo.
 
-Se presenta a continuación la fórmula estadística que permite conocer el tamaño de muestra necesario para lograr con 95% de confianza ($\alpha$) un error de muestreo (e).
+Se presenta a continuación la fórmula estadística que permite conocer el tamaño de muestra necesario para lograr con 95% de confianza ($\alpha$) un error de muestreo (e). Esta fórmula corresponde se calcula a partir de un diseño de muestreo aleatorio simple, donde la variable de respuesta es categórica:
 
 $$
 m=\frac{p(1-p)Z_{1-\alpha/2}^2}{e²};
 $$
-$$n=\frac{m}{1+\frac{m}{N}}$$
+$$n=\frac{m}{1+\frac{m}{N}} \frac{deff}{(1-TNR)}$$
 
 **Donde:**
 
@@ -24,8 +65,9 @@ $Z_{1-\alpha/2}$ = Percentil $\alpha/2$ de la distribución Normal estándar.
 
 e = Error de muestreo máximo a tolerar.
 
+TNR = Tasa de no respuesta
 
-En la medida en que se desea disminuir el error de muestreo, es necesario incrementar de manera exponencial el tamaño de muestra. Se presenta a continuación una función creada con *R* (software estadístico) para conocer el tamaño de muestra de una población. Es necesario indicar los parámetros e hipótesis bajo los cuales se realizará dicho cálculo. Posteriormente, se presenta una gráfica que permite conocer el tamaño de muestra de acuerdo con el error de muestreo a tolerar (suponiendo fijos otros parámetros).
+deff = Efecto de diseño (aumento en la varianza por usar un diseño distinto al aleatorio simple)
 
 ::: {.infobox .pin data-latex="{pin}"}
 **¡¡ RECORDAR !!**
@@ -33,13 +75,16 @@ En la medida en que se desea disminuir el error de muestreo, es necesario increm
 En la medida en que se desea disminuir el error de muestreo, es necesario incrementar de manera exponencial el tamaño de muestra.
 :::
 
+Se presenta a continuación una función creada con *R* (software estadístico) para conocer el tamaño de muestra de una población. Es necesario indicar los parámetros e hipótesis bajo los cuales se realizará dicho cálculo. Posteriormente, se presenta una gráfica que permite conocer el tamaño de muestra de acuerdo con el error de muestreo a tolerar (suponiendo fijos otros parámetros).
+
+
 ### Implementación en R
 
 ```{r}
-n_muestra <- function(e = 0.04, p = 0.5, alpha = 0.95, N = 100000){
+n_muestra <- function(e = 0.04, p = 0.5, alpha = 0.95, N = 100000, deff = 1.5, tnr = 0.10){
   
   m = p*(1-p)*(qnorm(1- (1-alpha)/2)/e)^2
-  n = ceiling(m/(1 + m/N)) 
+  n = ceiling( (m/(1 + m/N)) * deff/(1 - tnr ) ) 
 
   return(n)
 }
@@ -49,10 +94,10 @@ n_muestra <- function(e = 0.04, p = 0.5, alpha = 0.95, N = 100000){
 Suponiendo un tamaño poblacional de 3 millones de personas, y con 95% de confianza un error máximo a tolerar de 2%, el tamaño de muestra necesario para estimar una proporción es:
 
 ```{r}
-n_muestra(e = 0.02, p = 0.5, alpha = 0.95, N = 3000000)
+n_muestra(e = 0.02, p = 0.5, alpha = 0.95, N = 3000000, deff = 1.7, tnr = 0.05)
 ```
 
-En este ejemplo, por practicidad se redondea el tamaño de la muestra a 2400 unidades. Veamos ahora una gráfica que permita anañizar la relación existente entre el tamaño de muestra y el error de muestreo.
+En este ejemplo, por practicidad se redondea el tamaño de la muestra a 4,300 unidades. Veamos ahora una gráfica que permita anañizar la relación existente entre el tamaño de muestra y el error de muestreo.
 
 ```{r, warning=F, message=FALSE}
 library(dplyr)
@@ -61,7 +106,7 @@ library(ggplot2)
 tam_muestra <- tibble(error = seq(0.02, 0.1, by = 0.001))
 
 tam_muestra %>% 
-  mutate(n = n_muestra(e = error)) %>% 
+  mutate(n = n_muestra(e = error, p = 0.5, alpha = 0.95, N = 100000, deff = 1.7, tnr = 0.1)) %>% 
   ggplot(aes(x = error, y = n)) +
   geom_line() +
   geom_point() +
@@ -82,7 +127,7 @@ tam_muestra %>%
   ggplot(aes(x = N, y = n)) +
   geom_line() +
   geom_point() +
-  ylim(c(0,800)) +
+  scale_y_continuous(limits = c(0, 1500), breaks = seq(0, 1500, by = 100)) +
   ggtitle("Relación entre tamaño de población y tamaño de muestra") +
   xlab("Tamaño de población") +
   ylab("Tamaño de muestra")
@@ -109,4 +154,136 @@ b) Encuesta Nacional a población de 18 años y más
 
 c) Encuesta en alcaldía de Gustavo A. Madero en CDMX a personas de 12 años y más
 :::
+
+Calculemos distintos posibles tamaños de muestra que consideren diversos escenarios en cuanto al error máximo a tolerar para nuestras estimaciones. Suponga además que el costo obtención de cada cuestionario tiene un precio alrededor de \$270.00 + IVA y que cuenta con un presupuesto de \$645,000.00
+
+```{r}
+marco %>% 
+  summarise(
+    viv = sum(VIVPAR_HAB, na.rm = T),
+    pob = sum(P_18YMAS, na.rm = T)
+    )
+
+n_muestra(e = 0.06, p = 0.5, alpha = 0.95, N = 886279, deff = 1.7, tnr = 0.1)
+
+n_muestra(e = 0.05, p = 0.5, alpha = 0.95, N = 886279, deff = 1.7, tnr = 0.1)
+
+n_muestra(e = 0.04, p = 0.5, alpha = 0.95, N = 886279, deff = 1.7, tnr = 0.1)
+
+n_muestra(e = 0.03, p = 0.5, alpha = 0.95, N = 886279, deff = 1.7, tnr = 0.1)
+
+n_muestra(e = 0.02, p = 0.5, alpha = 0.95, N = 886279, deff = 1.7, tnr = 0.1)
+
+```
+::: {.infobox .note data-latex="{note}"}
+**EJERCICIO**
+
+**¿Cuál sería el tamaño de muestra que elegirías para el estudio?**
+
+Considera en tu ejercicio todos los gastos de honorarios que deben ser cubiertos a tu equipo de trabajo y haz una propuesta técnica y económica
+:::
+
+
+
+## Distribución muestral
+
+Una vez que el tamaño de muestra ha sido calculado, es común que se proceda a distribuirla de una manera estratégica que permita recolectar de manera óptima la información necesaria. Existe distintos tipos de distribución (afijación), las cuales dependen de que existan estratos (grupos) de la población sobre los cuales se desea distribuir la muestra. Entre las más comunes, se encuentran:
+
+1. **Afijación simple:** En este tipo de afijación, la muestra se distribuye de manera igualitaria entre los distintos grupos. La fórmula es la siguiente:
+
+$$n_h=\frac{n}{L}$$
+**Donde:**
+
+$n_h=$ Es el tamaño de muestra en el h-ésimo estrato
+
+$n=$ Es el tamaño de muestra total
+
+$L=$ Es el número de estratos
+
+
+2. **Afijación proporcional:** Posiblemente es el tipo de afijación más usado. Esta estrategia se usa para distribuir la muestra de manera proporcional a una característica. Por regla general, se distribuye de acuerdo con la distribución poblacional (viviendas o personas) en zonas geográficas. La fórmula es la siguiente:
+
+
+$$n_h = \frac{P_h}{P} \cdot n$$
+
+**Donde:**
+
+* $n_h=$ Es el tamaño de muestra ajustado en el h-ésimo estrato
+
+* $n=$ Es el tamaño de muestra global
+
+* $P_h=$ Es la población en el h-ésimo estrato
+
+* $P=$ Es la población total
+
+
+### Implementación en R
+
+Suponga por un momento que contamos con una característica particular de interés en la que podemos clasificar a la población de manzanas, puede ser el ámbito (rural vs urbano) o alguna otra clasificación de interés.
+
+Para fines prácticos, clasificaremos las manzanas dependiendo del número de viviendas particulares habitadas. La clasificación es la siguiente:
+
+* Estrato 1: 0-25 viviendas
+
+* Estrato 2: 26-35 viviendas
+
+* Estrato 3: 36-55 viviendas
+
+* Estrato 4: 56 o más viviendas
+
+```{r}
+marco <- marco %>% 
+  mutate(estrato = case_when(
+    VIVPAR_HAB <= 35 ~ "gpo1",
+    VIVPAR_HAB <= 55 ~ "gpo2",
+    VIVPAR_HAB <= 80 ~ "gpo3",
+    TRUE ~ "gpo4",
+  ))
+
+marco
+
+pob_estrato <- marco %>% 
+  group_by(estrato) %>% 
+  summarise(
+    n = n(),
+    pob = sum(P_18YMAS, na.rm = T),
+    viv = sum(VIVPAR_HAB, na.rm = T)
+  )
+
+pob_estrato
+```
+
+Suponiendo que el tamaño de muestra seleccionado es de 2,000 individuos y se desea hacer una afijación proporcional, el tamaño de muestra en cada estrato queda asignado de la siguiente forma:
+
+```{r}
+pob_estrato %>% 
+  mutate(
+    prop = viv/sum(viv),
+    n_h = round(prop * 2000)
+  )
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

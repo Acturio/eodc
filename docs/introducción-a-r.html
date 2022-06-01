@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 3 Introducción a R | Análisis Muestral de Encuestas Origen-Destino</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 3 Introducción a R | Análisis Muestral de Encuestas Origen-Destino" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 3 Introducción a R | Análisis Muestral de Encuestas Origen-Destino" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Act. Arturo Bringas" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="tipos-de-muestras.html"/>
+<link rel="next" href="construcción-de-muestra.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"><img src="img/00-presentacion/logo_puec.jpg" width="240" height="300"></a></li|
+|:-:|  
+<center> Muestreo en encuestas de Origen-Destino </center>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#objetivo"><i class="fa fa-check"></i><b>1.1</b> Objetivo</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#instructor"><i class="fa fa-check"></i><b>1.2</b> Instructor</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#recursos-y-dinámica-de-clase"><i class="fa fa-check"></i><b>1.3</b> Recursos y dinámica de clase</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="tipos-de-muestras.html"><a href="tipos-de-muestras.html"><i class="fa fa-check"></i><b>2</b> Tipos de muestras</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="tipos-de-muestras.html"><a href="tipos-de-muestras.html#qué-es-y-para-qué-sirve-muestreo"><i class="fa fa-check"></i><b>2.1</b> ¿Qué es y para qué sirve muestreo?</a></li>
+<li class="chapter" data-level="2.2" data-path="tipos-de-muestras.html"><a href="tipos-de-muestras.html#ventajas-e-importancia-de-utilizar-muestreo"><i class="fa fa-check"></i><b>2.2</b> Ventajas e importancia de utilizar muestreo</a></li>
+<li class="chapter" data-level="2.3" data-path="tipos-de-muestras.html"><a href="tipos-de-muestras.html#qué-se-requiere-para-formular-un-problema-de-muestreo"><i class="fa fa-check"></i><b>2.3</b> ¿Qué se requiere para formular un problema de muestreo?</a></li>
+<li class="chapter" data-level="2.4" data-path="tipos-de-muestras.html"><a href="tipos-de-muestras.html#tipos-de-muestreo"><i class="fa fa-check"></i><b>2.4</b> Tipos de muestreo</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="tipos-de-muestras.html"><a href="tipos-de-muestras.html#muestreo-no-probabilístico"><i class="fa fa-check"></i><b>2.4.1</b> Muestreo no probabilístico</a></li>
+<li class="chapter" data-level="2.4.2" data-path="tipos-de-muestras.html"><a href="tipos-de-muestras.html#muestreo-probabilístico"><i class="fa fa-check"></i><b>2.4.2</b> Muestreo probabilístico</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="tipos-de-muestras.html"><a href="tipos-de-muestras.html#instrumentos-de-captura-de-datos"><i class="fa fa-check"></i><b>2.5</b> Instrumentos de captura de datos</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="tipos-de-muestras.html"><a href="tipos-de-muestras.html#tipos-de-encuestas-según-la-forma-de-aplicación"><i class="fa fa-check"></i><b>2.5.1</b> Tipos de encuestas según la forma de aplicación</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="introducción-a-r.html"><a href="introducción-a-r.html"><i class="fa fa-check"></i><b>3</b> Introducción a R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="introducción-a-r.html"><a href="introducción-a-r.html#cómo-obtener-r"><i class="fa fa-check"></i><b>3.1</b> ¿Cómo obtener <em>R</em>?</a></li>
+<li class="chapter" data-level="3.2" data-path="introducción-a-r.html"><a href="introducción-a-r.html#qué-es-rstudio"><i class="fa fa-check"></i><b>3.2</b> ¿Qué es RStudio?</a></li>
+<li class="chapter" data-level="3.3" data-path="introducción-a-r.html"><a href="introducción-a-r.html#r-como-lenguaje-orientado-a-objetos"><i class="fa fa-check"></i><b>3.3</b> <em>R</em> como lenguaje orientado a objetos</a></li>
+<li class="chapter" data-level="3.4" data-path="introducción-a-r.html"><a href="introducción-a-r.html#estructuras-de-almacenamiento"><i class="fa fa-check"></i><b>3.4</b> Estructuras de almacenamiento</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="introducción-a-r.html"><a href="introducción-a-r.html#variables"><i class="fa fa-check"></i><b>3.4.1</b> Variables</a></li>
+<li class="chapter" data-level="3.4.2" data-path="introducción-a-r.html"><a href="introducción-a-r.html#vectores"><i class="fa fa-check"></i><b>3.4.2</b> Vectores</a></li>
+<li class="chapter" data-level="3.4.3" data-path="introducción-a-r.html"><a href="introducción-a-r.html#data-frames"><i class="fa fa-check"></i><b>3.4.3</b> Data Frames</a></li>
+<li class="chapter" data-level="3.4.4" data-path="introducción-a-r.html"><a href="introducción-a-r.html#ejercicios"><i class="fa fa-check"></i><b>3.4.4</b> Ejercicios</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="introducción-a-r.html"><a href="introducción-a-r.html#lectura-de-datos"><i class="fa fa-check"></i><b>3.5</b> Lectura de datos</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="introducción-a-r.html"><a href="introducción-a-r.html#archivos-csv"><i class="fa fa-check"></i><b>3.5.1</b> Archivos <em>csv</em></a></li>
+<li class="chapter" data-level="3.5.2" data-path="introducción-a-r.html"><a href="introducción-a-r.html#archivos-xls-y-xlsx"><i class="fa fa-check"></i><b>3.5.2</b> Archivos <em>xls</em> y <em>xlsx</em></a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="introducción-a-r.html"><a href="introducción-a-r.html#consulta-de-datos"><i class="fa fa-check"></i><b>3.6</b> Consulta de datos</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="introducción-a-r.html"><a href="introducción-a-r.html#select"><i class="fa fa-check"></i><b>3.6.1</b> select()</a></li>
+<li class="chapter" data-level="3.6.2" data-path="introducción-a-r.html"><a href="introducción-a-r.html#filter"><i class="fa fa-check"></i><b>3.6.2</b> filter()</a></li>
+<li class="chapter" data-level="3.6.3" data-path="introducción-a-r.html"><a href="introducción-a-r.html#arrange"><i class="fa fa-check"></i><b>3.6.3</b> arrange()</a></li>
+<li class="chapter" data-level="3.6.4" data-path="introducción-a-r.html"><a href="introducción-a-r.html#mutate"><i class="fa fa-check"></i><b>3.6.4</b> mutate()</a></li>
+<li class="chapter" data-level="3.6.5" data-path="introducción-a-r.html"><a href="introducción-a-r.html#summarise"><i class="fa fa-check"></i><b>3.6.5</b> summarise()</a></li>
+<li class="chapter" data-level="3.6.6" data-path="introducción-a-r.html"><a href="introducción-a-r.html#group_by"><i class="fa fa-check"></i><b>3.6.6</b> group_by()</a></li>
+<li class="chapter" data-level="3.6.7" data-path="introducción-a-r.html"><a href="introducción-a-r.html#left_join"><i class="fa fa-check"></i><b>3.6.7</b> left_join()</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html"><i class="fa fa-check"></i><b>4</b> Construcción de muestra</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#marco-de-muestreo"><i class="fa fa-check"></i><b>4.1</b> Marco de muestreo</a></li>
+<li class="chapter" data-level="4.2" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#tamaño-de-muestra"><i class="fa fa-check"></i><b>4.2</b> Tamaño de muestra</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#implementación-en-r"><i class="fa fa-check"></i><b>4.2.1</b> Implementación en R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#distribución-muestral"><i class="fa fa-check"></i><b>4.3</b> Distribución muestral</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#implementación-en-r-1"><i class="fa fa-check"></i><b>4.3.1</b> Implementación en R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="./"><img src="img/00-presentacion/logo_unam.png" width="240"></a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Análisis Muestral de Encuestas Origen-Destino</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introducción-a-r" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Capítulo 3</span> Introducción a R<a href="introducción-a-r.html#introducción-a-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><em>R</em> (R Core Team) es un entorno y lenguaje de programación que permite el análisis estadístico de información y reportes gráficos. Es ampliamente usado en investigación por la comunidad estadística en campos como la biomedicina, minería de datos, matemáticas financieras, entre otros. Ha ganado mucha popularidad en los últimos años al ser un software libre que está en constante crecimiento por las aportaciones de otros usuarios y que permite la interacción con software estadísticos como STATA, SAS, SPSS, etc.. R permite la incorporación de librerías y paqueterías con funcionalidades específicas, por lo que es un lenguaje de programación muy completo y fácil de usar.</p>
+<div id="cómo-obtener-r" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> ¿Cómo obtener <em>R</em>?<a href="introducción-a-r.html#cómo-obtener-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>R puede ser fácilmente descargado de forma gratuita desde el sitio oficial <a href="http://www.r-project.org/" class="uri">http://www.r-project.org/</a>. R está disponible para las plataformas Windows, Mac y Linux.</p>
+</div>
+<div id="qué-es-rstudio" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> ¿Qué es RStudio?<a href="introducción-a-r.html#qué-es-rstudio" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><em>RStudio</em> es un Entorno de Desarrollo Integrado (IDE, por sus siglas en inglés) para R. Este permite y facilita el desarrollo y ejecución de sintaxis para código en <em>R</em>, incluye una consola y proporciona herramientas para la gestión del espacio de trabajo. <em>RStudio</em> está disponible para Windows, Mac y Linux o para navegadores conectados a <em>RStudio Server o RStudio Server Pro</em>.</p>
+<p>Algunas de las principales características de Rstudio que lo hacen una gran herramienta para trabajar en <em>R</em>, son:</p>
+<ul>
+<li>Auto completado de código</li>
+<li>Sangría inteligente</li>
+<li>Resaltado de sintaxis</li>
+<li>Facilidad para definir funciones</li>
+<li>Soporte integrado</li>
+<li>Documentación integrada</li>
+<li>Administración de directorios y proyectos</li>
+<li>Visor de datos</li>
+<li>Depurador interactivo para corregir errores</li>
+<li>Conección con Rmarkwon y Sweave</li>
+</ul>
+<p>La siguiente imagen muestra la forma en la que está estructurado RStudio. El orden de los páneles puede ser elegido por el usuario, así como las características de tipo de letra, tamaño y color de fondo, entre otras características.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-15"></span>
+<img src="img/02-intro2r/rstudio.png" alt="Páneles de trabajo de Rstudio" width="800px" height="450px" />
+<p class="caption">
+Figure 3.1: Páneles de trabajo de Rstudio
+</p>
+</div>
+</div>
+<div id="r-como-lenguaje-orientado-a-objetos" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> <em>R</em> como lenguaje orientado a objetos<a href="introducción-a-r.html#r-como-lenguaje-orientado-a-objetos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><em>R</em> es un lenguaje de programación orientado a objetos (POO). (López 2011, pag. 5) define a los objetos y sus características como “cualquier cosa con significado para el problema que se trata de resolver.” A partir de esa definición, se puede decir que sirve para representar alguna entidad de la vida real, por lo general son componentes del problema que se pretende resolver y con los que podemos interactuar. A través de esta interacción y del estudio que se haga de ellos, es posible clasificarlos en grupos de acuerdo a sus caractrerísticas. A partir de los objetos con los que se trabaje, surgirán las clases adecuadas para encontrar la solución a un problema dado.</p>
+<p>Los objetos tienen características fundamentales que permiten identificarlos, conocerlos y entender su comportamiento. De acuerdo con (Schildt 2009), estas características son:</p>
+<ol style="list-style-type: decimal">
+<li>Identidad</li>
+<li>Comportamiento</li>
+<li>Estructura</li>
+</ol>
+<ul>
+<li><p><strong>Identidad:</strong> Esta es la propiedad que da nombre a cada uno de los objetos y que permite declararlos, distinguirlos de manera única, usarlos y llamarlos para la representación de su contenido.</p></li>
+<li><p><strong>Comportamiento:</strong> Esta es la propiedad que determina las operaciones que puede realizar el objeto, es decir, permite conocer las capacidades y alcances de la funcionalidad de cada objeto. El comportamiento permite conocer la interacción que puede existir con otros objetos y los resultrados que generarán.</p></li>
+<li><p><strong>Estructura:</strong> El estado se refiere a un conjunto de características o atributos específicos del objeto dados en un momento determinado, y que pueden cambiar en un instante de tiempo.</p></li>
+</ul>
+<p>En la programación orientada a objetos, un programa recolecta muchos objetos para ser tratado como un conjunto dinámico de objetos interactuando entre sí. Los objetos están definidos por:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Atributos:</strong> Son las propiedades o características de los datos contenidos en un objeto. Los valores asociados a un objeto en un momento determinado del tiempo determinan su estado.</p></li>
+<li><p><strong>Métodos:</strong> Acceden a los atributos de los objetos y determinan el comportamiento de los datos contenidos.</p></li>
+</ol>
+</div>
+<div id="estructuras-de-almacenamiento" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Estructuras de almacenamiento<a href="introducción-a-r.html#estructuras-de-almacenamiento" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<table>
+<tbody>
+<tr class="odd">
+<td>Para este capítulo usaremos las notas de ‘fhernanb’: <a href="https://fhernanb.github.io/Manual-de-R/intro.html">Manual de R</a></td>
+</tr>
+</tbody>
+</table>
+<p>En <em>R</em> existen varios tipos de objectos que permiten que el usuario pueda almacenar la información para realizar procedimientos estadísticos y gráficos. Los principales objetos en R son vectores, matrices, arreglos, marcos de datos y listas. A continuación se presentan las características de estos objetos y la forma para crearlos.</p>
+<div id="variables" class="section level3 hasAnchor" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Variables<a href="introducción-a-r.html#variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Las variables sirven para almacenar un valor que luego vamos a utilizar en algún procedimiento.</p>
+<p>Para hacer la asignación de un valor a alguna variable se utiliza el operador &lt;- entre el valor y el nombre de la variable. A continuación un ejemplo sencillo.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="introducción-a-r.html#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb1-2"><a href="introducción-a-r.html#cb1-2" aria-hidden="true" tabindex="-1"></a>(<span class="dv">2</span> <span class="sc">*</span> x) <span class="sc">+</span> <span class="dv">3</span></span></code></pre></div>
+<pre><code>## [1] 13</code></pre>
+<p>En el siguiente ejemplo se crea la variable pais y se almacena el nombre Colombia, luego se averigua el número de caracteres de la variable pais.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="introducción-a-r.html#cb3-1" aria-hidden="true" tabindex="-1"></a>pais <span class="ot">&lt;-</span> <span class="st">&quot;Colombia&quot;</span></span>
+<span id="cb3-2"><a href="introducción-a-r.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nchar</span>(pais)</span></code></pre></div>
+<pre><code>## [1] 8</code></pre>
+<p>También existen variables lógicas y estas toman los valores verdadero (TRUE) o falso (FALSE) dependiendo del resultado lógico puesto a prueba. Ejemplo:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="introducción-a-r.html#cb5-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb5-2"><a href="introducción-a-r.html#cb5-2" aria-hidden="true" tabindex="-1"></a>y <span class="sc">==</span> (<span class="dv">5</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="introducción-a-r.html#cb7-1" aria-hidden="true" tabindex="-1"></a>y <span class="sc">!=</span> <span class="dv">5</span> <span class="sc">+</span> <span class="dv">5</span></span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+</div>
+<div id="vectores" class="section level3 hasAnchor" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> Vectores<a href="introducción-a-r.html#vectores" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Los vectores vectores son arreglos ordenados en los cuales se puede almacenar información de tipo numérico (variable cuantitativa), alfanumérico (variable cualitativa) o lógico (TRUE o FALSE), pero no mezclas de éstos. La función de <em>R</em> para crear un vector es c() y que significa concatenar; dentro de los paréntesis de esta función se ubica la información a almacenar. Una vez construído el vector se acostumbra a etiquetarlo con un nombre corto y representativo de la información que almacena, la asignación se hace por medio del operador &lt;- entre el nombre y el vector.</p>
+<p>A continuación se presenta un ejemplo de cómo crear tres vectores que contienen las respuestas de cinco personas a tres preguntas que se les realizaron.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="introducción-a-r.html#cb9-1" aria-hidden="true" tabindex="-1"></a>edad <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">19</span>, <span class="dv">13</span>, <span class="cn">NA</span>, <span class="dv">20</span>)</span>
+<span id="cb9-2"><a href="introducción-a-r.html#cb9-2" aria-hidden="true" tabindex="-1"></a>deporte <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">NA</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb9-3"><a href="introducción-a-r.html#cb9-3" aria-hidden="true" tabindex="-1"></a>comic_fav <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">&#39;Superman&#39;</span>, <span class="st">&#39;Batman&#39;</span>, <span class="cn">NA</span>, <span class="st">&#39;Batman&#39;</span>)</span></code></pre></div>
+<p>El vector edad es un vector cuantitativo y contiene las edades de las 5 personas. En la cuarta posición del vector se colocó el símbolo NA que significa <strong>Not Available</strong> debido a que no se registró la edad para esa persona. Al hacer una asignación se acostumbra a dejar un espacio antes y después del operador &lt;- de asignación. El segundo vector es llamado deporte y es un vector lógico que almacena las respuestas a la pregunta de si la persona practica deporte, nuevamente aquí hay un NA para la tercera persona. El último vector comic_fav contiene la información del cómic favorito de cada persona, como esta variable es cualitativa es necesario usar las comillas ’ ’ para encerrar las respuestas.</p>
+<div class="infobox important">
+<p><strong>¡¡ RECORDAR !!</strong></p>
+<ul>
+<li><p>Cuando se usa NA para representar una información Not Available no se deben usar comillas.</p></li>
+<li><p>Es posible usar comillas sencillas ‘foo’ o comillas dobles “foo” para ingresar valores de una variable cualitativa.</p></li>
+</ul>
+</div>
+<p>Si se desea ver lo que está almacenado en cada uno de estos vectores, se debe escribir en la consola de R el nombre de uno de los objetos y luego se presiona la tecla enter o intro, al realizar esto lo que se obtiene se muestra a continuación.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="introducción-a-r.html#cb10-1" aria-hidden="true" tabindex="-1"></a>edad </span></code></pre></div>
+<pre><code>## [1] 15 19 13 NA 20</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="introducción-a-r.html#cb12-1" aria-hidden="true" tabindex="-1"></a>deporte </span></code></pre></div>
+<pre><code>## [1]  TRUE  TRUE    NA FALSE  TRUE</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="introducción-a-r.html#cb14-1" aria-hidden="true" tabindex="-1"></a>comic_fav </span></code></pre></div>
+<pre><code>## [1] NA         &quot;Superman&quot; &quot;Batman&quot;   NA         &quot;Batman&quot;</code></pre>
+<div id="cómo-extraer-elementos-de-un-vector" class="section level4 hasAnchor" number="3.4.2.1">
+<h4><span class="header-section-number">3.4.2.1</span> Cómo extraer elementos de un vector?<a href="introducción-a-r.html#cómo-extraer-elementos-de-un-vector" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Para extraer un elemento almacenado dentro un vector se usan los corchetes [] y dentro de ellos la posición o posiciones que interesan.</p>
+<p>Ejemplo Si queremos extraer la edad de la tercera persona escribimos el nombre del vector y luego <span class="math display">\[3\]</span> para indicar la tercera posición de edad, a continuación el código.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="introducción-a-r.html#cb16-1" aria-hidden="true" tabindex="-1"></a>edad[<span class="dv">3</span>]</span></code></pre></div>
+<pre><code>## [1] 13</code></pre>
+<p>Si queremos conocer el cómic favorito de la segunda y quinta persona, escribimos el nombre del vector y luego, dentro de los corchetes, escribimos otro vector con las posiciones 2 y 5 que nos interesan así: <span class="math inline">\(c(2, 5)\)</span>, a continuación el código.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="introducción-a-r.html#cb18-1" aria-hidden="true" tabindex="-1"></a>comic_fav[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>)]</span></code></pre></div>
+<pre><code>## [1] &quot;Superman&quot; &quot;Batman&quot;</code></pre>
+<p>Si nos interesan las respuestas de la práctica de deporte, excepto la de la persona 3, usamos <span class="math display">\[-3\]</span> luego del nombre del vector para obtener todo, excepto la tercera posición.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="introducción-a-r.html#cb20-1" aria-hidden="true" tabindex="-1"></a>deporte[<span class="sc">-</span><span class="dv">3</span>]</span></code></pre></div>
+<pre><code>## [1]  TRUE  TRUE FALSE  TRUE</code></pre>
+<div class="infobox important">
+<p><strong>¡¡ RECORDAR !!</strong></p>
+<p>Si desea extraer varios posiciones de un vector NUNCA escriba esto: mi_vector[2, 5, 7]. Tiene que crear un vector con las posiciones y luego colocarlo dentro de los corchetes así: <strong><span class="math display">\[mi\_vector[c(2, 5, 7)]\]</span></strong></p>
+</div>
+</div>
+</div>
+<div id="data-frames" class="section level3 hasAnchor" number="3.4.3">
+<h3><span class="header-section-number">3.4.3</span> Data Frames<a href="introducción-a-r.html#data-frames" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>El marco de datos marco de datos o data frame es uno de los objetos más utilizados porque permite agrupar vectores con información de diferente tipo (numérica, alfanumérica o lógica) en un mismo objeto, la única restricción es que los vectores deben tener la misma longitud. Para crear un marco de datos se usa la función data.frame( ), como ejemplo vamos a crear un marco de datos con los vectores edad, deporte y comic_fav definidos anteriormente.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="introducción-a-r.html#cb22-1" aria-hidden="true" tabindex="-1"></a>mi_data_frame <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(edad, deporte, comic_fav) </span></code></pre></div>
+<p>Una vez creado el objeto mi_data_frame podemos ver el objeto escribiendo su nombre en la consola, a continuación se muestra lo que se obtiene.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="introducción-a-r.html#cb23-1" aria-hidden="true" tabindex="-1"></a>mi_data_frame </span></code></pre></div>
+<pre><code>##   edad deporte comic_fav
+## 1   15    TRUE      &lt;NA&gt;
+## 2   19    TRUE  Superman
+## 3   13      NA    Batman
+## 4   NA   FALSE      &lt;NA&gt;
+## 5   20    TRUE    Batman</code></pre>
+<p>De la salida anterior vemos que el marco de datos tiene 3 variables (columnas) cuyos nombres coinciden con los nombres de los vectores creados anteriormente, los números consecutivos al lado izquierdo son sólo de referencia y permiten identificar la información para cada persona en la base de datos.</p>
+</div>
+<div id="ejercicios" class="section level3 hasAnchor" number="3.4.4">
+<h3><span class="header-section-number">3.4.4</span> Ejercicios<a href="introducción-a-r.html#ejercicios" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Use funciones o procedimientos (varias líneas) de R para responder cada una de las siguientes preguntas.</p>
+<ol style="list-style-type: decimal">
+<li><p>Construya un vector con 10 nombres de personas.</p></li>
+<li><p>Construya un vector con las edades de las 10 personas anteriores.</p></li>
+<li><p>Construya un marco de datos o data frame con las respuestas de 10 personas a las preguntas:</p>
+<ol style="list-style-type: lower-alpha">
+<li>¿Cuál es su nombre?</li>
+<li>Sexo de la persona</li>
+<li>¿Cuál es su edad en años?</li>
+<li>¿En qué alcaldía vive?</li>
+<li>¿En qué alcaldía trabaja?</li>
+</ol></li>
+</ol>
+</div>
+</div>
+<div id="lectura-de-datos" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Lectura de datos<a href="introducción-a-r.html#lectura-de-datos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>El primer paso para analizar datos es incorporarlos a la sesión de R para que puedan ser manipulados y observados. Existen múltiples librerías y funciones en <em>R</em> que permiten leer la información proveniente de un archivo externo, el cual puede tener una de muchas posibles extensiones.</p>
+<p>Usualmente, no creamos los datos desde la sesión de <em>R</em>, sino que a través de un archivo externo se realiza la lectura de datos escritos en un archivo. Los más comúnes son:</p>
+<p><img src="img/02-intro2r/archivos.jpg" style="display: block; margin: auto;" /></p>
+<p>La paquetería <em>readr</em> fue desarrollada recientemente para lidiar con la lectura de archivos grandes rápidamente. Esta paquetería proporciona funciones que suelen ser mucho más rápidas que las funciones base que proporciona <em>R</em>.</p>
+<p><img src="img/02-intro2r/logo-readr.png" style="display: block; margin: auto;" /></p>
+<p><strong>Ventajas de readr:</strong></p>
+<ul>
+<li><p>Por lo general, son mucho más rápidos (~ 10x) que sus funciones equivalentes.</p></li>
+<li><p>Producen tibbles:</p>
+<ul>
+<li>No convierten vectores de caracteres en factores.</li>
+<li>No usan nombres de filas ni modifican los nombres de columnas.</li>
+</ul></li>
+<li><p>Reproducibilidad</p></li>
+</ul>
+<div id="archivos-csv" class="section level3 hasAnchor" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> Archivos <em>csv</em><a href="introducción-a-r.html#archivos-csv" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A la hora de importar conjuntos de datos en <em>R</em>, uno de los formatos más habituales en los que hallamos información es en archivos separados por comas (comma separated values), cuya extensión suele ser <em>.csv</em>. En ellos encontramos múltiples líneas que recogen la tabla de interés, y en las cuales los valores aparecen, de manera consecutiva, separados por el carácter <em>,</em>.</p>
+<p>Para importar este tipo de archivos en nuestra sesión de <em>R</em>, se utiliza la función <code>read_csv()</code>. Para acceder a su documentación utilizamos el comando <code>?read_csv</code>.</p>
+<p>El único argumento que debemos de pasar a esta función de manera obligatoria, es <code>file</code>, el nombre o la ruta completa del archivo que pretendemos importar.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="introducción-a-r.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb25-2"><a href="introducción-a-r.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<p>Algunas de las ventajas de utilizar <code>read_csv()</code> son:</p>
+<ul>
+<li><p>No convierte, automáticamente, las columnas con cadenas de caracteres a factores, como sí hacen por defecto las otras funciones base de <em>R</em>.</p></li>
+<li><p>Reconoce ocho clases diferentes de datos (enteros, lógicos, etc.), dejando el resto como cadenas de caracteres.</p></li>
+</ul>
+<p>Veamos un ejemplo:</p>
+<p>La tabla de datos llamada <a href="">ITER_NAL_CNPV20</a> contiene un conjunto de datos con información del Censo Nacional de Población y Vivienda creado por INEGI en el año 2020. Contiene datos desagregados y agregados en distintos niveles, por lo que <strong>es necesario limpiarlo para obtener un apropiado marco de muestreo.</strong></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="introducción-a-r.html#cb26-1" aria-hidden="true" tabindex="-1"></a>tidy <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/ITER_NAL_CNPV20.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Rows: 195662 Columns: 232
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (229): ENTIDAD, NOM_ENT, MUN, NOM_MUN, LOC, NOM_LOC, LONGITUD, LATITUD, ...
+## dbl   (3): POBTOT, VIVTOT, TVIVHAB
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="introducción-a-r.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(tidy)</span></code></pre></div>
+<pre><code>## Rows: 195,662
+## Columns: 232
+## $ ENTIDAD     &lt;chr&gt; &quot;00&quot;, &quot;00&quot;, &quot;00&quot;, &quot;01&quot;, &quot;01&quot;, &quot;01&quot;, &quot;01&quot;, &quot;01&quot;, &quot;01&quot;, &quot;01&quot;…
+## $ NOM_ENT     &lt;chr&gt; &quot;Total nacional&quot;, &quot;Total nacional&quot;, &quot;Total nacional&quot;, &quot;Agu…
+## $ MUN         &lt;chr&gt; &quot;000&quot;, &quot;000&quot;, &quot;000&quot;, &quot;000&quot;, &quot;000&quot;, &quot;000&quot;, &quot;001&quot;, &quot;001&quot;, &quot;0…
+## $ NOM_MUN     &lt;chr&gt; &quot;Total nacional&quot;, &quot;Total nacional&quot;, &quot;Total nacional&quot;, &quot;Tot…
+## $ LOC         &lt;chr&gt; &quot;0000&quot;, &quot;9998&quot;, &quot;9999&quot;, &quot;0000&quot;, &quot;9998&quot;, &quot;9999&quot;, &quot;0000&quot;, &quot;0…
+## $ NOM_LOC     &lt;chr&gt; &quot;Total nacional&quot;, &quot;Localidades de una vivienda&quot;, &quot;Localida…
+## $ LONGITUD    &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, &quot;102°17&#39;45.768\&quot; W&quot;, &quot;102°22&#39;2…
+## $ LATITUD     &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, &quot;21°52&#39;47.362\&quot; N&quot;, &quot;21°52&#39;18.…
+## $ ALTITUD     &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, &quot;1878&quot;, &quot;1902&quot;, &quot;1861&quot;, &quot;1861&quot;…
+## $ POBTOT      &lt;dbl&gt; 126014024, 250354, 147125, 1425607, 3697, 3021, 948990, 86…
+## $ POBFEM      &lt;chr&gt; &quot;64540634&quot;, &quot;96869&quot;, &quot;61324&quot;, &quot;728924&quot;, &quot;1510&quot;, &quot;1013&quot;, &quot;4…
+## $ POBMAS      &lt;chr&gt; &quot;61473390&quot;, &quot;153485&quot;, &quot;85801&quot;, &quot;696683&quot;, &quot;2187&quot;, &quot;2008&quot;, &quot;…
+## $ P_0A2       &lt;chr&gt; &quot;5764054&quot;, &quot;10493&quot;, &quot;6798&quot;, &quot;71864&quot;, &quot;165&quot;, &quot;119&quot;, &quot;44372&quot;…
+## $ P_0A2_F     &lt;chr&gt; &quot;2848875&quot;, &quot;5193&quot;, &quot;3407&quot;, &quot;35604&quot;, &quot;81&quot;, &quot;54&quot;, &quot;21893&quot;, &quot;…
+## $ P_0A2_M     &lt;chr&gt; &quot;2915179&quot;, &quot;5300&quot;, &quot;3391&quot;, &quot;36260&quot;, &quot;84&quot;, &quot;65&quot;, &quot;22479&quot;, &quot;…
+## $ P_3YMAS     &lt;chr&gt; &quot;119976584&quot;, &quot;239441&quot;, &quot;139757&quot;, &quot;1352235&quot;, &quot;3532&quot;, &quot;2902&quot;…
+## $ P_3YMAS_F   &lt;chr&gt; &quot;61554567&quot;, &quot;91463&quot;, &quot;57628&quot;, &quot;692561&quot;, &quot;1429&quot;, &quot;959&quot;, &quot;46…
+## $ P_3YMAS_M   &lt;chr&gt; &quot;58422017&quot;, &quot;147978&quot;, &quot;82129&quot;, &quot;659674&quot;, &quot;2103&quot;, &quot;1943&quot;, &quot;…
+## $ P_5YMAS     &lt;chr&gt; &quot;115693273&quot;, &quot;232086&quot;, &quot;135028&quot;, &quot;1299669&quot;, &quot;3420&quot;, &quot;2829&quot;…
+## $ P_5YMAS_F   &lt;chr&gt; &quot;59433559&quot;, &quot;87931&quot;, &quot;55256&quot;, &quot;666713&quot;, &quot;1377&quot;, &quot;925&quot;, &quot;44…
+## $ P_5YMAS_M   &lt;chr&gt; &quot;56259714&quot;, &quot;144155&quot;, &quot;79772&quot;, &quot;632956&quot;, &quot;2043&quot;, &quot;1904&quot;, &quot;…
+## $ P_12YMAS    &lt;chr&gt; &quot;100528155&quot;, &quot;207748&quot;, &quot;119223&quot;, &quot;1116719&quot;, &quot;3018&quot;, &quot;2553&quot;…
+## $ P_12YMAS_F  &lt;chr&gt; &quot;51962264&quot;, &quot;76111&quot;, &quot;47543&quot;, &quot;576593&quot;, &quot;1179&quot;, &quot;798&quot;, &quot;39…
+## $ P_12YMAS_M  &lt;chr&gt; &quot;48565891&quot;, &quot;131637&quot;, &quot;71680&quot;, &quot;540126&quot;, &quot;1839&quot;, &quot;1755&quot;, &quot;…
+## $ P_15YMAS    &lt;chr&gt; &quot;93985354&quot;, &quot;197411&quot;, &quot;111530&quot;, &quot;1038904&quot;, &quot;2836&quot;, &quot;2444&quot;,…
+## $ P_15YMAS_F  &lt;chr&gt; &quot;48732991&quot;, &quot;71344&quot;, &quot;44275&quot;, &quot;538387&quot;, &quot;1086&quot;, &quot;740&quot;, &quot;36…
+## $ P_15YMAS_M  &lt;chr&gt; &quot;45252363&quot;, &quot;126067&quot;, &quot;67255&quot;, &quot;500517&quot;, &quot;1750&quot;, &quot;1704&quot;, &quot;…
+## $ P_18YMAS    &lt;chr&gt; &quot;87492680&quot;, &quot;186968&quot;, &quot;104612&quot;, &quot;960764&quot;, &quot;2609&quot;, &quot;2341&quot;, …
+## $ P_18YMAS_F  &lt;chr&gt; &quot;45530857&quot;, &quot;66514&quot;, &quot;41184&quot;, &quot;500089&quot;, &quot;987&quot;, &quot;699&quot;, &quot;343…
+## $ P_18YMAS_M  &lt;chr&gt; &quot;41961823&quot;, &quot;120454&quot;, &quot;63428&quot;, &quot;460675&quot;, &quot;1622&quot;, &quot;1642&quot;, &quot;…
+## $ P_3A5       &lt;chr&gt; &quot;6462212&quot;, &quot;10900&quot;, &quot;7028&quot;, &quot;78833&quot;, &quot;169&quot;, &quot;113&quot;, &quot;48767&quot;…
+## $ P_3A5_F     &lt;chr&gt; &quot;3193548&quot;, &quot;5270&quot;, &quot;3511&quot;, &quot;38679&quot;, &quot;80&quot;, &quot;47&quot;, &quot;23951&quot;, &quot;…
+## $ P_3A5_M     &lt;chr&gt; &quot;3268664&quot;, &quot;5630&quot;, &quot;3517&quot;, &quot;40154&quot;, &quot;89&quot;, &quot;66&quot;, &quot;24816&quot;, &quot;…
+## $ P_6A11      &lt;chr&gt; &quot;12986217&quot;, &quot;20793&quot;, &quot;13506&quot;, &quot;156683&quot;, &quot;345&quot;, &quot;236&quot;, &quot;979…
+## $ P_6A11_F    &lt;chr&gt; &quot;6398755&quot;, &quot;10082&quot;, &quot;6574&quot;, &quot;77289&quot;, &quot;170&quot;, &quot;114&quot;, &quot;48353&quot;…
+## $ P_6A11_M    &lt;chr&gt; &quot;6587462&quot;, &quot;10711&quot;, &quot;6932&quot;, &quot;79394&quot;, &quot;175&quot;, &quot;122&quot;, &quot;49594&quot;…
+## $ P_8A14      &lt;chr&gt; &quot;15287375&quot;, &quot;24342&quot;, &quot;16724&quot;, &quot;181905&quot;, &quot;427&quot;, &quot;262&quot;, &quot;114…
+## $ P_8A14_F    &lt;chr&gt; &quot;7531118&quot;, &quot;11538&quot;, &quot;7679&quot;, &quot;89383&quot;, &quot;211&quot;, &quot;133&quot;, &quot;56248&quot;…
+## $ P_8A14_M    &lt;chr&gt; &quot;7756257&quot;, &quot;12804&quot;, &quot;9045&quot;, &quot;92522&quot;, &quot;216&quot;, &quot;129&quot;, &quot;58303&quot;…
+## $ P_12A14     &lt;chr&gt; &quot;6542801&quot;, &quot;10337&quot;, &quot;7693&quot;, &quot;77815&quot;, &quot;182&quot;, &quot;109&quot;, &quot;49497&quot;…
+## $ P_12A14_F   &lt;chr&gt; &quot;3229273&quot;, &quot;4767&quot;, &quot;3268&quot;, &quot;38206&quot;, &quot;93&quot;, &quot;58&quot;, &quot;24224&quot;, &quot;…
+## $ P_12A14_M   &lt;chr&gt; &quot;3313528&quot;, &quot;5570&quot;, &quot;4425&quot;, &quot;39609&quot;, &quot;89&quot;, &quot;51&quot;, &quot;25273&quot;, &quot;…
+## $ P_15A17     &lt;chr&gt; &quot;6492674&quot;, &quot;10443&quot;, &quot;6918&quot;, &quot;78140&quot;, &quot;227&quot;, &quot;103&quot;, &quot;49934&quot;…
+## $ P_15A17_F   &lt;chr&gt; &quot;3202134&quot;, &quot;4830&quot;, &quot;3091&quot;, &quot;38298&quot;, &quot;99&quot;, &quot;41&quot;, &quot;24477&quot;, &quot;…
+## $ P_15A17_M   &lt;chr&gt; &quot;3290540&quot;, &quot;5613&quot;, &quot;3827&quot;, &quot;39842&quot;, &quot;128&quot;, &quot;62&quot;, &quot;25457&quot;, …
+## $ P_18A24     &lt;chr&gt; &quot;14736111&quot;, &quot;27841&quot;, &quot;16336&quot;, &quot;180847&quot;, &quot;438&quot;, &quot;439&quot;, &quot;120…
+## $ P_18A24_F   &lt;chr&gt; &quot;7398617&quot;, &quot;11140&quot;, &quot;6760&quot;, &quot;90632&quot;, &quot;180&quot;, &quot;123&quot;, &quot;60159&quot;…
+## $ P_18A24_M   &lt;chr&gt; &quot;7337494&quot;, &quot;16701&quot;, &quot;9576&quot;, &quot;90215&quot;, &quot;258&quot;, &quot;316&quot;, &quot;60293&quot;…
+## $ P_15A49_F   &lt;chr&gt; &quot;33885546&quot;, &quot;47693&quot;, &quot;29297&quot;, &quot;388917&quot;, &quot;750&quot;, &quot;531&quot;, &quot;260…
+## $ P_60YMAS    &lt;chr&gt; &quot;15142976&quot;, &quot;37383&quot;, &quot;21277&quot;, &quot;145376&quot;, &quot;448&quot;, &quot;281&quot;, &quot;102…
+## $ P_60YMAS_F  &lt;chr&gt; &quot;8139094&quot;, &quot;13442&quot;, &quot;8916&quot;, &quot;78703&quot;, &quot;190&quot;, &quot;116&quot;, &quot;56724&quot;…
+## $ P_60YMAS_M  &lt;chr&gt; &quot;7003882&quot;, &quot;23941&quot;, &quot;12361&quot;, &quot;66673&quot;, &quot;258&quot;, &quot;165&quot;, &quot;46263…
+## $ REL_H_M     &lt;chr&gt; &quot;95.25&quot;, &quot;158.45&quot;, &quot;139.91&quot;, &quot;95.58&quot;, &quot;144.83&quot;, &quot;198.22&quot;, …
+## $ POB0_14     &lt;chr&gt; &quot;31755284&quot;, &quot;52523&quot;, &quot;35025&quot;, &quot;385195&quot;, &quot;861&quot;, &quot;577&quot;, &quot;240…
+## $ POB15_64    &lt;chr&gt; &quot;83663440&quot;, &quot;171209&quot;, &quot;96250&quot;, &quot;941834&quot;, &quot;2524&quot;, &quot;2241&quot;, &quot;…
+## $ POB65_MAS   &lt;chr&gt; &quot;10321914&quot;, &quot;26202&quot;, &quot;15280&quot;, &quot;97070&quot;, &quot;312&quot;, &quot;203&quot;, &quot;6794…
+## $ PROM_HNV    &lt;chr&gt; &quot;2.09&quot;, &quot;*&quot;, &quot;*&quot;, &quot;2.11&quot;, &quot;*&quot;, &quot;*&quot;, &quot;1.98&quot;, &quot;1.95&quot;, &quot;*&quot;, &quot;…
+## $ PNACENT     &lt;chr&gt; &quot;102724322&quot;, &quot;177757&quot;, &quot;117805&quot;, &quot;1133247&quot;, &quot;2908&quot;, &quot;2370&quot;…
+## $ PNACENT_F   &lt;chr&gt; &quot;52519974&quot;, &quot;75977&quot;, &quot;52686&quot;, &quot;576781&quot;, &quot;1216&quot;, &quot;811&quot;, &quot;36…
+## $ PNACENT_M   &lt;chr&gt; &quot;50204348&quot;, &quot;101780&quot;, &quot;65119&quot;, &quot;556466&quot;, &quot;1692&quot;, &quot;1559&quot;, &quot;…
+## $ PNACOE      &lt;chr&gt; &quot;21611963&quot;, &quot;54046&quot;, &quot;20274&quot;, &quot;276430&quot;, &quot;749&quot;, &quot;616&quot;, &quot;214…
+## $ PNACOE_F    &lt;chr&gt; &quot;11222300&quot;, &quot;18910&quot;, &quot;7205&quot;, &quot;144420&quot;, &quot;275&quot;, &quot;198&quot;, &quot;1128…
+## $ PNACOE_M    &lt;chr&gt; &quot;10389663&quot;, &quot;35136&quot;, &quot;13069&quot;, &quot;132010&quot;, &quot;474&quot;, &quot;418&quot;, &quot;102…
+## $ PRES2015    &lt;chr&gt; &quot;111075594&quot;, &quot;184423&quot;, &quot;114178&quot;, &quot;1232234&quot;, &quot;2721&quot;, &quot;1638&quot;…
+## $ PRES2015_F  &lt;chr&gt; &quot;57288776&quot;, &quot;79893&quot;, &quot;52604&quot;, &quot;635320&quot;, &quot;1298&quot;, &quot;779&quot;, &quot;42…
+## $ PRES2015_M  &lt;chr&gt; &quot;53786818&quot;, &quot;104530&quot;, &quot;61574&quot;, &quot;596914&quot;, &quot;1423&quot;, &quot;859&quot;, &quot;3…
+## $ PRESOE15    &lt;chr&gt; &quot;3807844&quot;, &quot;16172&quot;, &quot;6214&quot;, &quot;56422&quot;, &quot;152&quot;, &quot;77&quot;, &quot;42481&quot;,…
+## $ PRESOE15_F  &lt;chr&gt; &quot;1889986&quot;, &quot;6089&quot;, &quot;1664&quot;, &quot;27956&quot;, &quot;69&quot;, &quot;36&quot;, &quot;21032&quot;, &quot;…
+## $ PRESOE15_M  &lt;chr&gt; &quot;1917858&quot;, &quot;10083&quot;, &quot;4550&quot;, &quot;28466&quot;, &quot;83&quot;, &quot;41&quot;, &quot;21449&quot;, …
+## $ P3YM_HLI    &lt;chr&gt; &quot;7364645&quot;, &quot;26486&quot;, &quot;18640&quot;, &quot;2539&quot;, &quot;20&quot;, &quot;14&quot;, &quot;1839&quot;, &quot;…
+## $ P3YM_HLI_F  &lt;chr&gt; &quot;3783447&quot;, &quot;10908&quot;, &quot;8181&quot;, &quot;1043&quot;, &quot;3&quot;, &quot;3&quot;, &quot;754&quot;, &quot;704&quot;…
+## $ P3YM_HLI_M  &lt;chr&gt; &quot;3581198&quot;, &quot;15578&quot;, &quot;10459&quot;, &quot;1496&quot;, &quot;17&quot;, &quot;11&quot;, &quot;1085&quot;, &quot;…
+## $ P3HLINHE    &lt;chr&gt; &quot;865972&quot;, &quot;2712&quot;, &quot;3098&quot;, &quot;25&quot;, &quot;0&quot;, &quot;0&quot;, &quot;8&quot;, &quot;6&quot;, &quot;*&quot;, &quot;…
+## $ P3HLINHE_F  &lt;chr&gt; &quot;547528&quot;, &quot;1652&quot;, &quot;1901&quot;, &quot;13&quot;, &quot;0&quot;, &quot;0&quot;, &quot;4&quot;, &quot;4&quot;, &quot;*&quot;, &quot;…
+## $ P3HLINHE_M  &lt;chr&gt; &quot;318444&quot;, &quot;1060&quot;, &quot;1197&quot;, &quot;12&quot;, &quot;0&quot;, &quot;0&quot;, &quot;4&quot;, &quot;2&quot;, &quot;*&quot;, &quot;…
+## $ P3HLI_HE    &lt;chr&gt; &quot;6423548&quot;, &quot;22906&quot;, &quot;14758&quot;, &quot;2461&quot;, &quot;15&quot;, &quot;6&quot;, &quot;1792&quot;, &quot;1…
+## $ P3HLI_HE_F  &lt;chr&gt; &quot;3198595&quot;, &quot;9203&quot;, &quot;6205&quot;, &quot;1012&quot;, &quot;3&quot;, &quot;3&quot;, &quot;737&quot;, &quot;688&quot;,…
+## $ P3HLI_HE_M  &lt;chr&gt; &quot;3224953&quot;, &quot;13703&quot;, &quot;8553&quot;, &quot;1449&quot;, &quot;12&quot;, &quot;3&quot;, &quot;1055&quot;, &quot;99…
+## $ P5_HLI      &lt;chr&gt; &quot;7177185&quot;, &quot;25743&quot;, &quot;17992&quot;, &quot;2508&quot;, &quot;20&quot;, &quot;14&quot;, &quot;1822&quot;, &quot;…
+## $ P5_HLI_NHE  &lt;chr&gt; &quot;785361&quot;, &quot;2412&quot;, &quot;2742&quot;, &quot;22&quot;, &quot;0&quot;, &quot;0&quot;, &quot;8&quot;, &quot;6&quot;, &quot;*&quot;, &quot;…
+## $ P5_HLI_HE   &lt;chr&gt; &quot;6317027&quot;, &quot;22464&quot;, &quot;14467&quot;, &quot;2437&quot;, &quot;15&quot;, &quot;6&quot;, &quot;1776&quot;, &quot;1…
+## $ PHOG_IND    &lt;chr&gt; &quot;11800247&quot;, &quot;27252&quot;, &quot;21531&quot;, &quot;5552&quot;, &quot;5&quot;, &quot;7&quot;, &quot;4050&quot;, &quot;3…
+## $ POB_AFRO    &lt;chr&gt; &quot;2576213&quot;, &quot;4122&quot;, &quot;2816&quot;, &quot;22425&quot;, &quot;52&quot;, &quot;32&quot;, &quot;15170&quot;, &quot;…
+## $ POB_AFRO_F  &lt;chr&gt; &quot;1297617&quot;, &quot;1614&quot;, &quot;1056&quot;, &quot;11211&quot;, &quot;20&quot;, &quot;11&quot;, &quot;7560&quot;, &quot;7…
+## $ POB_AFRO_M  &lt;chr&gt; &quot;1278596&quot;, &quot;2508&quot;, &quot;1760&quot;, &quot;11214&quot;, &quot;32&quot;, &quot;21&quot;, &quot;7610&quot;, &quot;7…
+## $ PCON_DISC   &lt;chr&gt; &quot;6179890&quot;, &quot;12126&quot;, &quot;8058&quot;, &quot;71294&quot;, &quot;212&quot;, &quot;123&quot;, &quot;47525&quot;…
+## $ PCDISC_MOT  &lt;chr&gt; &quot;2939986&quot;, &quot;5875&quot;, &quot;4079&quot;, &quot;34507&quot;, &quot;110&quot;, &quot;67&quot;, &quot;23117&quot;, …
+## $ PCDISC_VIS  &lt;chr&gt; &quot;2691338&quot;, &quot;5008&quot;, &quot;3590&quot;, &quot;29888&quot;, &quot;69&quot;, &quot;35&quot;, &quot;20047&quot;, &quot;…
+## $ PCDISC_LENG &lt;chr&gt; &quot;945162&quot;, &quot;1940&quot;, &quot;1664&quot;, &quot;9297&quot;, &quot;18&quot;, &quot;7&quot;, &quot;5894&quot;, &quot;5317…
+## $ PCDISC_AUD  &lt;chr&gt; &quot;1350802&quot;, &quot;2895&quot;, &quot;2295&quot;, &quot;12989&quot;, &quot;39&quot;, &quot;27&quot;, &quot;8636&quot;, &quot;7…
+## $ PCDISC_MOT2 &lt;chr&gt; &quot;1168098&quot;, &quot;2123&quot;, &quot;1808&quot;, &quot;12726&quot;, &quot;38&quot;, &quot;13&quot;, &quot;8226&quot;, &quot;7…
+## $ PCDISC_MEN  &lt;chr&gt; &quot;1149257&quot;, &quot;2179&quot;, &quot;1825&quot;, &quot;12967&quot;, &quot;27&quot;, &quot;12&quot;, &quot;8618&quot;, &quot;7…
+## $ PCON_LIMI   &lt;chr&gt; &quot;13934448&quot;, &quot;28067&quot;, &quot;16685&quot;, &quot;165482&quot;, &quot;418&quot;, &quot;290&quot;, &quot;116…
+## $ PCLIM_CSB   &lt;chr&gt; &quot;4365234&quot;, &quot;10653&quot;, &quot;6309&quot;, &quot;49636&quot;, &quot;161&quot;, &quot;109&quot;, &quot;34873&quot;…
+## $ PCLIM_VIS   &lt;chr&gt; &quot;8974853&quot;, &quot;17059&quot;, &quot;10523&quot;, &quot;103289&quot;, &quot;226&quot;, &quot;159&quot;, &quot;7366…
+## $ PCLIM_HACO  &lt;chr&gt; &quot;864662&quot;, &quot;2092&quot;, &quot;1279&quot;, &quot;8940&quot;, &quot;30&quot;, &quot;16&quot;, &quot;5980&quot;, &quot;539…
+## $ PCLIM_OAUD  &lt;chr&gt; &quot;2900108&quot;, &quot;6916&quot;, &quot;3982&quot;, &quot;30298&quot;, &quot;75&quot;, &quot;53&quot;, &quot;21547&quot;, &quot;…
+## $ PCLIM_MOT2  &lt;chr&gt; &quot;673540&quot;, &quot;1625&quot;, &quot;1085&quot;, &quot;6368&quot;, &quot;24&quot;, &quot;13&quot;, &quot;4413&quot;, &quot;399…
+## $ PCLIM_RE_CO &lt;chr&gt; &quot;2698640&quot;, &quot;5763&quot;, &quot;3479&quot;, &quot;34556&quot;, &quot;95&quot;, &quot;62&quot;, &quot;24523&quot;, &quot;…
+## $ PCLIM_PMEN  &lt;chr&gt; &quot;1590583&quot;, &quot;2823&quot;, &quot;1579&quot;, &quot;20169&quot;, &quot;56&quot;, &quot;31&quot;, &quot;13945&quot;, &quot;…
+## $ PSIND_LIM   &lt;chr&gt; &quot;104815785&quot;, &quot;207052&quot;, &quot;120888&quot;, &quot;1177938&quot;, &quot;3044&quot;, &quot;2590&quot;…
+## $ P3A5_NOA    &lt;chr&gt; &quot;2359716&quot;, &quot;5620&quot;, &quot;3783&quot;, &quot;31495&quot;, &quot;84&quot;, &quot;57&quot;, &quot;18639&quot;, &quot;…
+## $ P3A5_NOA_F  &lt;chr&gt; &quot;1155636&quot;, &quot;2689&quot;, &quot;1873&quot;, &quot;15371&quot;, &quot;36&quot;, &quot;26&quot;, &quot;9130&quot;, &quot;8…
+## $ P3A5_NOA_M  &lt;chr&gt; &quot;1204080&quot;, &quot;2931&quot;, &quot;1910&quot;, &quot;16124&quot;, &quot;48&quot;, &quot;31&quot;, &quot;9509&quot;, &quot;8…
+## $ P6A11_NOA   &lt;chr&gt; &quot;577029&quot;, &quot;2920&quot;, &quot;1782&quot;, &quot;4941&quot;, &quot;25&quot;, &quot;6&quot;, &quot;2877&quot;, &quot;2525…
+## $ P6A11_NOAF  &lt;chr&gt; &quot;275189&quot;, &quot;1403&quot;, &quot;874&quot;, &quot;2292&quot;, &quot;17&quot;, &quot;3&quot;, &quot;1360&quot;, &quot;1183&quot;…
+## $ P6A11_NOAM  &lt;chr&gt; &quot;301840&quot;, &quot;1517&quot;, &quot;908&quot;, &quot;2649&quot;, &quot;8&quot;, &quot;3&quot;, &quot;1517&quot;, &quot;1342&quot;,…
+## $ P12A14NOA   &lt;chr&gt; &quot;618233&quot;, &quot;2699&quot;, &quot;1674&quot;, &quot;6812&quot;, &quot;34&quot;, &quot;13&quot;, &quot;3907&quot;, &quot;341…
+## $ P12A14NOAF  &lt;chr&gt; &quot;283195&quot;, &quot;1190&quot;, &quot;766&quot;, &quot;2901&quot;, &quot;16&quot;, &quot;7&quot;, &quot;1671&quot;, &quot;1467&quot;…
+## $ P12A14NOAM  &lt;chr&gt; &quot;335038&quot;, &quot;1509&quot;, &quot;908&quot;, &quot;3911&quot;, &quot;18&quot;, &quot;6&quot;, &quot;2236&quot;, &quot;1948&quot;…
+## $ P15A17A     &lt;chr&gt; &quot;4726359&quot;, &quot;4952&quot;, &quot;3557&quot;, &quot;55493&quot;, &quot;133&quot;, &quot;56&quot;, &quot;36490&quot;, …
+## $ P15A17A_F   &lt;chr&gt; &quot;2390407&quot;, &quot;2386&quot;, &quot;1509&quot;, &quot;28286&quot;, &quot;53&quot;, &quot;22&quot;, &quot;18550&quot;, &quot;…
+## $ P15A17A_M   &lt;chr&gt; &quot;2335952&quot;, &quot;2566&quot;, &quot;2048&quot;, &quot;27207&quot;, &quot;80&quot;, &quot;34&quot;, &quot;17940&quot;, &quot;…
+## $ P18A24A     &lt;chr&gt; &quot;4894125&quot;, &quot;4157&quot;, &quot;2738&quot;, &quot;59978&quot;, &quot;93&quot;, &quot;77&quot;, &quot;44885&quot;, &quot;…
+## $ P18A24A_F   &lt;chr&gt; &quot;2482980&quot;, &quot;1610&quot;, &quot;1053&quot;, &quot;31114&quot;, &quot;33&quot;, &quot;23&quot;, &quot;23031&quot;, &quot;…
+## $ P18A24A_M   &lt;chr&gt; &quot;2411145&quot;, &quot;2547&quot;, &quot;1685&quot;, &quot;28864&quot;, &quot;60&quot;, &quot;54&quot;, &quot;21854&quot;, &quot;…
+## $ P8A14AN     &lt;chr&gt; &quot;412725&quot;, &quot;2393&quot;, &quot;1527&quot;, &quot;3178&quot;, &quot;19&quot;, &quot;7&quot;, &quot;1851&quot;, &quot;1609…
+## $ P8A14AN_F   &lt;chr&gt; &quot;178152&quot;, &quot;1080&quot;, &quot;712&quot;, &quot;1318&quot;, &quot;10&quot;, &quot;4&quot;, &quot;772&quot;, &quot;683&quot;, …
+## $ P8A14AN_M   &lt;chr&gt; &quot;234573&quot;, &quot;1313&quot;, &quot;815&quot;, &quot;1860&quot;, &quot;9&quot;, &quot;3&quot;, &quot;1079&quot;, &quot;926&quot;, …
+## $ P15YM_AN    &lt;chr&gt; &quot;4456431&quot;, &quot;24331&quot;, &quot;15092&quot;, &quot;21908&quot;, &quot;180&quot;, &quot;113&quot;, &quot;11618…
+## $ P15YM_AN_F  &lt;chr&gt; &quot;2677192&quot;, &quot;10532&quot;, &quot;7074&quot;, &quot;11762&quot;, &quot;78&quot;, &quot;41&quot;, &quot;6599&quot;, &quot;…
+## $ P15YM_AN_M  &lt;chr&gt; &quot;1779239&quot;, &quot;13799&quot;, &quot;8018&quot;, &quot;10146&quot;, &quot;102&quot;, &quot;72&quot;, &quot;5019&quot;, …
+## $ P15YM_SE    &lt;chr&gt; &quot;4841952&quot;, &quot;28014&quot;, &quot;17660&quot;, &quot;25567&quot;, &quot;209&quot;, &quot;119&quot;, &quot;14576…
+## $ P15YM_SE_F  &lt;chr&gt; &quot;2791237&quot;, &quot;11278&quot;, &quot;7476&quot;, &quot;13286&quot;, &quot;79&quot;, &quot;43&quot;, &quot;7917&quot;, &quot;…
+## $ P15YM_SE_M  &lt;chr&gt; &quot;2050715&quot;, &quot;16736&quot;, &quot;10184&quot;, &quot;12281&quot;, &quot;130&quot;, &quot;76&quot;, &quot;6659&quot;,…
+## $ P15PRI_IN   &lt;chr&gt; &quot;7731820&quot;, &quot;38545&quot;, &quot;21620&quot;, &quot;65609&quot;, &quot;378&quot;, &quot;301&quot;, &quot;33308…
+## $ P15PRI_INF  &lt;chr&gt; &quot;4042527&quot;, &quot;13056&quot;, &quot;8064&quot;, &quot;33542&quot;, &quot;152&quot;, &quot;86&quot;, &quot;18056&quot;,…
+## $ P15PRI_INM  &lt;chr&gt; &quot;3689293&quot;, &quot;25489&quot;, &quot;13556&quot;, &quot;32067&quot;, &quot;226&quot;, &quot;215&quot;, &quot;15252…
+## $ P15PRI_CO   &lt;chr&gt; &quot;12325433&quot;, &quot;38809&quot;, &quot;22033&quot;, &quot;122405&quot;, &quot;470&quot;, &quot;409&quot;, &quot;762…
+## $ P15PRI_COF  &lt;chr&gt; &quot;6515268&quot;, &quot;14762&quot;, &quot;9009&quot;, &quot;64730&quot;, &quot;207&quot;, &quot;132&quot;, &quot;41402&quot;…
+## $ P15PRI_COM  &lt;chr&gt; &quot;5810165&quot;, &quot;24047&quot;, &quot;13024&quot;, &quot;57675&quot;, &quot;263&quot;, &quot;277&quot;, &quot;34854…
+## $ P15SEC_IN   &lt;chr&gt; &quot;2913915&quot;, &quot;14833&quot;, &quot;5040&quot;, &quot;30347&quot;, &quot;157&quot;, &quot;145&quot;, &quot;19144&quot;…
+## $ P15SEC_INF  &lt;chr&gt; &quot;1297269&quot;, &quot;3143&quot;, &quot;1561&quot;, &quot;12806&quot;, &quot;37&quot;, &quot;27&quot;, &quot;8184&quot;, &quot;7…
+## $ P15SEC_INM  &lt;chr&gt; &quot;1616646&quot;, &quot;11690&quot;, &quot;3479&quot;, &quot;17541&quot;, &quot;120&quot;, &quot;118&quot;, &quot;10960&quot;…
+## $ P15SEC_CO   &lt;chr&gt; &quot;22833912&quot;, &quot;40180&quot;, &quot;24056&quot;, &quot;288036&quot;, &quot;832&quot;, &quot;807&quot;, &quot;182…
+## $ P15SEC_COF  &lt;chr&gt; &quot;11857736&quot;, &quot;15578&quot;, &quot;9485&quot;, &quot;151759&quot;, &quot;291&quot;, &quot;220&quot;, &quot;9543…
+## $ P15SEC_COM  &lt;chr&gt; &quot;10976176&quot;, &quot;24602&quot;, &quot;14571&quot;, &quot;136277&quot;, &quot;541&quot;, &quot;587&quot;, &quot;871…
+## $ P18YM_PB    &lt;chr&gt; &quot;39977750&quot;, &quot;33907&quot;, &quot;19102&quot;, &quot;467249&quot;, &quot;722&quot;, &quot;617&quot;, &quot;354…
+## $ P18YM_PB_F  &lt;chr&gt; &quot;20408275&quot;, &quot;11972&quot;, &quot;7672&quot;, &quot;240419&quot;, &quot;289&quot;, &quot;211&quot;, &quot;1818…
+## $ P18YM_PB_M  &lt;chr&gt; &quot;19569475&quot;, &quot;21935&quot;, &quot;11430&quot;, &quot;226830&quot;, &quot;433&quot;, &quot;406&quot;, &quot;172…
+## $ GRAPROES    &lt;chr&gt; &quot;9.74&quot;, &quot;6.5&quot;, &quot;6.45&quot;, &quot;10.35&quot;, &quot;8.14&quot;, &quot;8.37&quot;, &quot;10.84&quot;, &quot;…
+## $ GRAPROES_F  &lt;chr&gt; &quot;9.64&quot;, &quot;6.51&quot;, &quot;6.48&quot;, &quot;10.32&quot;, &quot;8.2&quot;, &quot;8.53&quot;, &quot;10.75&quot;, &quot;…
+## $ GRAPROES_M  &lt;chr&gt; &quot;9.84&quot;, &quot;6.5&quot;, &quot;6.43&quot;, &quot;10.38&quot;, &quot;8.11&quot;, &quot;8.3&quot;, &quot;10.93&quot;, &quot;1…
+## $ PEA         &lt;chr&gt; &quot;62281634&quot;, &quot;128289&quot;, &quot;68904&quot;, &quot;706930&quot;, &quot;2077&quot;, &quot;1748&quot;, &quot;…
+## $ PEA_F       &lt;chr&gt; &quot;25465693&quot;, &quot;33067&quot;, &quot;18475&quot;, &quot;293533&quot;, &quot;506&quot;, &quot;363&quot;, &quot;208…
+## $ PEA_M       &lt;chr&gt; &quot;36815941&quot;, &quot;95222&quot;, &quot;50429&quot;, &quot;413397&quot;, &quot;1571&quot;, &quot;1385&quot;, &quot;2…
+## $ PE_INAC     &lt;chr&gt; &quot;37891261&quot;, &quot;68766&quot;, &quot;46162&quot;, &quot;407903&quot;, &quot;939&quot;, &quot;801&quot;, &quot;269…
+## $ PE_INAC_F   &lt;chr&gt; &quot;26379060&quot;, &quot;42827&quot;, &quot;28959&quot;, &quot;282320&quot;, &quot;673&quot;, &quot;435&quot;, &quot;182…
+## $ PE_INAC_M   &lt;chr&gt; &quot;11512201&quot;, &quot;25939&quot;, &quot;17203&quot;, &quot;125583&quot;, &quot;266&quot;, &quot;366&quot;, &quot;862…
+## $ POCUPADA    &lt;chr&gt; &quot;61121324&quot;, &quot;127469&quot;, &quot;68215&quot;, &quot;692983&quot;, &quot;2060&quot;, &quot;1741&quot;, &quot;…
+## $ POCUPADA_F  &lt;chr&gt; &quot;25137019&quot;, &quot;32906&quot;, &quot;18365&quot;, &quot;289268&quot;, &quot;497&quot;, &quot;361&quot;, &quot;205…
+## $ POCUPADA_M  &lt;chr&gt; &quot;35984305&quot;, &quot;94563&quot;, &quot;49850&quot;, &quot;403715&quot;, &quot;1563&quot;, &quot;1380&quot;, &quot;2…
+## $ PDESOCUP    &lt;chr&gt; &quot;1160310&quot;, &quot;820&quot;, &quot;689&quot;, &quot;13947&quot;, &quot;17&quot;, &quot;7&quot;, &quot;10173&quot;, &quot;949…
+## $ PDESOCUP_F  &lt;chr&gt; &quot;328674&quot;, &quot;161&quot;, &quot;110&quot;, &quot;4265&quot;, &quot;9&quot;, &quot;2&quot;, &quot;3386&quot;, &quot;3224&quot;, …
+## $ PDESOCUP_M  &lt;chr&gt; &quot;831636&quot;, &quot;659&quot;, &quot;579&quot;, &quot;9682&quot;, &quot;8&quot;, &quot;5&quot;, &quot;6787&quot;, &quot;6274&quot;, …
+## $ PSINDER     &lt;chr&gt; &quot;32999713&quot;, &quot;86676&quot;, &quot;56232&quot;, &quot;262088&quot;, &quot;1067&quot;, &quot;1289&quot;, &quot;1…
+## $ PDER_SS     &lt;chr&gt; &quot;92582812&quot;, &quot;153663&quot;, &quot;90057&quot;, &quot;1161139&quot;, &quot;2472&quot;, &quot;1730&quot;, …
+## $ PDER_IMSS   &lt;chr&gt; &quot;47245909&quot;, &quot;53559&quot;, &quot;23569&quot;, &quot;780525&quot;, &quot;1090&quot;, &quot;828&quot;, &quot;57…
+## $ PDER_ISTE   &lt;chr&gt; &quot;7165164&quot;, &quot;3795&quot;, &quot;2312&quot;, &quot;92771&quot;, &quot;113&quot;, &quot;87&quot;, &quot;65237&quot;, …
+## $ PDER_ISTEE  &lt;chr&gt; &quot;1041534&quot;, &quot;552&quot;, &quot;350&quot;, &quot;3786&quot;, &quot;4&quot;, &quot;9&quot;, &quot;2352&quot;, &quot;2243&quot;,…
+## $ PAFIL_PDOM  &lt;chr&gt; &quot;1192255&quot;, &quot;649&quot;, &quot;485&quot;, &quot;3196&quot;, &quot;0&quot;, &quot;1&quot;, &quot;2563&quot;, &quot;2494&quot;,…
+## $ PDER_SEGP   &lt;chr&gt; &quot;32842765&quot;, &quot;84849&quot;, &quot;59445&quot;, &quot;271996&quot;, &quot;1242&quot;, &quot;775&quot;, &quot;12…
+## $ PDER_IMSSB  &lt;chr&gt; &quot;958787&quot;, &quot;2883&quot;, &quot;1956&quot;, &quot;1680&quot;, &quot;2&quot;, &quot;1&quot;, &quot;1064&quot;, &quot;969&quot;,…
+## $ PAFIL_IPRIV &lt;chr&gt; &quot;2615213&quot;, &quot;3288&quot;, &quot;1300&quot;, &quot;31789&quot;, &quot;31&quot;, &quot;20&quot;, &quot;25703&quot;, &quot;…
+## $ PAFIL_OTRAI &lt;chr&gt; &quot;1149542&quot;, &quot;6284&quot;, &quot;1504&quot;, &quot;3179&quot;, &quot;13&quot;, &quot;25&quot;, &quot;2346&quot;, &quot;21…
+## $ P12YM_SOLT  &lt;chr&gt; &quot;34370381&quot;, &quot;63913&quot;, &quot;38355&quot;, &quot;402370&quot;, &quot;1037&quot;, &quot;787&quot;, &quot;27…
+## $ P12YM_CASA  &lt;chr&gt; &quot;54036478&quot;, &quot;124916&quot;, &quot;68874&quot;, &quot;593273&quot;, &quot;1695&quot;, &quot;1454&quot;, &quot;…
+## $ P12YM_SEPA  &lt;chr&gt; &quot;12049313&quot;, &quot;18433&quot;, &quot;10660&quot;, &quot;120740&quot;, &quot;285&quot;, &quot;312&quot;, &quot;873…
+## $ PCATOLICA   &lt;chr&gt; &quot;97864218&quot;, &quot;187464&quot;, &quot;112351&quot;, &quot;1272419&quot;, &quot;3250&quot;, &quot;2732&quot;,…
+## $ PRO_CRIEVA  &lt;chr&gt; &quot;14095307&quot;, &quot;29725&quot;, &quot;16630&quot;, &quot;73359&quot;, &quot;223&quot;, &quot;95&quot;, &quot;55328…
+## $ POTRAS_REL  &lt;chr&gt; &quot;248169&quot;, &quot;1117&quot;, &quot;675&quot;, &quot;1900&quot;, &quot;11&quot;, &quot;22&quot;, &quot;1539&quot;, &quot;1457…
+## $ PSIN_RELIG  &lt;chr&gt; &quot;13314516&quot;, &quot;29624&quot;, &quot;16432&quot;, &quot;74439&quot;, &quot;195&quot;, &quot;169&quot;, &quot;5853…
+## $ TOTHOG      &lt;chr&gt; &quot;35219141&quot;, &quot;62516&quot;, &quot;36568&quot;, &quot;386445&quot;, &quot;807&quot;, &quot;516&quot;, &quot;266…
+## $ HOGJEF_F    &lt;chr&gt; &quot;11474983&quot;, &quot;8292&quot;, &quot;6620&quot;, &quot;119453&quot;, &quot;123&quot;, &quot;100&quot;, &quot;85732…
+## $ HOGJEF_M    &lt;chr&gt; &quot;23744158&quot;, &quot;54224&quot;, &quot;29948&quot;, &quot;266992&quot;, &quot;684&quot;, &quot;416&quot;, &quot;181…
+## $ POBHOG      &lt;chr&gt; &quot;125514839&quot;, &quot;198544&quot;, &quot;125099&quot;, &quot;1421200&quot;, &quot;3137&quot;, &quot;1918&quot;…
+## $ PHOGJEF_F   &lt;chr&gt; &quot;37418569&quot;, &quot;28805&quot;, &quot;21860&quot;, &quot;395735&quot;, &quot;532&quot;, &quot;385&quot;, &quot;273…
+## $ PHOGJEF_M   &lt;chr&gt; &quot;88096270&quot;, &quot;169739&quot;, &quot;103239&quot;, &quot;1025465&quot;, &quot;2605&quot;, &quot;1533&quot;,…
+## $ VIVTOT      &lt;dbl&gt; 43903443, 101390, 61435, 463972, 1368, 869, 313256, 286646…
+## $ TVIVHAB     &lt;dbl&gt; 35233462, 62767, 36676, 386671, 813, 518, 266942, 246259, …
+## $ TVIVPAR     &lt;chr&gt; &quot;42300700&quot;, &quot;99591&quot;, &quot;60317&quot;, &quot;453099&quot;, &quot;1354&quot;, &quot;858&quot;, &quot;30…
+## $ VIVPAR_HAB  &lt;chr&gt; &quot;33630719&quot;, &quot;60968&quot;, &quot;35558&quot;, &quot;375798&quot;, &quot;799&quot;, &quot;507&quot;, &quot;257…
+## $ VIVPARH_CV  &lt;chr&gt; &quot;35156897&quot;, &quot;62091&quot;, &quot;36359&quot;, &quot;386011&quot;, &quot;801&quot;, &quot;516&quot;, &quot;266…
+## $ TVIVPARHAB  &lt;chr&gt; &quot;35219141&quot;, &quot;62516&quot;, &quot;36568&quot;, &quot;386445&quot;, &quot;807&quot;, &quot;516&quot;, &quot;266…
+## $ VIVPAR_DES  &lt;chr&gt; &quot;6155682&quot;, &quot;18117&quot;, &quot;12225&quot;, &quot;60327&quot;, &quot;233&quot;, &quot;164&quot;, &quot;37113…
+## $ VIVPAR_UT   &lt;chr&gt; &quot;2514299&quot;, &quot;20506&quot;, &quot;12534&quot;, &quot;16974&quot;, &quot;322&quot;, &quot;187&quot;, &quot;9201&quot;…
+## $ OCUPVIVPAR  &lt;chr&gt; &quot;125514839&quot;, &quot;198544&quot;, &quot;125099&quot;, &quot;1421200&quot;, &quot;3137&quot;, &quot;1918&quot;…
+## $ PROM_OCUP   &lt;chr&gt; &quot;3.56&quot;, &quot;3.18&quot;, &quot;3.42&quot;, &quot;3.68&quot;, &quot;3.89&quot;, &quot;3.72&quot;, &quot;3.54&quot;, &quot;3…
+## $ PRO_OCUP_C  &lt;chr&gt; &quot;0.96&quot;, &quot;1.03&quot;, &quot;1.03&quot;, &quot;0.89&quot;, &quot;1.02&quot;, &quot;1.03&quot;, &quot;0.84&quot;, &quot;0…
+## $ VPH_PISODT  &lt;chr&gt; &quot;33833470&quot;, &quot;53169&quot;, &quot;29302&quot;, &quot;382634&quot;, &quot;771&quot;, &quot;499&quot;, &quot;264…
+## $ VPH_PISOTI  &lt;chr&gt; &quot;1235550&quot;, &quot;8797&quot;, &quot;6891&quot;, &quot;2899&quot;, &quot;30&quot;, &quot;17&quot;, &quot;1530&quot;, &quot;10…
+## $ VPH_1DOR    &lt;chr&gt; &quot;11186214&quot;, &quot;30115&quot;, &quot;17038&quot;, &quot;86423&quot;, &quot;270&quot;, &quot;175&quot;, &quot;5543…
+## $ VPH_2YMASD  &lt;chr&gt; &quot;23887498&quot;, &quot;31851&quot;, &quot;19157&quot;, &quot;299141&quot;, &quot;531&quot;, &quot;341&quot;, &quot;210…
+## $ VPH_1CUART  &lt;chr&gt; &quot;2085925&quot;, &quot;7333&quot;, &quot;4351&quot;, &quot;6390&quot;, &quot;39&quot;, &quot;27&quot;, &quot;3185&quot;, &quot;24…
+## $ VPH_2CUART  &lt;chr&gt; &quot;5460133&quot;, &quot;16206&quot;, &quot;9491&quot;, &quot;30686&quot;, &quot;116&quot;, &quot;85&quot;, &quot;17449&quot;,…
+## $ VPH_3YMASC  &lt;chr&gt; &quot;27527131&quot;, &quot;38424&quot;, &quot;22351&quot;, &quot;348487&quot;, &quot;646&quot;, &quot;404&quot;, &quot;245…
+## $ VPH_C_ELEC  &lt;chr&gt; &quot;34805976&quot;, &quot;48426&quot;, &quot;28586&quot;, &quot;384361&quot;, &quot;723&quot;, &quot;477&quot;, &quot;265…
+## $ VPH_S_ELEC  &lt;chr&gt; &quot;268863&quot;, &quot;13538&quot;, &quot;7607&quot;, &quot;1210&quot;, &quot;78&quot;, &quot;39&quot;, &quot;438&quot;, &quot;300…
+## $ VPH_AGUADV  &lt;chr&gt; &quot;33858339&quot;, &quot;45470&quot;, &quot;26499&quot;, &quot;383430&quot;, &quot;694&quot;, &quot;463&quot;, &quot;265…
+## $ VPH_AEASP   &lt;chr&gt; &quot;29541708&quot;, &quot;8198&quot;, &quot;5054&quot;, &quot;355192&quot;, &quot;195&quot;, &quot;136&quot;, &quot;25415…
+## $ VPH_AGUAFV  &lt;chr&gt; &quot;1215497&quot;, &quot;16498&quot;, &quot;9696&quot;, &quot;2137&quot;, &quot;107&quot;, &quot;53&quot;, &quot;989&quot;, &quot;3…
+## $ VPH_TINACO  &lt;chr&gt; &quot;22629812&quot;, &quot;34143&quot;, &quot;18089&quot;, &quot;295903&quot;, &quot;608&quot;, &quot;361&quot;, &quot;199…
+## $ VPH_CISTER  &lt;chr&gt; &quot;9652823&quot;, &quot;13743&quot;, &quot;7029&quot;, &quot;152521&quot;, &quot;405&quot;, &quot;241&quot;, &quot;12280…
+## $ VPH_EXCSA   &lt;chr&gt; &quot;33081729&quot;, &quot;44688&quot;, &quot;24348&quot;, &quot;382597&quot;, &quot;708&quot;, &quot;455&quot;, &quot;265…
+## $ VPH_LETR    &lt;chr&gt; &quot;1396774&quot;, &quot;9825&quot;, &quot;6050&quot;, &quot;1011&quot;, &quot;27&quot;, &quot;19&quot;, &quot;520&quot;, &quot;60&quot;…
+## $ VPH_DRENAJ  &lt;chr&gt; &quot;33564054&quot;, &quot;47253&quot;, &quot;26036&quot;, &quot;383148&quot;, &quot;719&quot;, &quot;459&quot;, &quot;265…
+## $ VPH_NODREN  &lt;chr&gt; &quot;1498766&quot;, &quot;14708&quot;, &quot;10155&quot;, &quot;2379&quot;, &quot;82&quot;, &quot;57&quot;, &quot;798&quot;, &quot;1…
+## $ VPH_C_SERV  &lt;chr&gt; &quot;32671764&quot;, &quot;35091&quot;, &quot;19807&quot;, &quot;380982&quot;, &quot;610&quot;, &quot;418&quot;, &quot;264…
+## $ VPH_NDEAED  &lt;chr&gt; &quot;79584&quot;, &quot;4842&quot;, &quot;2935&quot;, &quot;184&quot;, &quot;16&quot;, &quot;10&quot;, &quot;53&quot;, &quot;19&quot;, &quot;*…
+## $ VPH_DSADMA  &lt;chr&gt; &quot;32979844&quot;, &quot;43668&quot;, &quot;23841&quot;, &quot;382121&quot;, &quot;704&quot;, &quot;445&quot;, &quot;264…
+## $ VPH_NDACMM  &lt;chr&gt; &quot;16874580&quot;, &quot;24373&quot;, &quot;16122&quot;, &quot;130744&quot;, &quot;203&quot;, &quot;119&quot;, &quot;883…
+## $ VPH_SNBIEN  &lt;chr&gt; &quot;581095&quot;, &quot;5136&quot;, &quot;4115&quot;, &quot;876&quot;, &quot;12&quot;, &quot;8&quot;, &quot;380&quot;, &quot;313&quot;, …
+## $ VPH_REFRI   &lt;chr&gt; &quot;30811260&quot;, &quot;38199&quot;, &quot;21775&quot;, &quot;365189&quot;, &quot;632&quot;, &quot;436&quot;, &quot;254…
+## $ VPH_LAVAD   &lt;chr&gt; &quot;25610544&quot;, &quot;26412&quot;, &quot;15880&quot;, &quot;335710&quot;, &quot;561&quot;, &quot;377&quot;, &quot;234…
+## $ VPH_HMICRO  &lt;chr&gt; &quot;16651199&quot;, &quot;13608&quot;, &quot;7902&quot;, &quot;238571&quot;, &quot;276&quot;, &quot;218&quot;, &quot;1760…
+## $ VPH_AUTOM   &lt;chr&gt; &quot;16340788&quot;, &quot;30940&quot;, &quot;16699&quot;, &quot;240381&quot;, &quot;529&quot;, &quot;343&quot;, &quot;169…
+## $ VPH_MOTO    &lt;chr&gt; &quot;4227460&quot;, &quot;15001&quot;, &quot;8076&quot;, &quot;45642&quot;, &quot;216&quot;, &quot;143&quot;, &quot;26624&quot;…
+## $ VPH_BICI    &lt;chr&gt; &quot;7469168&quot;, &quot;13600&quot;, &quot;6330&quot;, &quot;105752&quot;, &quot;407&quot;, &quot;241&quot;, &quot;54393…
+## $ VPH_RADIO   &lt;chr&gt; &quot;23772973&quot;, &quot;36738&quot;, &quot;20009&quot;, &quot;312002&quot;, &quot;650&quot;, &quot;405&quot;, &quot;221…
+## $ VPH_TV      &lt;chr&gt; &quot;32031555&quot;, &quot;40001&quot;, &quot;23198&quot;, &quot;370411&quot;, &quot;684&quot;, &quot;466&quot;, &quot;257…
+## $ VPH_PC      &lt;chr&gt; &quot;13204680&quot;, &quot;5797&quot;, &quot;3588&quot;, &quot;177149&quot;, &quot;167&quot;, &quot;114&quot;, &quot;13692…
+## $ VPH_TELEF   &lt;chr&gt; &quot;13184550&quot;, &quot;3523&quot;, &quot;2177&quot;, &quot;147818&quot;, &quot;43&quot;, &quot;37&quot;, &quot;116647&quot;…
+## $ VPH_CEL     &lt;chr&gt; &quot;30775898&quot;, &quot;47005&quot;, &quot;25581&quot;, &quot;359895&quot;, &quot;732&quot;, &quot;470&quot;, &quot;251…
+## $ VPH_INTER   &lt;chr&gt; &quot;18307193&quot;, &quot;8385&quot;, &quot;5027&quot;, &quot;236003&quot;, &quot;205&quot;, &quot;146&quot;, &quot;17861…
+## $ VPH_STVP    &lt;chr&gt; &quot;15211306&quot;, &quot;18981&quot;, &quot;11306&quot;, &quot;174089&quot;, &quot;212&quot;, &quot;156&quot;, &quot;130…
+## $ VPH_SPMVPI  &lt;chr&gt; &quot;6616141&quot;, &quot;1732&quot;, &quot;971&quot;, &quot;98724&quot;, &quot;48&quot;, &quot;35&quot;, &quot;80951&quot;, &quot;7…
+## $ VPH_CVJ     &lt;chr&gt; &quot;4047100&quot;, &quot;1113&quot;, &quot;708&quot;, &quot;70126&quot;, &quot;41&quot;, &quot;38&quot;, &quot;56131&quot;, &quot;5…
+## $ VPH_SINRTV  &lt;chr&gt; &quot;1788552&quot;, &quot;12775&quot;, &quot;8247&quot;, &quot;6021&quot;, &quot;39&quot;, &quot;25&quot;, &quot;3299&quot;, &quot;2…
+## $ VPH_SINLTC  &lt;chr&gt; &quot;3170894&quot;, &quot;14143&quot;, &quot;10065&quot;, &quot;15323&quot;, &quot;62&quot;, &quot;44&quot;, &quot;7293&quot;, …
+## $ VPH_SINCINT &lt;chr&gt; &quot;15108204&quot;, &quot;51293&quot;, &quot;29741&quot;, &quot;128996&quot;, &quot;530&quot;, &quot;330&quot;, &quot;742…
+## $ VPH_SINTIC  &lt;chr&gt; &quot;852871&quot;, &quot;7154&quot;, &quot;5283&quot;, &quot;1711&quot;, &quot;20&quot;, &quot;11&quot;, &quot;731&quot;, &quot;595&quot;…
+## $ TAMLOC      &lt;chr&gt; &quot;*&quot;, &quot;*&quot;, &quot;*&quot;, &quot;*&quot;, &quot;*&quot;, &quot;*&quot;, &quot;*&quot;, &quot;13&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1…</code></pre>
+<p>¿Y si el archivo que necesitamos leer esta en excel?</p>
+</div>
+<div id="archivos-xls-y-xlsx" class="section level3 hasAnchor" number="3.5.2">
+<h3><span class="header-section-number">3.5.2</span> Archivos <em>xls</em> y <em>xlsx</em><a href="introducción-a-r.html#archivos-xls-y-xlsx" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La paquetería <em>readxl</em> facilita la obtención de datos tabulares de archivos de <em>Excel</em>. Admite tanto el formato <em>.xls</em> heredado como el formato <em>.xlsx</em> moderno basado en <em>XML</em>.</p>
+<p>Esta paqueteía pone a disposición las siguientes funciones:</p>
+<ul>
+<li><p><code>read_xlsx()</code> lee un archivo con extensión <em>xlsx</em>.</p></li>
+<li><p><code>read_excel()</code> determina si el archivo es de tipo <em>xls</em> o <em>xlsx</em> para después
+llamar a una de las fuciones mencionadas anteriormente.</p></li>
+</ul>
+<p><strong>EJERCICIO:</strong> Leer archivos propios en formato de Excel</p>
+</div>
+</div>
+<div id="consulta-de-datos" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> Consulta de datos<a href="introducción-a-r.html#consulta-de-datos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Ahora que ya sabemos como cargar datos, aprenderemos como manipularlos con <em>dplyr.</em> El paquete <em>dplyr</em> proporciona un conjunto de funciones muy útiles para manipular data frames y así reducir el número de repeticiones, la probabilidad de cometer errores y el número de caracteres que hay que escribir. Como valor extra, podemos encontrar que la gramática de <em>dplyr</em> es más fácil de entender.</p>
+<p>Revisaremos algunas de sus funciones <strong>más usadas</strong> (<em>verbos</em>), así como el uso de <strong>pipes</strong> (%&gt;%) para combinarlas.</p>
+<ul>
+<li><p>select()</p></li>
+<li><p>filter()</p></li>
+<li><p>arrange()</p></li>
+<li><p>mutate()</p></li>
+<li><p>summarise()</p></li>
+<li><p>join()</p></li>
+<li><p>group_by()</p></li>
+</ul>
+<p>Primero tenemos que instalar y cargar la paquetería (parte de tidyverse):</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="introducción-a-r.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<p>Usaremos el dataset <em>iris</em> que se encuentra en la paquetería <em>datasets</em> (el alumno puede hacer el ejercicio con la tabla de su elección)</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="introducción-a-r.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris,<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1           5.1         3.5          1.4         0.2  setosa
+## 2           4.9         3.0          1.4         0.2  setosa
+## 3           4.7         3.2          1.3         0.2  setosa
+## 4           4.6         3.1          1.5         0.2  setosa
+## 5           5.0         3.6          1.4         0.2  setosa
+## 6           5.4         3.9          1.7         0.4  setosa
+## 7           4.6         3.4          1.4         0.3  setosa
+## 8           5.0         3.4          1.5         0.2  setosa
+## 9           4.4         2.9          1.4         0.2  setosa
+## 10          4.9         3.1          1.5         0.1  setosa</code></pre>
+<div id="select" class="section level3 hasAnchor" number="3.6.1">
+<h3><span class="header-section-number">3.6.1</span> select()<a href="introducción-a-r.html#select" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Observamos que nuestros datos tienen 150 observaciones y 5 variables, con <em>select()</em> podemos seleccionar las variables que le indiquemos.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="introducción-a-r.html#cb33-1" aria-hidden="true" tabindex="-1"></a>select_ejemplo<span class="ot">&lt;-</span>iris <span class="sc">%&gt;%</span> <span class="fu">select</span>(Sepal.Length,Petal.Length,Species)</span>
+<span id="cb33-2"><a href="introducción-a-r.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(select_ejemplo,<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##    Sepal.Length Petal.Length Species
+## 1           5.1          1.4  setosa
+## 2           4.9          1.4  setosa
+## 3           4.7          1.3  setosa
+## 4           4.6          1.5  setosa
+## 5           5.0          1.4  setosa
+## 6           5.4          1.7  setosa
+## 7           4.6          1.4  setosa
+## 8           5.0          1.5  setosa
+## 9           4.4          1.4  setosa
+## 10          4.9          1.5  setosa</code></pre>
+<div class="infobox pin">
+<p><strong>¡¡ RECORDAR !!</strong></p>
+<p>El operador pipe (%&gt;%) se usa para <strong>conectar múltiples acciones</strong></p>
+</div>
+<p>En este caso solo le indicamos que en los datos de iris se seleccionan 3 varibles y se guarda este nuevo data frame en la variable <em>select_ejemplo</em>.</p>
+<p>Con <em>select()</em> y <em>contains</em> podemos seleccionar varibles con alguna cadena de texto.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="introducción-a-r.html#cb35-1" aria-hidden="true" tabindex="-1"></a>select_ejemplo <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">&quot;Sepal&quot;</span>))</span>
+<span id="cb35-2"><a href="introducción-a-r.html#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(select_ejemplo, <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>##   Sepal.Length Sepal.Width
+## 1          5.1         3.5
+## 2          4.9         3.0
+## 3          4.7         3.2
+## 4          4.6         3.1
+## 5          5.0         3.6</code></pre>
+<p>De igual manera, con <em>select()</em>, <em>ends_with</em> y <em>start_with()</em> podemos seleccionar que inicien o terminen con alguna cadena de texto.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="introducción-a-r.html#cb37-1" aria-hidden="true" tabindex="-1"></a>select_ejemplo <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;Sepal&quot;</span>), <span class="fu">ends_with</span>(<span class="st">&quot;Length&quot;</span>))</span>
+<span id="cb37-2"><a href="introducción-a-r.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(select_ejemplo, <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>##   Sepal.Length Sepal.Width Petal.Length
+## 1          5.1         3.5          1.4
+## 2          4.9         3.0          1.4
+## 3          4.7         3.2          1.3
+## 4          4.6         3.1          1.5
+## 5          5.0         3.6          1.4</code></pre>
+<p>Funciones útiles para <em>select()</em>:</p>
+<ul>
+<li><p><em>contains()</em>: Selecciona variables cuyo nombre contiene la cadena de texto.</p></li>
+<li><p><em>ends_with()</em>: Selecciona variables cuyo nombre termina con la cadena de caracteres.</p></li>
+<li><p><em>everything()</em>: Selecciona todas las columnas.</p></li>
+<li><p><em>matches()</em>: Selecciona las variables cuyos nombres coinciden con una expresión regular.</p></li>
+<li><p><em>num_range()</em>: Selecciona las variables por posición.</p></li>
+<li><p><em>start_with()</em>: Selecciona variables cuyos nombres empiezan con la cadena de caracteres.</p></li>
+<li><p><em>any_of</em>: Selecciona cualquiera de estas variables, en caso de existir</p></li>
+</ul>
+</div>
+<div id="filter" class="section level3 hasAnchor" number="3.6.2">
+<h3><span class="header-section-number">3.6.2</span> filter()<a href="introducción-a-r.html#filter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La función filter nos permite filtrar filas según una condición, primero notemos que la variable <em>Species</em> tiene tres categorías.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="introducción-a-r.html#cb39-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> <span class="fu">count</span>(Species)</span></code></pre></div>
+<pre><code>##      Species  n
+## 1     setosa 50
+## 2 versicolor 50
+## 3  virginica 50</code></pre>
+<p>Ahora usaremos la función <em>filter</em> para quedarnos solo con las observaciones de la especie virginica.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="introducción-a-r.html#cb41-1" aria-hidden="true" tabindex="-1"></a>ejemplo_filter <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Species<span class="sc">==</span><span class="st">&quot;virginica&quot;</span>)</span>
+<span id="cb41-2"><a href="introducción-a-r.html#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ejemplo_filter, <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+## 1          6.3         3.3          6.0         2.5 virginica
+## 2          5.8         2.7          5.1         1.9 virginica
+## 3          7.1         3.0          5.9         2.1 virginica
+## 4          6.3         2.9          5.6         1.8 virginica
+## 5          6.5         3.0          5.8         2.2 virginica</code></pre>
+<p>También se puede usar para filtrar variables numéricas:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="introducción-a-r.html#cb43-1" aria-hidden="true" tabindex="-1"></a>ejemplo_filter<span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Sepal.Length <span class="sc">&gt;</span> <span class="dv">5</span> <span class="sc">&amp;</span> Sepal.Width <span class="sc">&gt;=</span> <span class="fl">3.5</span>)</span>
+<span id="cb43-2"><a href="introducción-a-r.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ejemplo_filter, <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          5.4         3.9          1.7         0.4  setosa
+## 3          5.4         3.7          1.5         0.2  setosa
+## 4          5.8         4.0          1.2         0.2  setosa
+## 5          5.7         4.4          1.5         0.4  setosa</code></pre>
+<p>Notemos que en el ejemplo anterior usamos <em>&amp;</em>, que nos ayuda a filtrar por dos condiciones.</p>
+<p>También podemos usar <em>|</em> para filtrar por alguna de las dos condiciones.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="introducción-a-r.html#cb45-1" aria-hidden="true" tabindex="-1"></a>ejemplo_filter<span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Sepal.Length<span class="sc">&gt;</span><span class="dv">5</span> <span class="sc">|</span> Sepal.Width<span class="sc">&gt;=</span><span class="fl">3.5</span>)</span>
+<span id="cb45-2"><a href="introducción-a-r.html#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ejemplo_filter,<span class="dv">5</span>)</span></code></pre></div>
+<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          5.0         3.6          1.4         0.2  setosa
+## 3          5.4         3.9          1.7         0.4  setosa
+## 4          5.4         3.7          1.5         0.2  setosa
+## 5          5.8         4.0          1.2         0.2  setosa</code></pre>
+<p>Las condiciones pueden ser expresiones lógicas construidas mediante los operadores relacionales y lógicos:</p>
+<ul>
+<li><p><strong>&lt;</strong> : Menor que</p></li>
+<li><p><strong>&gt;</strong> : Mayor que</p></li>
+<li><p><strong>=</strong> : Igual que</p></li>
+<li><p><strong>&lt;=</strong> : Menor o igual que</p></li>
+<li><p><strong>&gt;=</strong> : Mayor o igual que</p></li>
+<li><p><strong>!=</strong> : Diferente que</p></li>
+<li><p><strong>%in%</strong> : Pertenece al conjunto</p></li>
+<li><p><strong>is.na</strong> : Es NA</p></li>
+<li><p><strong>!is.na</strong> : No es NA</p></li>
+</ul>
+</div>
+<div id="arrange" class="section level3 hasAnchor" number="3.6.3">
+<h3><span class="header-section-number">3.6.3</span> arrange()<a href="introducción-a-r.html#arrange" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La función arrange() se utiliza para ordenar las filas de un data frame de acuerdo a una o varias variables.</p>
+<p>Por defecto arrange() ordena las filas por orden ascendente:</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="introducción-a-r.html#cb47-1" aria-hidden="true" tabindex="-1"></a>ejemplo_arrange <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(Sepal.Length)</span>
+<span id="cb47-2"><a href="introducción-a-r.html#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ejemplo_arrange, <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1           4.3         3.0          1.1         0.1  setosa
+## 2           4.4         2.9          1.4         0.2  setosa
+## 3           4.4         3.0          1.3         0.2  setosa
+## 4           4.4         3.2          1.3         0.2  setosa
+## 5           4.5         2.3          1.3         0.3  setosa
+## 6           4.6         3.1          1.5         0.2  setosa
+## 7           4.6         3.4          1.4         0.3  setosa
+## 8           4.6         3.6          1.0         0.2  setosa
+## 9           4.6         3.2          1.4         0.2  setosa
+## 10          4.7         3.2          1.3         0.2  setosa</code></pre>
+<p><br>
+<br>
+Si las queremos ordenar de forma ascendente lo haremos del siguiente modo:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="introducción-a-r.html#cb49-1" aria-hidden="true" tabindex="-1"></a>ejemplo_arrange <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(Sepal.Length))</span>
+<span id="cb49-2"><a href="introducción-a-r.html#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ejemplo_arrange, <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##    Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+## 1           7.9         3.8          6.4         2.0 virginica
+## 2           7.7         3.8          6.7         2.2 virginica
+## 3           7.7         2.6          6.9         2.3 virginica
+## 4           7.7         2.8          6.7         2.0 virginica
+## 5           7.7         3.0          6.1         2.3 virginica
+## 6           7.6         3.0          6.6         2.1 virginica
+## 7           7.4         2.8          6.1         1.9 virginica
+## 8           7.3         2.9          6.3         1.8 virginica
+## 9           7.2         3.6          6.1         2.5 virginica
+## 10          7.2         3.2          6.0         1.8 virginica</code></pre>
+</div>
+<div id="mutate" class="section level3 hasAnchor" number="3.6.4">
+<h3><span class="header-section-number">3.6.4</span> mutate()<a href="introducción-a-r.html#mutate" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Con la función mutate() podemos computar tranformaciones de variables en un data frame. A menudo, tendremos la necesidad de crear nuevas variables que se calculan a partir de variables existentes,mutate() nos proporciona una interface clara para realizar este tipo de operaciones.</p>
+<p>Por ejemplo haremos la suma de las variables <em>Sepal.Lenght</em> y <em>Sepal.Width</em>:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="introducción-a-r.html#cb51-1" aria-hidden="true" tabindex="-1"></a>ejemplo_mutate <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> </span>
+<span id="cb51-2"><a href="introducción-a-r.html#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Sepal.Length, Sepal.Width) <span class="sc">%&gt;%</span></span>
+<span id="cb51-3"><a href="introducción-a-r.html#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Suma =</span> Sepal.Length <span class="sc">+</span> Sepal.Width)</span>
+<span id="cb51-4"><a href="introducción-a-r.html#cb51-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-5"><a href="introducción-a-r.html#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ejemplo_mutate, <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>##   Sepal.Length Sepal.Width Suma
+## 1          5.1         3.5  8.6
+## 2          4.9         3.0  7.9
+## 3          4.7         3.2  7.9
+## 4          4.6         3.1  7.7
+## 5          5.0         3.6  8.6</code></pre>
+<div class="infobox pin">
+<p><strong>¡¡ RECORDAR !!</strong></p>
+<p>Notemos que en el ejemplo anterior usamos dos <em>pipes</em> (%&gt;%). Como habiamos mencionado se pueden usar los <em>pipes</em> necesarios para combinar tareas.</p>
+</div>
+</div>
+<div id="summarise" class="section level3 hasAnchor" number="3.6.5">
+<h3><span class="header-section-number">3.6.5</span> summarise()<a href="introducción-a-r.html#summarise" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La función summarise() funciona de forma análoga a la función mutate, excepto que en lugar de añadir nuevas columnas crea un nuevo data frame.</p>
+<p>Podemos usar el ejemplo anterior y calcular la media de la varible creada <em>Suma</em>:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="introducción-a-r.html#cb53-1" aria-hidden="true" tabindex="-1"></a>ejemplo_summarise <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> </span>
+<span id="cb53-2"><a href="introducción-a-r.html#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Sepal.Length, Sepal.Width) <span class="sc">%&gt;%</span></span>
+<span id="cb53-3"><a href="introducción-a-r.html#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Suma =</span> Sepal.Length <span class="sc">+</span> Sepal.Width) <span class="sc">%&gt;%</span></span>
+<span id="cb53-4"><a href="introducción-a-r.html#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Media_Suma =</span> <span class="fu">mean</span>(Suma))</span>
+<span id="cb53-5"><a href="introducción-a-r.html#cb53-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-6"><a href="introducción-a-r.html#cb53-6" aria-hidden="true" tabindex="-1"></a>ejemplo_summarise</span></code></pre></div>
+<pre><code>##   Media_Suma
+## 1   8.900667</code></pre>
+<p>Solo fue necesario agregar un <em>pipe</em>, especificar el nombre de la varible creada y la operación a realizar.</p>
+<p>A continuación se muestran funciones que trabajando conjuntamente con la función summarise() facilitarán nuestro trabajo diario. Las primeras pertenecen al paquete base y las otras son del paquete dplyr. Todas ellas toman como argumento un vector y devuelven un único resultado:</p>
+<ul>
+<li><p><em>min(), max()</em> : Valores max y min.</p></li>
+<li><p><em>mean()</em> : Media.</p></li>
+<li><p><em>median()</em> : Mediana.</p></li>
+<li><p><em>sum()</em> : Suma de los valores.</p></li>
+<li><p><em>var(), sd()</em> : Varianza y desviación estandar.</p></li>
+<li><p><em>first()</em> : Primer valor en un vector.</p></li>
+<li><p><em>last()</em> : El último valor en un vector</p></li>
+<li><p><em>n()</em> : El número de valores en un vector.</p></li>
+<li><p><em>n_distinc()</em> : El número de valores distintos en un vector.</p></li>
+<li><p><em>nth()</em> : Extrar el valor que ocupa la posición n en un vector.</p></li>
+</ul>
+<p>Mas adelante veremos como combinar esta función con la función <em>group_by</em>.</p>
+</div>
+<div id="group_by" class="section level3 hasAnchor" number="3.6.6">
+<h3><span class="header-section-number">3.6.6</span> group_by()<a href="introducción-a-r.html#group_by" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La función group_by() agrupa un conjunto de filas seleccionado en un conjunto de filas de resumen de acuerdo con los valores de una o más columnas o expresiones.</p>
+<p>Usaremos el ejemplo anterior, primero creamos nuestra nueva variable <em>Suma</em>, despues agrupamos por especie y al final sacamos la media de la variable <em>Suma</em> pero esta vez, por la función <em>group_by</em>, nos regresara una media por cada grupo creado, es decir, nos regresara el promedio de la suma por especie.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="introducción-a-r.html#cb55-1" aria-hidden="true" tabindex="-1"></a>ejemplo_groupby <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span></span>
+<span id="cb55-2"><a href="introducción-a-r.html#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Suma =</span> Sepal.Length <span class="sc">+</span> Sepal.Width) <span class="sc">%&gt;%</span></span>
+<span id="cb55-3"><a href="introducción-a-r.html#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Species) <span class="sc">%&gt;%</span></span>
+<span id="cb55-4"><a href="introducción-a-r.html#cb55-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Media_Suma =</span> <span class="fu">mean</span>(Suma))</span>
+<span id="cb55-5"><a href="introducción-a-r.html#cb55-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-6"><a href="introducción-a-r.html#cb55-6" aria-hidden="true" tabindex="-1"></a>ejemplo_groupby</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 2
+##   Species    Media_Suma
+##   &lt;fct&gt;           &lt;dbl&gt;
+## 1 setosa           8.43
+## 2 versicolor       8.71
+## 3 virginica        9.56</code></pre>
+</div>
+<div id="left_join" class="section level3 hasAnchor" number="3.6.7">
+<h3><span class="header-section-number">3.6.7</span> left_join()<a href="introducción-a-r.html#left_join" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Una operación fundamental por agregar a nuestro flujo de trabajo es el cruce de tablas, las cuales pueden proceder de la misma o de distinta fuente. Comúnmente <strong>este proceso se realiza para enriquecer y unificar la información</strong> proveniente de distintas tablas de datos.</p>
+<p>Para lograr esta tarea es indispensable que exista una variable <strong>llave</strong> en ambos conjuntos de datos que sirva como puente o identificador de cada caso o renglón. Si se cuenta con la columna llave entonces será posible cruzar las tablas y lograr su enriquecimiento.</p>
+<p>En el siguiente ejemplo se muestra el uso de la variable llave a través de la columna “ID.” Se puede apreciar que en la tabla final se cuenta con información de la variable “Weight” para los elementos que existen en las tablas “A” y “B.”</p>
+<p><img src="img/02-intro2r/left_join3.png" width="700pt" style="display: block; margin: auto;" /></p>
+<p>La función que hace posible el complemento de la información es llamada <em>left_join()</em>. El primer argumento de la función corresponde al conjunto de datos que se desea complementar, mientras que en el segundo argumento se ingresa el conjunto de datos con la información que enriquecerá al primer conjunto. Es necesario especificar en el argumento <em>“by”</em> el nombre de la columna llave.</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="introducción-a-r.html#cb57-1" aria-hidden="true" tabindex="-1"></a>conjuntoX <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">&quot;Llave&quot;</span> <span class="ot">=</span> LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>], <span class="st">&quot;C1&quot;</span> <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>)</span>
+<span id="cb57-2"><a href="introducción-a-r.html#cb57-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-3"><a href="introducción-a-r.html#cb57-3" aria-hidden="true" tabindex="-1"></a>conjuntoY <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb57-4"><a href="introducción-a-r.html#cb57-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Llave&quot;</span> <span class="ot">=</span> <span class="fu">sample</span>(LETTERS[<span class="dv">11</span><span class="sc">:</span><span class="dv">3</span>], <span class="at">size =</span> <span class="dv">9</span>, <span class="at">replace =</span> T), </span>
+<span id="cb57-5"><a href="introducción-a-r.html#cb57-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Ex1&quot;</span> <span class="ot">=</span> letters[<span class="dv">2</span><span class="sc">:</span><span class="dv">10</span>], </span>
+<span id="cb57-6"><a href="introducción-a-r.html#cb57-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Ex2&quot;</span> <span class="ot">=</span> <span class="dv">1002</span><span class="sc">:</span><span class="dv">1010</span>,</span>
+<span id="cb57-7"><a href="introducción-a-r.html#cb57-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Ex3&quot;</span> <span class="ot">=</span> <span class="fu">paste0</span>(letters[<span class="dv">12</span><span class="sc">:</span><span class="dv">20</span>],<span class="dv">2</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb57-8"><a href="introducción-a-r.html#cb57-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb57-9"><a href="introducción-a-r.html#cb57-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-10"><a href="introducción-a-r.html#cb57-10" aria-hidden="true" tabindex="-1"></a>conjuntoX</span></code></pre></div>
+<pre><code>##   Llave C1
+## 1     A  1
+## 2     B  2
+## 3     C  3
+## 4     D  4
+## 5     E  5
+## 6     F  6
+## 7     G  7
+## 8     H  8</code></pre>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="introducción-a-r.html#cb59-1" aria-hidden="true" tabindex="-1"></a>conjuntoY</span></code></pre></div>
+<pre><code>##   Llave Ex1  Ex2 Ex3
+## 1     K   b 1002  l2
+## 2     I   c 1003  m3
+## 3     D   d 1004  n4
+## 4     H   e 1005  o5
+## 5     J   f 1006  p6
+## 6     E   g 1007  q7
+## 7     E   h 1008  r8
+## 8     D   i 1009  s9
+## 9     J   j 1010 t10</code></pre>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="introducción-a-r.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(<span class="at">x =</span> conjuntoX, <span class="at">y =</span> conjuntoY, <span class="at">by =</span> <span class="st">&quot;Llave&quot;</span>)</span></code></pre></div>
+<pre><code>##    Llave C1  Ex1  Ex2  Ex3
+## 1      A  1 &lt;NA&gt;   NA &lt;NA&gt;
+## 2      B  2 &lt;NA&gt;   NA &lt;NA&gt;
+## 3      C  3 &lt;NA&gt;   NA &lt;NA&gt;
+## 4      D  4    d 1004   n4
+## 5      D  4    i 1009   s9
+## 6      E  5    g 1007   q7
+## 7      E  5    h 1008   r8
+## 8      F  6 &lt;NA&gt;   NA &lt;NA&gt;
+## 9      G  7 &lt;NA&gt;   NA &lt;NA&gt;
+## 10     H  8    e 1005   o5</code></pre>
+<p>Es posible que no todas las observaciones de un conjunto de datos estén en el otro conjunto, cuando esto sucede un aviso aparece indicando que los factores o categorías de la variable llave son diferentes. En caso de no encontrarse uno o más de los valores, el resultado para esos casos será NA (no disponible, por su traducción del inglés “Not Available”), y aparecerá siempre que no se cuente con información en un registro, como se muestra en el ejemplo anterior.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="tipos-de-muestras.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="construcción-de-muestra.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["unam22_eodc.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

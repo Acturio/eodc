@@ -38,17 +38,11 @@ El objetivo de estas sesiones es presentar de modo general la metodología estad
 Actuario, egresado de la Facultad de Ciencias y Maestría en Ciencia de Datos, ITAM. 
 Experiencia en modelos predictivos y de clasificación de machine learning aplicado a seguros, deportes y movilidad internacional. Es jefe de departamento en Investigación Aplicada y Opinión de la UNAM, donde realiza estudios estadísticos de impacto social. Es consultor para empresas y organizaciones como GNP, El Universal, UNAM, Sinnia, la Organización de las Naciones Unidas Contra la Droga y el Delito (UNODC), entre otros. Actualmente es profesor de *ciencia de datos y machine learning* en AMAT y se desempeña como consultor independiente en diferentes proyectos contribuyendo a empresas en temas de machine learning, estadística, series de tiempo, visualización de datos y análisis geoespacial.
 
-```{r echo=FALSE,fig.align='center'}
-knitr::include_graphics("img/00-presentacion/arturo.png")
-```
-
-
 ## Recursos y dinámica de clase
 
 En esta clase estaremos usando: 
 
 * R [da click aquí si aún no lo descargas](https://cran.r-project.org/)
 * RStudio [da click aquí también](https://www.rstudio.com/products/rstudio/download/)
-* [Google Drive]()
-* Notas de clase [Revisame si quieres aprender]() 
+* Notas de clase [link](https://acturio.github.io/eodc/) 
 
