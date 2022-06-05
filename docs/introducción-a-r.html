@@ -203,6 +203,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="4.3.1" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#implementación-en-r-1"><i class="fa fa-check"></i><b>4.3.1</b> Implementación en R</a></li>
 </ul></li>
+<li class="chapter" data-level="4.4" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#probabilidades-y-factores"><i class="fa fa-check"></i><b>4.4</b> Probabilidades y Factores</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#probabilidades"><i class="fa fa-check"></i><b>4.4.1</b> Probabilidades</a></li>
+<li class="chapter" data-level="4.4.2" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#factor-de-expansión"><i class="fa fa-check"></i><b>4.4.2</b> Factor de expansión</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#extracción-de-muestra"><i class="fa fa-check"></i><b>4.5</b> Extracción de muestra</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#mas-sin-remplazo"><i class="fa fa-check"></i><b>4.5.1</b> MAS sin remplazo</a></li>
+<li class="chapter" data-level="4.5.2" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#mas-con-remplazo"><i class="fa fa-check"></i><b>4.5.2</b> MAS con remplazo</a></li>
+<li class="chapter" data-level="4.5.3" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#muestreo-ppt"><i class="fa fa-check"></i><b>4.5.3</b> Muestreo PPT</a></li>
+<li class="chapter" data-level="4.5.4" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#muestreo-estratificado-y-ppt"><i class="fa fa-check"></i><b>4.5.4</b> Muestreo estratificado y PPT</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -381,7 +393,7 @@ Figure 3.1: Páneles de trabajo de Rstudio
 <p>Usualmente, no creamos los datos desde la sesión de <em>R</em>, sino que a través de un archivo externo se realiza la lectura de datos escritos en un archivo. Los más comúnes son:</p>
 <p><img src="img/02-intro2r/archivos.jpg" style="display: block; margin: auto;" /></p>
 <p>La paquetería <em>readr</em> fue desarrollada recientemente para lidiar con la lectura de archivos grandes rápidamente. Esta paquetería proporciona funciones que suelen ser mucho más rápidas que las funciones base que proporciona <em>R</em>.</p>
-<p><img src="img/02-intro2r/logo-readr.png" style="display: block; margin: auto;" /></p>
+<p><img src="img/02-intro2r/logo-readr.png" width="120" style="display: block; margin: auto;" /></p>
 <p><strong>Ventajas de readr:</strong></p>
 <ul>
 <li><p>Por lo general, son mucho más rápidos (~ 10x) que sus funciones equivalentes.</p></li>
@@ -918,27 +930,27 @@ Si las queremos ordenar de forma ascendente lo haremos del siguiente modo:</p>
 ## 8     H  8</code></pre>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="introducción-a-r.html#cb59-1" aria-hidden="true" tabindex="-1"></a>conjuntoY</span></code></pre></div>
 <pre><code>##   Llave Ex1  Ex2 Ex3
-## 1     K   b 1002  l2
-## 2     I   c 1003  m3
-## 3     D   d 1004  n4
-## 4     H   e 1005  o5
-## 5     J   f 1006  p6
-## 6     E   g 1007  q7
-## 7     E   h 1008  r8
+## 1     I   b 1002  l2
+## 2     F   c 1003  m3
+## 3     E   d 1004  n4
+## 4     G   e 1005  o5
+## 5     D   f 1006  p6
+## 6     G   g 1007  q7
+## 7     K   h 1008  r8
 ## 8     D   i 1009  s9
-## 9     J   j 1010 t10</code></pre>
+## 9     K   j 1010 t10</code></pre>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="introducción-a-r.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(<span class="at">x =</span> conjuntoX, <span class="at">y =</span> conjuntoY, <span class="at">by =</span> <span class="st">&quot;Llave&quot;</span>)</span></code></pre></div>
 <pre><code>##    Llave C1  Ex1  Ex2  Ex3
 ## 1      A  1 &lt;NA&gt;   NA &lt;NA&gt;
 ## 2      B  2 &lt;NA&gt;   NA &lt;NA&gt;
 ## 3      C  3 &lt;NA&gt;   NA &lt;NA&gt;
-## 4      D  4    d 1004   n4
+## 4      D  4    f 1006   p6
 ## 5      D  4    i 1009   s9
-## 6      E  5    g 1007   q7
-## 7      E  5    h 1008   r8
-## 8      F  6 &lt;NA&gt;   NA &lt;NA&gt;
-## 9      G  7 &lt;NA&gt;   NA &lt;NA&gt;
-## 10     H  8    e 1005   o5</code></pre>
+## 6      E  5    d 1004   n4
+## 7      F  6    c 1003   m3
+## 8      G  7    e 1005   o5
+## 9      G  7    g 1007   q7
+## 10     H  8 &lt;NA&gt;   NA &lt;NA&gt;</code></pre>
 <p>Es posible que no todas las observaciones de un conjunto de datos estén en el otro conjunto, cuando esto sucede un aviso aparece indicando que los factores o categorías de la variable llave son diferentes. En caso de no encontrarse uno o más de los valores, el resultado para esos casos será NA (no disponible, por su traducción del inglés “Not Available”), y aparecerá siempre que no se cuente con información en un registro, como se muestra en el ejemplo anterior.</p>
 
 </div>

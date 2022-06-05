@@ -175,6 +175,7 @@ n_muestra(e = 0.03, p = 0.5, alpha = 0.95, N = 886279, deff = 1.7, tnr = 0.1)
 n_muestra(e = 0.02, p = 0.5, alpha = 0.95, N = 886279, deff = 1.7, tnr = 0.1)
 
 ```
+
 ::: {.infobox .note data-latex="{note}"}
 **EJERCICIO**
 
@@ -238,7 +239,9 @@ marco <- marco %>%
     VIVPAR_HAB <= 55 ~ "gpo2",
     VIVPAR_HAB <= 80 ~ "gpo3",
     TRUE ~ "gpo4",
-  ))
+  )) %>% 
+  arrange(estrato) %>% 
+  mutate(ID_unit = 1:nrow(marco))
 
 marco
 
@@ -256,12 +259,189 @@ pob_estrato
 Suponiendo que el tamaño de muestra seleccionado es de 2,000 individuos y se desea hacer una afijación proporcional, el tamaño de muestra en cada estrato queda asignado de la siguiente forma:
 
 ```{r}
-pob_estrato %>% 
+distribucion <- pob_estrato %>% 
   mutate(
     prop = viv/sum(viv),
     n_h = round(prop * 2000)
   )
+
+distribucion
 ```
+
+Una práctica muy común es redondear la muestra elegida en cada estrato de forma que sean número múltiplos de 5 o 10 los que definan el tamaño final de muestra en cada estrato. Existen múltiples formas de realizar estos ajustes. Usaremos un redondeo simple para determinar el tamaño de muetsra final en cada estrato.
+
+```{r}
+distribucion <- distribucion %>% 
+  mutate(nh_aj = round(n_h/10)*10)
+
+distribucion
+```
+
+**De esta forma, el tamaño final de la muestra será de `r sum(distribucion$nh_aj)` unidades.**
+
+## Probabilidades y Factores
+
+Dependiendo del diseño de muestreo implementado, a cada unidad se le deberá asignar una probabilidad de ser incluída en la muestra. Entre las más comunes se encuentran:
+
+### Probabilidades
+
+* Muestreo Aleatorio Simple con reemplazo: Ocurre cuando **SÍ** se realiza reemplazo de la muestra y un elemento puede ser seleccionado una o más veces.
+
+$$\pi_k=1-(\frac{N-1}{N})^n$$
+
+* Muestreo Aleatorio Simple sin reemplazo: Ocurre cuando **NO** se realiza reemplazo de la muestra y un elemento es seleccionado una sola vez.
+
+$$\pi_k=\frac{n}{N}$$
+
+* Muestreo con probabilidad PPT: La probabilidad con la que un individuo es seleccionado es proporcional a una característica de interés:
+
+$$\pi_k=n\frac{X_k}{\sum_{i=1}^N{X_k}}$$
+
+Cuando se trata de un muestreo polietápico, cada una de las etapas tiene su propia probabilidad y factor de expansión asociado. Debido a que el muestreo se realiza de manera independiente en cada etapa, tanto la probabilidad de inclusión final como el factor de expansión se calcula mediante la multiplicación de cada una de las etapas que conforman el muestreo.
+
+$$\pi_k=\pi_{upm} \cdot \pi_{usm} \cdot ... \cdot \pi_{uum}$$
+
+### Factor de expansión
+
+El factor de expansión se refiere al número de individuos fuera de la muestra que son representados por cada uno de los individuos incluídos dentro de la muestra, Este factor es calculado para cada elemento muestral. Matemáticamente, este cálculo se realiza a través del inverso de probabilidad de selección:
+
+$$F_k=\frac{1}{\pi_k}$$
+
+
+En *R* realizaremos automáticamente el cálculo de la probabilidad de inclusión y posteriormente invertiremos esta probabilidad para extraer el factor de expansión.
+
+## Extracción de muestra
+
+Una vez definido el diseño de muestreo y tamaño de muestra, procedemos a extraer nuestra muestra de acuerdo con el diseño determinado. En esta sección probaremos múltiples formas de extraer la muestra final
+
+### MAS sin remplazo
+
+El muestreo aleatorio simple sin reemplazo es uno de los más simples de implementar. Es necesario contar con la librería *sampling* para poder hacer uso de las funciones necesarias.
+
+
+```{r, warning=FALSE, message=FALSE}
+library(tidyverse)
+```
+
+```{r}
+library(sampling)
+
+set.seed(310308261)
+muestra_1 <- strata(
+  data = marco, 
+  stratanames = NULL, 
+  size = 2000, 
+  method = "srswor", 
+  description = TRUE
+  ) %>% 
+  as_tibble()
+muestra_1
+
+muestra_ponde_1 <- marco %>% 
+  filter(ID_unit %in% muestra_1$ID_unit) %>% 
+  left_join(muestra_1, by = "ID_unit") %>% 
+  mutate(factor = 1/Prob)
+
+glimpse(muestra_ponde_1)
+```
+
+### MAS con remplazo
+
+El muestreo aleatorio simple con reemplazo es ampliamante usado en las primeras etapas de muestreo, pues una localidad puedes ser seleccionada múltiples veces sin que ponga en riesgo obtener observaciones duplicadas. Cuando esto sucede, se toman elementos muestrales distintos en las etapas sucesivas. La implementación en *R* queda de la siguiente forma:
+
+```{r}
+set.seed(159753)
+muestra_2 <- strata(
+  data = marco, 
+  stratanames = NULL, 
+  size = 2000, 
+  method = "srswr", 
+  description = TRUE
+  ) %>% 
+  as_tibble()
+
+```
+
+Observemos cuántas unidades fueron seleccionadas más de una vez:
+
+```{r}
+muestra_2
+```
+
+En esta etapa deberá tenerse presente el factor de expansión asociado a cada unidad de muestreo. Esta primer etapa del cálculo del factor de expansión lo hace *R* automáticamente:
+
+```{r}
+muestra_ponde_2 <- marco %>% 
+  filter(ID_unit %in% muestra_2$ID_unit) %>% 
+  left_join(muestra_2, by = "ID_unit") %>% 
+  mutate(factor = 1/Prob)
+
+glimpse(muestra_ponde_2)
+```
+
+### Muestreo PPT
+
+Recurrimos al muestreo con **probabilidad proporcional al tamaño de la población** cuando deseamos extraer una muestra con probabilidades desiguales que dependen de nuestro interés por observar ciertas unidades particulares. A continuación se muestra su implementación en *R*:
+
+```{r}
+set.seed(19573)
+muestra_est <- strata(
+  data = marco, 
+  stratanames = NULL, 
+  size = 2000,
+  method = "systematic", 
+  pik = marco$VIVPAR_HAB, 
+  description = TRUE
+  )
+
+muestra_est_pond <- marco %>% 
+  filter(ID_unit %in% muestra_est$ID_unit) %>% 
+  left_join(muestra_est, by = "ID_unit") %>% 
+  mutate(factor = 1/Prob)
+
+glimpse(muestra_est_pond)
+```
+
+
+### Muestreo estratificado y PPT
+
+Este tipo de muestreo implica la creación previa de estratos y sus respectivas distribución por algunos de los métodos antes estudiados. Es importante mencionar que las funciones usadas para este tipo de muestreo implican que las unidades muestrales se encuentran ordenadas por estrato de modo que todos los elementos pertenecientes a un mismo estrato se encuentran juntos.
+
+```{r}
+set.seed(13258)
+muestra_estratificada <- strata(
+  data = marco, 
+  stratanames = "estrato",
+  size = c(500, 560, 430, 510),
+  method = "systematic", 
+  pik = marco$VIVPAR_HAB,
+  description = TRUE
+  )
+```
+
+```{r}
+muestra_estratificada_ppt <- marco %>% 
+  filter(ID_unit %in% muestra_estratificada$ID_unit) %>% 
+  left_join(muestra_estratificada, by = c("ID_unit", "estrato")) %>% 
+  mutate(factor = 1/Prob)
+
+glimpse(muestra_estratificada_ppt)
+```
+
+
+**Finalmente...** para extraer estos resultados en un archivo manipulable por nosotros u otras personas, hacemos uso de la función *write.csv()*, la cual nos permitirá almacenar nuestra muestra en formato de excel con extensión .csv:
+
+```{r, eval=FALSE}
+write.csv(muestra_estratificada_ppt, "data/muestra_estratificada.csv", row.names = F)
+```
+
+
+
+
+
+
+
+
 
 
 

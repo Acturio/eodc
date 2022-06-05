@@ -203,6 +203,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="4.3.1" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#implementación-en-r-1"><i class="fa fa-check"></i><b>4.3.1</b> Implementación en R</a></li>
 </ul></li>
+<li class="chapter" data-level="4.4" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#probabilidades-y-factores"><i class="fa fa-check"></i><b>4.4</b> Probabilidades y Factores</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#probabilidades"><i class="fa fa-check"></i><b>4.4.1</b> Probabilidades</a></li>
+<li class="chapter" data-level="4.4.2" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#factor-de-expansión"><i class="fa fa-check"></i><b>4.4.2</b> Factor de expansión</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#extracción-de-muestra"><i class="fa fa-check"></i><b>4.5</b> Extracción de muestra</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#mas-sin-remplazo"><i class="fa fa-check"></i><b>4.5.1</b> MAS sin remplazo</a></li>
+<li class="chapter" data-level="4.5.2" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#mas-con-remplazo"><i class="fa fa-check"></i><b>4.5.2</b> MAS con remplazo</a></li>
+<li class="chapter" data-level="4.5.3" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#muestreo-ppt"><i class="fa fa-check"></i><b>4.5.3</b> Muestreo PPT</a></li>
+<li class="chapter" data-level="4.5.4" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#muestreo-estratificado-y-ppt"><i class="fa fa-check"></i><b>4.5.4</b> Muestreo estratificado y PPT</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -434,23 +446,25 @@ m=\frac{p(1-p)Z_{1-\alpha/2}^2}{e²};
 <span id="cb84-4"><a href="construcción-de-muestra.html#cb84-4" aria-hidden="true" tabindex="-1"></a>    VIVPAR_HAB <span class="sc">&lt;=</span> <span class="dv">55</span> <span class="sc">~</span> <span class="st">&quot;gpo2&quot;</span>,</span>
 <span id="cb84-5"><a href="construcción-de-muestra.html#cb84-5" aria-hidden="true" tabindex="-1"></a>    VIVPAR_HAB <span class="sc">&lt;=</span> <span class="dv">80</span> <span class="sc">~</span> <span class="st">&quot;gpo3&quot;</span>,</span>
 <span id="cb84-6"><a href="construcción-de-muestra.html#cb84-6" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;gpo4&quot;</span>,</span>
-<span id="cb84-7"><a href="construcción-de-muestra.html#cb84-7" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb84-8"><a href="construcción-de-muestra.html#cb84-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb84-9"><a href="construcción-de-muestra.html#cb84-9" aria-hidden="true" tabindex="-1"></a>marco</span></code></pre></div>
-<pre><code>## # A tibble: 7,344 × 10
+<span id="cb84-7"><a href="construcción-de-muestra.html#cb84-7" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span> </span>
+<span id="cb84-8"><a href="construcción-de-muestra.html#cb84-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(estrato) <span class="sc">%&gt;%</span> </span>
+<span id="cb84-9"><a href="construcción-de-muestra.html#cb84-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ID_unit =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(marco))</span>
+<span id="cb84-10"><a href="construcción-de-muestra.html#cb84-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-11"><a href="construcción-de-muestra.html#cb84-11" aria-hidden="true" tabindex="-1"></a>marco</span></code></pre></div>
+<pre><code>## # A tibble: 7,344 × 11
 ##    ENTIDAD MUN   NOM_MUN    LOC   AGEB  MZA   POBTOT P_18YMAS VIVPAR_HAB estrato
 ##    &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;  
-##  1 09      005   Gustavo A… 0001  0012  001      172      129         46 gpo2   
-##  2 09      005   Gustavo A… 0001  0012  002      150      107         43 gpo2   
-##  3 09      005   Gustavo A… 0001  0012  003      135      105         50 gpo2   
-##  4 09      005   Gustavo A… 0001  0012  004      119       97         45 gpo2   
-##  5 09      005   Gustavo A… 0001  0012  005      195      141         61 gpo3   
-##  6 09      005   Gustavo A… 0001  0012  006      226      165         62 gpo3   
-##  7 09      005   Gustavo A… 0001  0012  007      186      127         49 gpo2   
-##  8 09      005   Gustavo A… 0001  0012  008       98       70         36 gpo2   
-##  9 09      005   Gustavo A… 0001  0012  010      178      130         48 gpo2   
-## 10 09      005   Gustavo A… 0001  0012  011      135      101         44 gpo2   
-## # … with 7,334 more rows</code></pre>
+##  1 09      005   Gustavo A… 0001  0012  012       98       77         32 gpo1   
+##  2 09      005   Gustavo A… 0001  0012  018       83       62         32 gpo1   
+##  3 09      005   Gustavo A… 0001  0012  024       98       71         20 gpo1   
+##  4 09      005   Gustavo A… 0001  0012  025      144      107         26 gpo1   
+##  5 09      005   Gustavo A… 0001  0012  026       83       64         21 gpo1   
+##  6 09      005   Gustavo A… 0001  0012  035       98       69         27 gpo1   
+##  7 09      005   Gustavo A… 0001  0012  036      107       82         35 gpo1   
+##  8 09      005   Gustavo A… 0001  0012  037       43       32         14 gpo1   
+##  9 09      005   Gustavo A… 0001  0027  001      145      112         32 gpo1   
+## 10 09      005   Gustavo A… 0001  0027  004       88       71         26 gpo1   
+## # … with 7,334 more rows, and 1 more variable: ID_unit &lt;int&gt;</code></pre>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="construcción-de-muestra.html#cb86-1" aria-hidden="true" tabindex="-1"></a>pob_estrato <span class="ot">&lt;-</span> marco <span class="sc">%&gt;%</span> </span>
 <span id="cb86-2"><a href="construcción-de-muestra.html#cb86-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(estrato) <span class="sc">%&gt;%</span> </span>
 <span id="cb86-3"><a href="construcción-de-muestra.html#cb86-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
@@ -468,11 +482,13 @@ m=\frac{p(1-p)Z_{1-\alpha/2}^2}{e²};
 ## 3 gpo3     1069 190801 70584
 ## 4 gpo4      671 216181 83046</code></pre>
 <p>Suponiendo que el tamaño de muestra seleccionado es de 2,000 individuos y se desea hacer una afijación proporcional, el tamaño de muestra en cada estrato queda asignado de la siguiente forma:</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="construcción-de-muestra.html#cb88-1" aria-hidden="true" tabindex="-1"></a>pob_estrato <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="construcción-de-muestra.html#cb88-1" aria-hidden="true" tabindex="-1"></a>distribucion <span class="ot">&lt;-</span> pob_estrato <span class="sc">%&gt;%</span> </span>
 <span id="cb88-2"><a href="construcción-de-muestra.html#cb88-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb88-3"><a href="construcción-de-muestra.html#cb88-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">prop =</span> viv<span class="sc">/</span><span class="fu">sum</span>(viv),</span>
 <span id="cb88-4"><a href="construcción-de-muestra.html#cb88-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_h =</span> <span class="fu">round</span>(prop <span class="sc">*</span> <span class="dv">2000</span>)</span>
-<span id="cb88-5"><a href="construcción-de-muestra.html#cb88-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<span id="cb88-5"><a href="construcción-de-muestra.html#cb88-5" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb88-6"><a href="construcción-de-muestra.html#cb88-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-7"><a href="construcción-de-muestra.html#cb88-7" aria-hidden="true" tabindex="-1"></a>distribucion</span></code></pre></div>
 <pre><code>## # A tibble: 4 × 6
 ##   estrato     n    pob   viv  prop   n_h
 ##   &lt;chr&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -480,6 +496,245 @@ m=\frac{p(1-p)Z_{1-\alpha/2}^2}{e²};
 ## 2 gpo2     2059 251101 91323 0.280   559
 ## 3 gpo3     1069 190801 70584 0.216   432
 ## 4 gpo4      671 216181 83046 0.254   509</code></pre>
+<p>Una práctica muy común es redondear la muestra elegida en cada estrato de forma que sean número múltiplos de 5 o 10 los que definan el tamaño final de muestra en cada estrato. Existen múltiples formas de realizar estos ajustes. Usaremos un redondeo simple para determinar el tamaño de muetsra final en cada estrato.</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="construcción-de-muestra.html#cb90-1" aria-hidden="true" tabindex="-1"></a>distribucion <span class="ot">&lt;-</span> distribucion <span class="sc">%&gt;%</span> </span>
+<span id="cb90-2"><a href="construcción-de-muestra.html#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">nh_aj =</span> <span class="fu">round</span>(n_h<span class="sc">/</span><span class="dv">10</span>)<span class="sc">*</span><span class="dv">10</span>)</span>
+<span id="cb90-3"><a href="construcción-de-muestra.html#cb90-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-4"><a href="construcción-de-muestra.html#cb90-4" aria-hidden="true" tabindex="-1"></a>distribucion</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 7
+##   estrato     n    pob   viv  prop   n_h nh_aj
+##   &lt;chr&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 gpo1     3545 228196 81666 0.250   500   500
+## 2 gpo2     2059 251101 91323 0.280   559   560
+## 3 gpo3     1069 190801 70584 0.216   432   430
+## 4 gpo4      671 216181 83046 0.254   509   510</code></pre>
+<p><strong>De esta forma, el tamaño final de la muestra será de 2000 unidades.</strong></p>
+</div>
+</div>
+<div id="probabilidades-y-factores" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Probabilidades y Factores<a href="construcción-de-muestra.html#probabilidades-y-factores" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Dependiendo del diseño de muestreo implementado, a cada unidad se le deberá asignar una probabilidad de ser incluída en la muestra. Entre las más comunes se encuentran:</p>
+<div id="probabilidades" class="section level3 hasAnchor" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Probabilidades<a href="construcción-de-muestra.html#probabilidades" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Muestreo Aleatorio Simple con reemplazo: Ocurre cuando <strong>SÍ</strong> se realiza reemplazo de la muestra y un elemento puede ser seleccionado una o más veces.</li>
+</ul>
+<p><span class="math display">\[\pi_k=1-(\frac{N-1}{N})^n\]</span></p>
+<ul>
+<li>Muestreo Aleatorio Simple sin reemplazo: Ocurre cuando <strong>NO</strong> se realiza reemplazo de la muestra y un elemento es seleccionado una sola vez.</li>
+</ul>
+<p><span class="math display">\[\pi_k=\frac{n}{N}\]</span></p>
+<ul>
+<li>Muestreo con probabilidad PPT: La probabilidad con la que un individuo es seleccionado es proporcional a una característica de interés:</li>
+</ul>
+<p><span class="math display">\[\pi_k=n\frac{X_k}{\sum_{i=1}^N{X_k}}\]</span></p>
+<p>Cuando se trata de un muestreo polietápico, cada una de las etapas tiene su propia probabilidad y factor de expansión asociado. Debido a que el muestreo se realiza de manera independiente en cada etapa, tanto la probabilidad de inclusión final como el factor de expansión se calcula mediante la multiplicación de cada una de las etapas que conforman el muestreo.</p>
+<p><span class="math display">\[\pi_k=\pi_{upm} \cdot \pi_{usm} \cdot ... \cdot \pi_{uum}\]</span></p>
+</div>
+<div id="factor-de-expansión" class="section level3 hasAnchor" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> Factor de expansión<a href="construcción-de-muestra.html#factor-de-expansión" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>El factor de expansión se refiere al número de individuos fuera de la muestra que son representados por cada uno de los individuos incluídos dentro de la muestra, Este factor es calculado para cada elemento muestral. Matemáticamente, este cálculo se realiza a través del inverso de probabilidad de selección:</p>
+<p><span class="math display">\[F_k=\frac{1}{\pi_k}\]</span></p>
+<p>En <em>R</em> realizaremos automáticamente el cálculo de la probabilidad de inclusión y posteriormente invertiremos esta probabilidad para extraer el factor de expansión.</p>
+</div>
+</div>
+<div id="extracción-de-muestra" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> Extracción de muestra<a href="construcción-de-muestra.html#extracción-de-muestra" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Una vez definido el diseño de muestreo y tamaño de muestra, procedemos a extraer nuestra muestra de acuerdo con el diseño determinado. En esta sección probaremos múltiples formas de extraer la muestra final</p>
+<div id="mas-sin-remplazo" class="section level3 hasAnchor" number="4.5.1">
+<h3><span class="header-section-number">4.5.1</span> MAS sin remplazo<a href="construcción-de-muestra.html#mas-sin-remplazo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>El muestreo aleatorio simple sin reemplazo es uno de los más simples de implementar. Es necesario contar con la librería <em>sampling</em> para poder hacer uso de las funciones necesarias.</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="construcción-de-muestra.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="construcción-de-muestra.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sampling)</span>
+<span id="cb93-2"><a href="construcción-de-muestra.html#cb93-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-3"><a href="construcción-de-muestra.html#cb93-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">310308261</span>)</span>
+<span id="cb93-4"><a href="construcción-de-muestra.html#cb93-4" aria-hidden="true" tabindex="-1"></a>muestra_1 <span class="ot">&lt;-</span> <span class="fu">strata</span>(</span>
+<span id="cb93-5"><a href="construcción-de-muestra.html#cb93-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> marco, </span>
+<span id="cb93-6"><a href="construcción-de-muestra.html#cb93-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">stratanames =</span> <span class="cn">NULL</span>, </span>
+<span id="cb93-7"><a href="construcción-de-muestra.html#cb93-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">2000</span>, </span>
+<span id="cb93-8"><a href="construcción-de-muestra.html#cb93-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;srswor&quot;</span>, </span>
+<span id="cb93-9"><a href="construcción-de-muestra.html#cb93-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">description =</span> <span class="cn">TRUE</span></span>
+<span id="cb93-10"><a href="construcción-de-muestra.html#cb93-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb93-11"><a href="construcción-de-muestra.html#cb93-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span></code></pre></div>
+<pre><code>## 
+## Population total and number of selected units: 7344 2000</code></pre>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="construcción-de-muestra.html#cb95-1" aria-hidden="true" tabindex="-1"></a>muestra_1</span></code></pre></div>
+<pre><code>## # A tibble: 2,000 × 2
+##    ID_unit  Prob
+##      &lt;int&gt; &lt;dbl&gt;
+##  1       7 0.272
+##  2       8 0.272
+##  3       9 0.272
+##  4      13 0.272
+##  5      14 0.272
+##  6      16 0.272
+##  7      17 0.272
+##  8      18 0.272
+##  9      27 0.272
+## 10      28 0.272
+## # … with 1,990 more rows</code></pre>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="construcción-de-muestra.html#cb97-1" aria-hidden="true" tabindex="-1"></a>muestra_ponde_1 <span class="ot">&lt;-</span> marco <span class="sc">%&gt;%</span> </span>
+<span id="cb97-2"><a href="construcción-de-muestra.html#cb97-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ID_unit <span class="sc">%in%</span> muestra_1<span class="sc">$</span>ID_unit) <span class="sc">%&gt;%</span> </span>
+<span id="cb97-3"><a href="construcción-de-muestra.html#cb97-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(muestra_1, <span class="at">by =</span> <span class="st">&quot;ID_unit&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb97-4"><a href="construcción-de-muestra.html#cb97-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">factor =</span> <span class="dv">1</span><span class="sc">/</span>Prob)</span>
+<span id="cb97-5"><a href="construcción-de-muestra.html#cb97-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-6"><a href="construcción-de-muestra.html#cb97-6" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(muestra_ponde_1)</span></code></pre></div>
+<pre><code>## Rows: 2,000
+## Columns: 13
+## $ ENTIDAD    &lt;chr&gt; &quot;09&quot;, &quot;09&quot;, &quot;09&quot;, &quot;09&quot;, &quot;09&quot;, &quot;09&quot;, &quot;09&quot;, &quot;09&quot;, &quot;09&quot;, &quot;09&quot;,…
+## $ MUN        &lt;chr&gt; &quot;005&quot;, &quot;005&quot;, &quot;005&quot;, &quot;005&quot;, &quot;005&quot;, &quot;005&quot;, &quot;005&quot;, &quot;005&quot;, &quot;00…
+## $ NOM_MUN    &lt;chr&gt; &quot;Gustavo A. Madero&quot;, &quot;Gustavo A. Madero&quot;, &quot;Gustavo A. Mader…
+## $ LOC        &lt;chr&gt; &quot;0001&quot;, &quot;0001&quot;, &quot;0001&quot;, &quot;0001&quot;, &quot;0001&quot;, &quot;0001&quot;, &quot;0001&quot;, &quot;00…
+## $ AGEB       &lt;chr&gt; &quot;0012&quot;, &quot;0012&quot;, &quot;0027&quot;, &quot;0027&quot;, &quot;0027&quot;, &quot;0027&quot;, &quot;0027&quot;, &quot;00…
+## $ MZA        &lt;chr&gt; &quot;036&quot;, &quot;037&quot;, &quot;001&quot;, &quot;017&quot;, &quot;018&quot;, &quot;020&quot;, &quot;021&quot;, &quot;023&quot;, &quot;03…
+## $ POBTOT     &lt;dbl&gt; 107, 43, 145, 45, 100, 111, 108, 90, 68, 121, 110, 102, 48,…
+## $ P_18YMAS   &lt;dbl&gt; 82, 32, 112, 35, 71, 84, 80, 68, 48, 86, 80, 71, 27, 48, 28…
+## $ VIVPAR_HAB &lt;dbl&gt; 35, 14, 32, 11, 33, 25, 32, 32, 22, 34, 28, 34, 13, 14, 11,…
+## $ estrato    &lt;chr&gt; &quot;gpo1&quot;, &quot;gpo1&quot;, &quot;gpo1&quot;, &quot;gpo1&quot;, &quot;gpo1&quot;, &quot;gpo1&quot;, &quot;gpo1&quot;, &quot;gp…
+## $ ID_unit    &lt;int&gt; 7, 8, 9, 13, 14, 16, 17, 18, 27, 28, 31, 37, 38, 39, 41, 46…
+## $ Prob       &lt;dbl&gt; 0.2723312, 0.2723312, 0.2723312, 0.2723312, 0.2723312, 0.27…
+## $ factor     &lt;dbl&gt; 3.672, 3.672, 3.672, 3.672, 3.672, 3.672, 3.672, 3.672, 3.6…</code></pre>
+</div>
+<div id="mas-con-remplazo" class="section level3 hasAnchor" number="4.5.2">
+<h3><span class="header-section-number">4.5.2</span> MAS con remplazo<a href="construcción-de-muestra.html#mas-con-remplazo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>El muestreo aleatorio simple con reemplazo es ampliamante usado en las primeras etapas de muestreo, pues una localidad puedes ser seleccionada múltiples veces sin que ponga en riesgo obtener observaciones duplicadas. Cuando esto sucede, se toman elementos muestrales distintos en las etapas sucesivas. La implementación en <em>R</em> queda de la siguiente forma:</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="construcción-de-muestra.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">159753</span>)</span>
+<span id="cb99-2"><a href="construcción-de-muestra.html#cb99-2" aria-hidden="true" tabindex="-1"></a>muestra_2 <span class="ot">&lt;-</span> <span class="fu">strata</span>(</span>
+<span id="cb99-3"><a href="construcción-de-muestra.html#cb99-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> marco, </span>
+<span id="cb99-4"><a href="construcción-de-muestra.html#cb99-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">stratanames =</span> <span class="cn">NULL</span>, </span>
+<span id="cb99-5"><a href="construcción-de-muestra.html#cb99-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">2000</span>, </span>
+<span id="cb99-6"><a href="construcción-de-muestra.html#cb99-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;srswr&quot;</span>, </span>
+<span id="cb99-7"><a href="construcción-de-muestra.html#cb99-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">description =</span> <span class="cn">TRUE</span></span>
+<span id="cb99-8"><a href="construcción-de-muestra.html#cb99-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb99-9"><a href="construcción-de-muestra.html#cb99-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span></code></pre></div>
+<pre><code>## 
+## Population total and number of selected units: 7344 2000</code></pre>
+<p>Observemos cuántas unidades fueron seleccionadas más de una vez:</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="construcción-de-muestra.html#cb101-1" aria-hidden="true" tabindex="-1"></a>muestra_2</span></code></pre></div>
+<pre><code>## # A tibble: 1,733 × 3
+##    ID_unit Replicates  Prob
+##      &lt;int&gt;      &lt;int&gt; &lt;dbl&gt;
+##  1       4          2 0.238
+##  2      13          1 0.238
+##  3      14          1 0.238
+##  4      18          1 0.238
+##  5      20          2 0.238
+##  6      24          1 0.238
+##  7      32          2 0.238
+##  8      33          2 0.238
+##  9      36          1 0.238
+## 10      37          1 0.238
+## # … with 1,723 more rows</code></pre>
+<p>En esta etapa deberá tenerse presente el factor de expansión asociado a cada unidad de muestreo. Esta primer etapa del cálculo del factor de expansión lo hace <em>R</em> automáticamente:</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="construcción-de-muestra.html#cb103-1" aria-hidden="true" tabindex="-1"></a>muestra_ponde_2 <span class="ot">&lt;-</span> marco <span class="sc">%&gt;%</span> </span>
+<span id="cb103-2"><a href="construcción-de-muestra.html#cb103-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ID_unit <span class="sc">%in%</span> muestra_2<span class="sc">$</span>ID_unit) <span class="sc">%&gt;%</span> </span>
+<span id="cb103-3"><a href="construcción-de-muestra.html#cb103-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(muestra_2, <span class="at">by =</span> <span class="st">&quot;ID_unit&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb103-4"><a href="construcción-de-muestra.html#cb103-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">factor =</span> <span class="dv">1</span><span class="sc">/</span>Prob)</span>
+<span id="cb103-5"><a href="construcción-de-muestra.html#cb103-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-6"><a href="construcción-de-muestra.html#cb103-6" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(muestra_ponde_2)</span></code></pre></div>
+<pre><code>## Rows: 1,733
+## Columns: 14
+## $ ENTIDAD    &lt;chr&gt; &quot;09&quot;, &quot;09&quot;, &quot;09&quot;, &quot;09&quot;, &quot;09&quot;, &quot;09&quot;, &quot;09&quot;, &quot;09&quot;, &quot;09&quot;, &quot;09&quot;,…
+## $ MUN        &lt;chr&gt; &quot;005&quot;, &quot;005&quot;, &quot;005&quot;, &quot;005&quot;, &quot;005&quot;, &quot;005&quot;, &quot;005&quot;, &quot;005&quot;, &quot;00…
+## $ NOM_MUN    &lt;chr&gt; &quot;Gustavo A. Madero&quot;, &quot;Gustavo A. Madero&quot;, &quot;Gustavo A. Mader…
+## $ LOC        &lt;chr&gt; &quot;0001&quot;, &quot;0001&quot;, &quot;0001&quot;, &quot;0001&quot;, &quot;0001&quot;, &quot;0001&quot;, &quot;0001&quot;, &quot;00…
+## $ AGEB       &lt;chr&gt; &quot;0012&quot;, &quot;0027&quot;, &quot;0027&quot;, &quot;0027&quot;, &quot;0027&quot;, &quot;0027&quot;, &quot;0050&quot;, &quot;00…
+## $ MZA        &lt;chr&gt; &quot;025&quot;, &quot;017&quot;, &quot;018&quot;, &quot;023&quot;, &quot;025&quot;, &quot;031&quot;, &quot;006&quot;, &quot;017&quot;, &quot;02…
+## $ POBTOT     &lt;dbl&gt; 144, 45, 100, 90, 107, 72, 80, 60, 73, 102, 60, 88, 69, 77,…
+## $ P_18YMAS   &lt;dbl&gt; 107, 35, 71, 68, 85, 49, 56, 50, 50, 71, 36, 61, 49, 59, 48…
+## $ VIVPAR_HAB &lt;dbl&gt; 26, 11, 33, 32, 29, 22, 24, 19, 16, 34, 14, 26, 17, 18, 20,…
+## $ estrato    &lt;chr&gt; &quot;gpo1&quot;, &quot;gpo1&quot;, &quot;gpo1&quot;, &quot;gpo1&quot;, &quot;gpo1&quot;, &quot;gpo1&quot;, &quot;gpo1&quot;, &quot;gp…
+## $ ID_unit    &lt;int&gt; 4, 13, 14, 18, 20, 24, 32, 33, 36, 37, 42, 46, 47, 48, 59, …
+## $ Replicates &lt;int&gt; 2, 1, 1, 1, 2, 1, 2, 2, 1, 1, 2, 1, 1, 1, 2, 1, 1, 2, 1, 1,…
+## $ Prob       &lt;dbl&gt; 0.2384121, 0.2384121, 0.2384121, 0.2384121, 0.2384121, 0.23…
+## $ factor     &lt;dbl&gt; 4.194418, 4.194418, 4.194418, 4.194418, 4.194418, 4.194418,…</code></pre>
+</div>
+<div id="muestreo-ppt" class="section level3 hasAnchor" number="4.5.3">
+<h3><span class="header-section-number">4.5.3</span> Muestreo PPT<a href="construcción-de-muestra.html#muestreo-ppt" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Recurrimos al muestreo con <strong>probabilidad proporcional al tamaño de la población</strong> cuando deseamos extraer una muestra con probabilidades desiguales que dependen de nuestro interés por observar ciertas unidades particulares. A continuación se muestra su implementación en <em>R</em>:</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="construcción-de-muestra.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">19573</span>)</span>
+<span id="cb105-2"><a href="construcción-de-muestra.html#cb105-2" aria-hidden="true" tabindex="-1"></a>muestra_est <span class="ot">&lt;-</span> <span class="fu">strata</span>(</span>
+<span id="cb105-3"><a href="construcción-de-muestra.html#cb105-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> marco, </span>
+<span id="cb105-4"><a href="construcción-de-muestra.html#cb105-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">stratanames =</span> <span class="cn">NULL</span>, </span>
+<span id="cb105-5"><a href="construcción-de-muestra.html#cb105-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">2000</span>,</span>
+<span id="cb105-6"><a href="construcción-de-muestra.html#cb105-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;systematic&quot;</span>, </span>
+<span id="cb105-7"><a href="construcción-de-muestra.html#cb105-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">pik =</span> marco<span class="sc">$</span>VIVPAR_HAB, </span>
+<span id="cb105-8"><a href="construcción-de-muestra.html#cb105-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">description =</span> <span class="cn">TRUE</span></span>
+<span id="cb105-9"><a href="construcción-de-muestra.html#cb105-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## 
+## Population total and number of selected units: 7344 2000</code></pre>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="construcción-de-muestra.html#cb107-1" aria-hidden="true" tabindex="-1"></a>muestra_est_pond <span class="ot">&lt;-</span> marco <span class="sc">%&gt;%</span> </span>
+<span id="cb107-2"><a href="construcción-de-muestra.html#cb107-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ID_unit <span class="sc">%in%</span> muestra_est<span class="sc">$</span>ID_unit) <span class="sc">%&gt;%</span> </span>
+<span id="cb107-3"><a href="construcción-de-muestra.html#cb107-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(muestra_est, <span class="at">by =</span> <span class="st">&quot;ID_unit&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb107-4"><a href="construcción-de-muestra.html#cb107-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">factor =</span> <span class="dv">1</span><span class="sc">/</span>Prob)</span>
+<span id="cb107-5"><a href="construcción-de-muestra.html#cb107-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-6"><a href="construcción-de-muestra.html#cb107-6" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(muestra_est_pond)</span></code></pre></div>
+<pre><code>## Rows: 2,000
+## Columns: 13
+## $ ENTIDAD    &lt;chr&gt; &quot;09&quot;, &quot;09&quot;, &quot;09&quot;, &quot;09&quot;, &quot;09&quot;, &quot;09&quot;, &quot;09&quot;, &quot;09&quot;, &quot;09&quot;, &quot;09&quot;,…
+## $ MUN        &lt;chr&gt; &quot;005&quot;, &quot;005&quot;, &quot;005&quot;, &quot;005&quot;, &quot;005&quot;, &quot;005&quot;, &quot;005&quot;, &quot;005&quot;, &quot;00…
+## $ NOM_MUN    &lt;chr&gt; &quot;Gustavo A. Madero&quot;, &quot;Gustavo A. Madero&quot;, &quot;Gustavo A. Mader…
+## $ LOC        &lt;chr&gt; &quot;0001&quot;, &quot;0001&quot;, &quot;0001&quot;, &quot;0001&quot;, &quot;0001&quot;, &quot;0001&quot;, &quot;0001&quot;, &quot;00…
+## $ AGEB       &lt;chr&gt; &quot;0012&quot;, &quot;0012&quot;, &quot;0027&quot;, &quot;0027&quot;, &quot;0027&quot;, &quot;0050&quot;, &quot;0050&quot;, &quot;00…
+## $ MZA        &lt;chr&gt; &quot;012&quot;, &quot;036&quot;, &quot;018&quot;, &quot;024&quot;, &quot;031&quot;, &quot;002&quot;, &quot;052&quot;, &quot;068&quot;, &quot;00…
+## $ POBTOT     &lt;dbl&gt; 98, 107, 100, 90, 72, 110, 48, 69, 117, 77, 117, 150, 118, …
+## $ P_18YMAS   &lt;dbl&gt; 77, 82, 71, 62, 49, 80, 27, 49, 94, 59, 82, 118, 88, 59, 96…
+## $ VIVPAR_HAB &lt;dbl&gt; 32, 35, 33, 30, 22, 28, 13, 17, 31, 25, 32, 34, 32, 29, 33,…
+## $ estrato    &lt;chr&gt; &quot;gpo1&quot;, &quot;gpo1&quot;, &quot;gpo1&quot;, &quot;gpo1&quot;, &quot;gpo1&quot;, &quot;gpo1&quot;, &quot;gpo1&quot;, &quot;gp…
+## $ ID_unit    &lt;int&gt; 1, 7, 14, 19, 24, 31, 38, 47, 54, 60, 67, 73, 79, 85, 90, 9…
+## $ Prob       &lt;dbl&gt; 0.20111717, 0.21997191, 0.20740208, 0.18854735, 0.13826806,…
+## $ factor     &lt;dbl&gt; 4.972226, 4.546035, 4.821552, 5.303708, 7.232329, 5.682544,…</code></pre>
+</div>
+<div id="muestreo-estratificado-y-ppt" class="section level3 hasAnchor" number="4.5.4">
+<h3><span class="header-section-number">4.5.4</span> Muestreo estratificado y PPT<a href="construcción-de-muestra.html#muestreo-estratificado-y-ppt" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Este tipo de muestreo implica la creación previa de estratos y sus respectivas distribución por algunos de los métodos antes estudiados. Es importante mencionar que las funciones usadas para este tipo de muestreo implican que las unidades muestrales se encuentran ordenadas por estrato de modo que todos los elementos pertenecientes a un mismo estrato se encuentran juntos.</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="construcción-de-muestra.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">13258</span>)</span>
+<span id="cb109-2"><a href="construcción-de-muestra.html#cb109-2" aria-hidden="true" tabindex="-1"></a>muestra_estratificada <span class="ot">&lt;-</span> <span class="fu">strata</span>(</span>
+<span id="cb109-3"><a href="construcción-de-muestra.html#cb109-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> marco, </span>
+<span id="cb109-4"><a href="construcción-de-muestra.html#cb109-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">stratanames =</span> <span class="st">&quot;estrato&quot;</span>,</span>
+<span id="cb109-5"><a href="construcción-de-muestra.html#cb109-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="fu">c</span>(<span class="dv">500</span>, <span class="dv">560</span>, <span class="dv">430</span>, <span class="dv">510</span>),</span>
+<span id="cb109-6"><a href="construcción-de-muestra.html#cb109-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;systematic&quot;</span>, </span>
+<span id="cb109-7"><a href="construcción-de-muestra.html#cb109-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">pik =</span> marco<span class="sc">$</span>VIVPAR_HAB,</span>
+<span id="cb109-8"><a href="construcción-de-muestra.html#cb109-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">description =</span> <span class="cn">TRUE</span></span>
+<span id="cb109-9"><a href="construcción-de-muestra.html#cb109-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## Stratum 1 
+## 
+## Population total and number of selected units: 3545 500 
+## Stratum 2 
+## 
+## Population total and number of selected units: 2059 560 
+## Stratum 3 
+## 
+## Population total and number of selected units: 1069 430 
+## Stratum 4 
+## 
+## Population total and number of selected units: 671 510 
+## Number of strata  4 
+## Total number of selected units 2000</code></pre>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="construcción-de-muestra.html#cb111-1" aria-hidden="true" tabindex="-1"></a>muestra_estratificada_ppt <span class="ot">&lt;-</span> marco <span class="sc">%&gt;%</span> </span>
+<span id="cb111-2"><a href="construcción-de-muestra.html#cb111-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ID_unit <span class="sc">%in%</span> muestra_estratificada<span class="sc">$</span>ID_unit) <span class="sc">%&gt;%</span> </span>
+<span id="cb111-3"><a href="construcción-de-muestra.html#cb111-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(muestra_estratificada, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;ID_unit&quot;</span>, <span class="st">&quot;estrato&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb111-4"><a href="construcción-de-muestra.html#cb111-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">factor =</span> <span class="dv">1</span><span class="sc">/</span>Prob)</span>
+<span id="cb111-5"><a href="construcción-de-muestra.html#cb111-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-6"><a href="construcción-de-muestra.html#cb111-6" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(muestra_estratificada_ppt)</span></code></pre></div>
+<pre><code>## Rows: 2,000
+## Columns: 14
+## $ ENTIDAD    &lt;chr&gt; &quot;09&quot;, &quot;09&quot;, &quot;09&quot;, &quot;09&quot;, &quot;09&quot;, &quot;09&quot;, &quot;09&quot;, &quot;09&quot;, &quot;09&quot;, &quot;09&quot;,…
+## $ MUN        &lt;chr&gt; &quot;005&quot;, &quot;005&quot;, &quot;005&quot;, &quot;005&quot;, &quot;005&quot;, &quot;005&quot;, &quot;005&quot;, &quot;005&quot;, &quot;00…
+## $ NOM_MUN    &lt;chr&gt; &quot;Gustavo A. Madero&quot;, &quot;Gustavo A. Madero&quot;, &quot;Gustavo A. Mader…
+## $ LOC        &lt;chr&gt; &quot;0001&quot;, &quot;0001&quot;, &quot;0001&quot;, &quot;0001&quot;, &quot;0001&quot;, &quot;0001&quot;, &quot;0001&quot;, &quot;00…
+## $ AGEB       &lt;chr&gt; &quot;0012&quot;, &quot;0027&quot;, &quot;0027&quot;, &quot;0027&quot;, &quot;0027&quot;, &quot;0050&quot;, &quot;0050&quot;, &quot;00…
+## $ MZA        &lt;chr&gt; &quot;024&quot;, &quot;001&quot;, &quot;019&quot;, &quot;026&quot;, &quot;036&quot;, &quot;019&quot;, &quot;064&quot;, &quot;004&quot;, &quot;01…
+## $ POBTOT     &lt;dbl&gt; 98, 145, 122, 116, 68, 51, 137, 56, 100, 119, 103, 114, 92,…
+## $ P_18YMAS   &lt;dbl&gt; 71, 112, 83, 86, 48, 38, 95, 44, 73, 84, 78, 76, 68, 94, 51…
+## $ VIVPAR_HAB &lt;dbl&gt; 20, 32, 29, 33, 22, 16, 30, 19, 19, 33, 29, 30, 27, 34, 20,…
+## $ estrato    &lt;chr&gt; &quot;gpo1&quot;, &quot;gpo1&quot;, &quot;gpo1&quot;, &quot;gpo1&quot;, &quot;gpo1&quot;, &quot;gpo1&quot;, &quot;gpo1&quot;, &quot;gp…
+## $ ID_unit    &lt;int&gt; 3, 9, 15, 21, 27, 34, 44, 51, 57, 65, 71, 77, 82, 89, 95, 1…
+## $ Prob       &lt;dbl&gt; 0.12244998, 0.19591997, 0.17755247, 0.20204247, 0.13469498,…
+## $ Stratum    &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
+## $ factor     &lt;dbl&gt; 8.166600, 5.104125, 5.632138, 4.949455, 7.424182, 10.208250…</code></pre>
+<p><strong>Finalmente…</strong> para extraer estos resultados en un archivo manipulable por nosotros u otras personas, hacemos uso de la función <em>write.csv()</em>, la cual nos permitirá almacenar nuestra muestra en formato de excel con extensión .csv:</p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="construcción-de-muestra.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(muestra_estratificada_ppt, <span class="st">&quot;data/muestra_estratificada.csv&quot;</span>, <span class="at">row.names =</span> F)</span></code></pre></div>
 
 </div>
 </div>

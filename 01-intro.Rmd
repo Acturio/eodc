@@ -199,6 +199,8 @@ knitr::include_graphics("img/01-muestreo/1-1-4-tipos-de-muestreo-probabilistico-
 
 * **Muestreo proporcional al tamaño de la población (PPT):** Método en el que la probabilidad de selección de una determinada unidad de muestreo es proporcional a su tamaño (generalmente el número de individuos u hogares que contiene la unidad de muestreo). En estas situaciones, si se utilizara el muestreo aleatorio para seleccionar las unidades de muestreo, los individuos de las mayores unidades de muestreo tendrían una probabilidad mucho menor de ser seleccionados que los de las unidades de muestreo más pequeñas
 
+$$\pi_k= n\frac{X_k}{\sum_{i=1}^{N}{X_k}}$$
+
 Ejemplo: Elegir primero hospitales y después de haberlos seleccionado, realizamos el muestreo de pacientes dentro de cada hospital. 
 
 ## Instrumentos de captura de datos

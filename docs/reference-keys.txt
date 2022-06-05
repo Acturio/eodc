@@ -39,3 +39,11 @@ tamaño-de-muestra
 implementación-en-r
 distribución-muestral
 implementación-en-r-1
+probabilidades-y-factores
+probabilidades
+factor-de-expansión
+extracción-de-muestra
+mas-sin-remplazo
+mas-con-remplazo
+muestreo-ppt
+muestreo-estratificado-y-ppt
