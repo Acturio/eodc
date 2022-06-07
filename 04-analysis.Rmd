@@ -14,7 +14,7 @@ Una vez que se ha realizado el levantamiento de información, se debe proceder a
 
 Cada departamento de investigación deberá definir la política sobre la cual se realizará la corrección de errores encontrados. Es posible disminuir estos errores cuando el levantamiento se realiza a través de tablets pre-programadas en donde el encuestador eliga la opción de respuesta y no se deba de escribir a mano.
 
-## Estimación de resultados
+## Implementación de diseño muestral
 
 Para analizar los resultados de la encuesta, comenzaremos por leer la tabla de datos desde al archivo en donde se encuentra almacenados. Las funciones más comunes son:
 
@@ -66,6 +66,7 @@ design <- datos %>%
 design
 ```
 
+## Estimación de resultados
 
 El diseño de muestreo ha sido creado. Por lo que a partir de este momento comenzaremos a hacer estimaciones estadísticas. Es importante mencionar que la técnica de estimación de resultados corresponde al estimador [Horvitz-Thompson](https://www150.statcan.gc.ca/n1/pub/12-001-x/2013001/article/11831/section2-eng.htm), el cual se calcula de la siguiente forma:
 
@@ -80,12 +81,12 @@ $\pi_i=$ Es la probabilidad de selección del i-ésimo individuo en la muestra
 
 $F_i=$ Es el factor de expansión del i-ésimo individuo. Fué calculado como $\frac{1}{\pi_i}$
 
-Ahora sí, procedemos a realizar estas estimaciones en *R* para conocer los resultados de interés:
+Ahora sí, procedemos a realizar estas estimaciones en *R* para conocer los resultados de interés. La variable *P7_1* contiene la pregunta: *¿Cuentan en esta casa con bicicletas?* El resultado se muestra a continuación:
 
 ```{r}
 design %>% 
-  srvyr::group_by(P7_1) %>% 
-  srvyr::summarize(
+  group_by(P7_1) %>% 
+  summarise(
     prop = survey_mean(
       na.rm = TRUE,
       vartype = c("se", "ci", "var", "cv"),
@@ -95,11 +96,25 @@ design %>%
   )
 ```
 
+Podemos observar que en los resultados obtenemos la proporción puntual y su intervalo de confianza al 95%. Obtenemos también la varianza estimada de nuestra estimación y el **coeficiente de variación**. Esta última métrica nos permite saber la precisión y confiabilidad de la estimación. En la literatura suelde decirse que de acuerdo al nivel obtenido en este valor, podemos determinar la calidad de estimación:
 
+1. CV < 0.05 $--->$ Excelente
+
+2. CV < 0.10 $--->$ Muy bueno
+
+3. CV < 0.15 $--->$ Bueno
+
+4. CV < 0.25 $--->$ Regular
+
+5. CV > 0.25 $--->$ Malo
+
+La clasificación usada anteriormente es una guía. Deberá entenderse únicamente como una sugerencia y no como una regla absoluta. Este criterio suele variar de investigador a investigador. Adicionalmente, la tabla anterior contiene el valor del **deff**. Este valor nos permitirá estimar el tamaño de muestra en futuros ejercicios.
+
+Veamos otros ejemplos usando distintos tipos de variables. Una vez que se obtiene la respuesta asociada a la pertenencia de bicicleta en casa, podemos hacer preguntas numéricas tambien. Por ejemplo, la variable *P7_1_1* pregunta por el *número de bicicletas en casa.* Los resultados son los siguientes:
 
 ```{r}
 design %>% 
-  srvyr::summarize(
+  summarise(
     mean = survey_mean(
       P7_1_1,
       na.rm = TRUE,
@@ -109,11 +124,13 @@ design %>%
     )
   )
 ```
-Probemos con otra pregunta de interés:
+El número promedio de bicicletas en casa es de 1.23, lo que implica que en promedio 8 de cada 10 casas que tienen bicicleta poseen una bicicleta y dos de cada 10 tienen 2 bicicletas. La tabla anterior también tiene los límites inferiores y superiores del intervalo de confianza, así como la variación estimada, coeficiente de variación y efecto de diseño *deff*.
+
+Probemos con otra pregunta de interés. La variable S10 dice: ¿Cuánto ganó o en cuánto calcula sus ingresos al mes? A continuación se presentan los resultados:
 
 ```{r}
 design %>% 
-  srvyr::summarize(
+  summarise(
     mean = survey_mean(
       S10,
       na.rm = TRUE,
@@ -123,21 +140,111 @@ design %>%
     )
   )
 ```
+## Tablas cruzadas
+
+Es muy común querer analizar los resultados de manera cruzada con alguna variable de interés. A continuación, se presentará el ejemplo de cómo estimar resultados de la frecuencia de uso de la bicicleta condicionando el sexo del individuo.
+
+```{r, warning=FALSE, message=FALSE}
+design %>% 
+  mutate(S1 = if_else(S1 == 1, "Hombre", "Mujer")) %>% 
+  filter(!is.na(S1), !is.na(P11)) %>% 
+  group_by(S1, P11) %>% 
+  summarise(
+    mean = survey_mean(
+      na.rm = TRUE,
+      vartype = NULL,
+      level = 0.95,
+      deff = FALSE
+    )
+  ) %>% 
+  pivot_wider(
+    names_from = P11, 
+    values_from = mean
+  ) %>% 
+  ungroup() %>% 
+  mutate_if(is.numeric, ~round(.x*100, 1)) %>% 
+  relocate(NS, .after = last_col()) %>% 
+  as.data.frame()
+```
+
+Se puede observar diferencia en algunas categorías. Por ejemplo, **es `r round(((24.6/17.2)-1)*100, 1)`% más probable que una persona use la bicicleta solo fines de semana cuando es mujer en comparación que los hombres.**
+
+Analicemos otro ejemplo: Si deseamos conocer el propósito de uso de la bicicleta diferenciando el sexo de la persona, encontramos lo siguiente:
+
+```{r}
+tabla <- design %>% 
+  mutate(S1 = if_else(S1 == 1, "Hombre", "Mujer")) %>% 
+  filter(!is.na(S1), !is.na(P11)) %>% 
+  group_by(S1, P12) %>% 
+  summarise(
+    mean = survey_mean(
+      na.rm = TRUE,
+      vartype = NULL,
+      level = 0.95,
+      deff = FALSE
+    )
+  ) %>% 
+  pivot_wider(
+    names_from = P12, 
+    values_from = mean
+  ) %>% 
+  ungroup() %>% 
+  mutate_if(is.numeric, ~round(.x*100, 1)) %>% 
+  relocate(NC, .after = last_col())
+
+tabla
+```
+
+Múltiples hallazgos pueden ser extraídos de una tabla cruzada, por ejemplo:
+
+* Es `r round(((61.4/54.6)-1)*100, 1)`% más probable que una mujer use la bicicleta como actividad recreativa. 
+
+* Es `r round(((41.6/34.9)-1)*100, 1)`% más probable que sea usada como modo de transporte general cuando la persona es hombre. 
+
+* En cuanto a uso laboral, no existe una diferencia significativa entre ambos sexos.
+
+Finalmente, los resultados se pueden guardar en un archivo de excel a través del siguiente comando:
+
+```{r, eval=FALSE}
+write.csv(tabla, "tabla_cruzada_2.csv", row.names = FALSE)
+```
 
 
+## Ejercicios
 
+No hay mejor manera de aprender que practicar y enseñar, por lo que en esta sección dedicaremos un buen momento a practicar lo aprendido hasta el momento! Esta práctica estará enfocada en 2 aspectos principales: creación de muestras y análisis de resultados.
 
+**PARTE 1**
 
+El participante deberá trabajar en equipo para crear una muestra probabilística a partir del marco de muestreo proporcionado en el curso. Las actividades a seguir son las siguientes:
 
+* Leer el marco de muestreo
 
+* Determinar la población objetivo
 
+* Limpiar el marco eliminando elementos que no pertenecen a la población objetivo
 
+* Calcular tamaño de muestra considerando que se tiene un presupuesto fijo **NO NEGOCIABLE** de \$500,000.00 MXN. (Suponga que todo este presupuesto es el máximo para uso exclusivo de la encuesta. Todos los costos de personal se encuentran en otro apartado). El costo de cada cuestionario es de \$290.00 (IVA incluido).
 
+* Elegir un diseño de muestreo y extraer la muestra a través de dicho método
 
+* Calcular factores de expansión asociados a cada individuo de la muestra.
 
+* Guardar y entregar la muestra en un archivo de excel.
 
+**PARTE 2**
 
+La segunda parte de esta práctica supone que ya se ha creado una muestra y el servicio de levantamiento de información ha entregado los resultados en un archivo. Deberá reportar hallazgos de interés considerando estimaciones puntuales, intervalos de confianza, coeficiente de variación y efecto de diseño (deff) en cada uno de los siguientes casos:
 
+* Realizar la estimación de 2 preguntas numéricas
+
+* Realizar la estimación de 2 preguntas categóricas
+
+* Realizar 2 tablas cruzadas con 2 preguntas de interés cada una
+
+* Para cada una de las tablas anteriores reportar al menos 1 hallazgo.
+
+* Guardar y entregar los resultados en un archivo de excel
 
 
 

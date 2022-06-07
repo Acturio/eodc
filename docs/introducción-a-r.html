@@ -219,9 +219,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="análisis-de-muestra.html"><a href="análisis-de-muestra.html"><i class="fa fa-check"></i><b>5</b> Análisis de muestra</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="análisis-de-muestra.html"><a href="análisis-de-muestra.html#captura-y-limpieza-de-datos"><i class="fa fa-check"></i><b>5.1</b> Captura y limpieza de datos</a></li>
-<li class="chapter" data-level="5.2" data-path="análisis-de-muestra.html"><a href="análisis-de-muestra.html#estimación-de-resultados"><i class="fa fa-check"></i><b>5.2</b> Estimación de resultados</a></li>
+<li class="chapter" data-level="5.2" data-path="análisis-de-muestra.html"><a href="análisis-de-muestra.html#implementación-de-diseño-muestral"><i class="fa fa-check"></i><b>5.2</b> Implementación de diseño muestral</a></li>
+<li class="chapter" data-level="5.3" data-path="análisis-de-muestra.html"><a href="análisis-de-muestra.html#estimación-de-resultados"><i class="fa fa-check"></i><b>5.3</b> Estimación de resultados</a></li>
+<li class="chapter" data-level="5.4" data-path="análisis-de-muestra.html"><a href="análisis-de-muestra.html#tablas-cruzadas"><i class="fa fa-check"></i><b>5.4</b> Tablas cruzadas</a></li>
+<li class="chapter" data-level="5.5" data-path="análisis-de-muestra.html"><a href="análisis-de-muestra.html#ejercicios-1"><i class="fa fa-check"></i><b>5.5</b> Ejercicios</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="./"><img src="img/00-presentacion/logo_unam.png" width="240"></a></li>
 
@@ -935,27 +937,27 @@ Si las queremos ordenar de forma ascendente lo haremos del siguiente modo:</p>
 ## 8     H  8</code></pre>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="introducción-a-r.html#cb59-1" aria-hidden="true" tabindex="-1"></a>conjuntoY</span></code></pre></div>
 <pre><code>##   Llave Ex1  Ex2 Ex3
-## 1     G   b 1002  l2
-## 2     I   c 1003  m3
-## 3     I   d 1004  n4
-## 4     K   e 1005  o5
-## 5     F   f 1006  p6
-## 6     F   g 1007  q7
-## 7     J   h 1008  r8
-## 8     G   i 1009  s9
-## 9     K   j 1010 t10</code></pre>
+## 1     H   b 1002  l2
+## 2     D   c 1003  m3
+## 3     C   d 1004  n4
+## 4     I   e 1005  o5
+## 5     H   f 1006  p6
+## 6     D   g 1007  q7
+## 7     G   h 1008  r8
+## 8     I   i 1009  s9
+## 9     E   j 1010 t10</code></pre>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="introducción-a-r.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(<span class="at">x =</span> conjuntoX, <span class="at">y =</span> conjuntoY, <span class="at">by =</span> <span class="st">&quot;Llave&quot;</span>)</span></code></pre></div>
 <pre><code>##    Llave C1  Ex1  Ex2  Ex3
 ## 1      A  1 &lt;NA&gt;   NA &lt;NA&gt;
 ## 2      B  2 &lt;NA&gt;   NA &lt;NA&gt;
-## 3      C  3 &lt;NA&gt;   NA &lt;NA&gt;
-## 4      D  4 &lt;NA&gt;   NA &lt;NA&gt;
-## 5      E  5 &lt;NA&gt;   NA &lt;NA&gt;
-## 6      F  6    f 1006   p6
-## 7      F  6    g 1007   q7
-## 8      G  7    b 1002   l2
-## 9      G  7    i 1009   s9
-## 10     H  8 &lt;NA&gt;   NA &lt;NA&gt;</code></pre>
+## 3      C  3    d 1004   n4
+## 4      D  4    c 1003   m3
+## 5      D  4    g 1007   q7
+## 6      E  5    j 1010  t10
+## 7      F  6 &lt;NA&gt;   NA &lt;NA&gt;
+## 8      G  7    h 1008   r8
+## 9      H  8    b 1002   l2
+## 10     H  8    f 1006   p6</code></pre>
 <p>Es posible que no todas las observaciones de un conjunto de datos estén en el otro conjunto, cuando esto sucede un aviso aparece indicando que los factores o categorías de la variable llave son diferentes. En caso de no encontrarse uno o más de los valores, el resultado para esos casos será NA (no disponible, por su traducción del inglés “Not Available”), y aparecerá siempre que no se cuente con información en un registro, como se muestra en el ejemplo anterior.</p>
 
 </div>

@@ -36,7 +36,7 @@ set in the _output.yml file.</p>" />
   
   
 <link rel="prev" href="construcción-de-muestra.html"/>
-<link rel="next" href="references.html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -219,9 +219,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="análisis-de-muestra.html"><a href="análisis-de-muestra.html"><i class="fa fa-check"></i><b>5</b> Análisis de muestra</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="análisis-de-muestra.html"><a href="análisis-de-muestra.html#captura-y-limpieza-de-datos"><i class="fa fa-check"></i><b>5.1</b> Captura y limpieza de datos</a></li>
-<li class="chapter" data-level="5.2" data-path="análisis-de-muestra.html"><a href="análisis-de-muestra.html#estimación-de-resultados"><i class="fa fa-check"></i><b>5.2</b> Estimación de resultados</a></li>
+<li class="chapter" data-level="5.2" data-path="análisis-de-muestra.html"><a href="análisis-de-muestra.html#implementación-de-diseño-muestral"><i class="fa fa-check"></i><b>5.2</b> Implementación de diseño muestral</a></li>
+<li class="chapter" data-level="5.3" data-path="análisis-de-muestra.html"><a href="análisis-de-muestra.html#estimación-de-resultados"><i class="fa fa-check"></i><b>5.3</b> Estimación de resultados</a></li>
+<li class="chapter" data-level="5.4" data-path="análisis-de-muestra.html"><a href="análisis-de-muestra.html#tablas-cruzadas"><i class="fa fa-check"></i><b>5.4</b> Tablas cruzadas</a></li>
+<li class="chapter" data-level="5.5" data-path="análisis-de-muestra.html"><a href="análisis-de-muestra.html#ejercicios-1"><i class="fa fa-check"></i><b>5.5</b> Ejercicios</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="./"><img src="img/00-presentacion/logo_unam.png" width="240"></a></li>
 
@@ -255,8 +257,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Cada departamento de investigación deberá definir la política sobre la cual se realizará la corrección de errores encontrados. Es posible disminuir estos errores cuando el levantamiento se realiza a través de tablets pre-programadas en donde el encuestador eliga la opción de respuesta y no se deba de escribir a mano.</p>
 </div>
-<div id="estimación-de-resultados" class="section level2 hasAnchor" number="5.2">
-<h2><span class="header-section-number">5.2</span> Estimación de resultados<a href="análisis-de-muestra.html#estimación-de-resultados" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="implementación-de-diseño-muestral" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Implementación de diseño muestral<a href="análisis-de-muestra.html#implementación-de-diseño-muestral" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Para analizar los resultados de la encuesta, comenzaremos por leer la tabla de datos desde al archivo en donde se encuentra almacenados. Las funciones más comunes son:</p>
 <ul>
 <li><p><strong>read_csv:</strong> Lee archivos csv. Es necesaria la librería <em>readr</em></p></li>
@@ -517,6 +519,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   Camina_V4 (int), V5_B2 (int), V5_C1 (int), V5_C5_1 (fct), V5_C7 (int),
 ##   Camina_V5 (int), V6_B2 (int), V6_C1 (int), V6_C5_1 (fct), V6_C7 (int),
 ##   Camina_V6 (int)</code></pre>
+</div>
+<div id="estimación-de-resultados" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Estimación de resultados<a href="análisis-de-muestra.html#estimación-de-resultados" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>El diseño de muestreo ha sido creado. Por lo que a partir de este momento comenzaremos a hacer estimaciones estadísticas. Es importante mencionar que la técnica de estimación de resultados corresponde al estimador <a href="https://www150.statcan.gc.ca/n1/pub/12-001-x/2013001/article/11831/section2-eng.htm">Horvitz-Thompson</a>, el cual se calcula de la siguiente forma:</p>
 <p><span class="math display">\[\hat{Y}=\sum_{i=1}^{n}{\frac{X_i}{\pi_i}}=\sum_{i=1}^{n}{X_i \cdot F_i}\]</span>
 <strong>Donde:</strong></p>
@@ -524,10 +529,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math inline">\(X_i=\)</span> Es la variable de interés observada en la muestra</p>
 <p><span class="math inline">\(\pi_i=\)</span> Es la probabilidad de selección del i-ésimo individuo en la muestra</p>
 <p><span class="math inline">\(F_i=\)</span> Es el factor de expansión del i-ésimo individuo. Fué calculado como <span class="math inline">\(\frac{1}{\pi_i}\)</span></p>
-<p>Ahora sí, procedemos a realizar estas estimaciones en <em>R</em> para conocer los resultados de interés:</p>
+<p>Ahora sí, procedemos a realizar estas estimaciones en <em>R</em> para conocer los resultados de interés. La variable <em>P7_1</em> contiene la pregunta: <em>¿Cuentan en esta casa con bicicletas?</em> El resultado se muestra a continuación:</p>
 <div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="análisis-de-muestra.html#cb118-1" aria-hidden="true" tabindex="-1"></a>design <span class="sc">%&gt;%</span> </span>
-<span id="cb118-2"><a href="análisis-de-muestra.html#cb118-2" aria-hidden="true" tabindex="-1"></a>  srvyr<span class="sc">::</span><span class="fu">group_by</span>(P7_1) <span class="sc">%&gt;%</span> </span>
-<span id="cb118-3"><a href="análisis-de-muestra.html#cb118-3" aria-hidden="true" tabindex="-1"></a>  srvyr<span class="sc">::</span><span class="fu">summarize</span>(</span>
+<span id="cb118-2"><a href="análisis-de-muestra.html#cb118-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(P7_1) <span class="sc">%&gt;%</span> </span>
+<span id="cb118-3"><a href="análisis-de-muestra.html#cb118-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb118-4"><a href="análisis-de-muestra.html#cb118-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">prop =</span> <span class="fu">survey_mean</span>(</span>
 <span id="cb118-5"><a href="análisis-de-muestra.html#cb118-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">na.rm =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb118-6"><a href="análisis-de-muestra.html#cb118-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>, <span class="st">&quot;var&quot;</span>, <span class="st">&quot;cv&quot;</span>),</span>
@@ -540,8 +545,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   &lt;fct&gt; &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;
 ## 1 No    0.532  0.0161    0.500    0.564 0.000258  0.0302      1.97
 ## 2 Si    0.468  0.0161    0.436    0.500 0.000258  0.0343      1.97</code></pre>
+<p>Podemos observar que en los resultados obtenemos la proporción puntual y su intervalo de confianza al 95%. Obtenemos también la varianza estimada de nuestra estimación y el <strong>coeficiente de variación</strong>. Esta última métrica nos permite saber la precisión y confiabilidad de la estimación. En la literatura suelde decirse que de acuerdo al nivel obtenido en este valor, podemos determinar la calidad de estimación:</p>
+<ol style="list-style-type: decimal">
+<li><p>CV &lt; 0.05 <span class="math inline">\(---&gt;\)</span> Excelente</p></li>
+<li><p>CV &lt; 0.10 <span class="math inline">\(---&gt;\)</span> Muy bueno</p></li>
+<li><p>CV &lt; 0.15 <span class="math inline">\(---&gt;\)</span> Bueno</p></li>
+<li><p>CV &lt; 0.25 <span class="math inline">\(---&gt;\)</span> Regular</p></li>
+<li><p>CV &gt; 0.25 <span class="math inline">\(---&gt;\)</span> Malo</p></li>
+</ol>
+<p>La clasificación usada anteriormente es una guía. Deberá entenderse únicamente como una sugerencia y no como una regla absoluta. Este criterio suele variar de investigador a investigador. Adicionalmente, la tabla anterior contiene el valor del <strong>deff</strong>. Este valor nos permitirá estimar el tamaño de muestra en futuros ejercicios.</p>
+<p>Veamos otros ejemplos usando distintos tipos de variables. Una vez que se obtiene la respuesta asociada a la pertenencia de bicicleta en casa, podemos hacer preguntas numéricas tambien. Por ejemplo, la variable <em>P7_1_1</em> pregunta por el <em>número de bicicletas en casa.</em> Los resultados son los siguientes:</p>
 <div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="análisis-de-muestra.html#cb120-1" aria-hidden="true" tabindex="-1"></a>design <span class="sc">%&gt;%</span> </span>
-<span id="cb120-2"><a href="análisis-de-muestra.html#cb120-2" aria-hidden="true" tabindex="-1"></a>  srvyr<span class="sc">::</span><span class="fu">summarize</span>(</span>
+<span id="cb120-2"><a href="análisis-de-muestra.html#cb120-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb120-3"><a href="análisis-de-muestra.html#cb120-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">survey_mean</span>(</span>
 <span id="cb120-4"><a href="análisis-de-muestra.html#cb120-4" aria-hidden="true" tabindex="-1"></a>      P7_1_1,</span>
 <span id="cb120-5"><a href="análisis-de-muestra.html#cb120-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">na.rm =</span> <span class="cn">TRUE</span>,</span>
@@ -554,9 +569,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##    mean mean_se mean_low mean_upp mean_var mean_cv mean_deff
 ##   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;
 ## 1  1.23  0.0208     1.19     1.27 0.000434  0.0169      1.27</code></pre>
-<p>Probemos con otra pregunta de interés:</p>
+<p>El número promedio de bicicletas en casa es de 1.23, lo que implica que en promedio 8 de cada 10 casas que tienen bicicleta poseen una bicicleta y dos de cada 10 tienen 2 bicicletas. La tabla anterior también tiene los límites inferiores y superiores del intervalo de confianza, así como la variación estimada, coeficiente de variación y efecto de diseño <em>deff</em>.</p>
+<p>Probemos con otra pregunta de interés. La variable S10 dice: ¿Cuánto ganó o en cuánto calcula sus ingresos al mes? A continuación se presentan los resultados:</p>
 <div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="análisis-de-muestra.html#cb122-1" aria-hidden="true" tabindex="-1"></a>design <span class="sc">%&gt;%</span> </span>
-<span id="cb122-2"><a href="análisis-de-muestra.html#cb122-2" aria-hidden="true" tabindex="-1"></a>  srvyr<span class="sc">::</span><span class="fu">summarize</span>(</span>
+<span id="cb122-2"><a href="análisis-de-muestra.html#cb122-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb122-3"><a href="análisis-de-muestra.html#cb122-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">survey_mean</span>(</span>
 <span id="cb122-4"><a href="análisis-de-muestra.html#cb122-4" aria-hidden="true" tabindex="-1"></a>      S10,</span>
 <span id="cb122-5"><a href="análisis-de-muestra.html#cb122-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">na.rm =</span> <span class="cn">TRUE</span>,</span>
@@ -569,6 +585,99 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##    mean mean_se mean_low mean_upp mean_var mean_cv mean_deff
 ##   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;
 ## 1 6946.    135.    6679.    7214.   18146.  0.0194      1.75</code></pre>
+</div>
+<div id="tablas-cruzadas" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> Tablas cruzadas<a href="análisis-de-muestra.html#tablas-cruzadas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Es muy común querer analizar los resultados de manera cruzada con alguna variable de interés. A continuación, se presentará el ejemplo de cómo estimar resultados de la frecuencia de uso de la bicicleta condicionando el sexo del individuo.</p>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="análisis-de-muestra.html#cb124-1" aria-hidden="true" tabindex="-1"></a>design <span class="sc">%&gt;%</span> </span>
+<span id="cb124-2"><a href="análisis-de-muestra.html#cb124-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">S1 =</span> <span class="fu">if_else</span>(S1 <span class="sc">==</span> <span class="dv">1</span>, <span class="st">&quot;Hombre&quot;</span>, <span class="st">&quot;Mujer&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb124-3"><a href="análisis-de-muestra.html#cb124-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(S1), <span class="sc">!</span><span class="fu">is.na</span>(P11)) <span class="sc">%&gt;%</span> </span>
+<span id="cb124-4"><a href="análisis-de-muestra.html#cb124-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(S1, P11) <span class="sc">%&gt;%</span> </span>
+<span id="cb124-5"><a href="análisis-de-muestra.html#cb124-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb124-6"><a href="análisis-de-muestra.html#cb124-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">survey_mean</span>(</span>
+<span id="cb124-7"><a href="análisis-de-muestra.html#cb124-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">na.rm =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb124-8"><a href="análisis-de-muestra.html#cb124-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">vartype =</span> <span class="cn">NULL</span>,</span>
+<span id="cb124-9"><a href="análisis-de-muestra.html#cb124-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">level =</span> <span class="fl">0.95</span>,</span>
+<span id="cb124-10"><a href="análisis-de-muestra.html#cb124-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">deff =</span> <span class="cn">FALSE</span></span>
+<span id="cb124-11"><a href="análisis-de-muestra.html#cb124-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb124-12"><a href="análisis-de-muestra.html#cb124-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb124-13"><a href="análisis-de-muestra.html#cb124-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb124-14"><a href="análisis-de-muestra.html#cb124-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> P11, </span>
+<span id="cb124-15"><a href="análisis-de-muestra.html#cb124-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> mean</span>
+<span id="cb124-16"><a href="análisis-de-muestra.html#cb124-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb124-17"><a href="análisis-de-muestra.html#cb124-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb124-18"><a href="análisis-de-muestra.html#cb124-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.numeric, <span class="sc">~</span><span class="fu">round</span>(.x<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb124-19"><a href="análisis-de-muestra.html#cb124-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(NS, <span class="at">.after =</span> <span class="fu">last_col</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb124-20"><a href="análisis-de-muestra.html#cb124-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span></code></pre></div>
+<pre><code>##       S1 Diario Fines de semana Mas de dos veces por semana
+## 1 Hombre   18.8            17.3                        25.9
+## 2  Mujer   18.5            24.6                        20.0
+##   No la he usado en el ultimo mes Ocasionalmente Una vez a la semana
+## 1                             5.0            9.2                11.9
+## 2                             5.1            7.1                10.3
+##   Una vez cada 15 dias  NS
+## 1                 11.7 0.4
+## 2                 14.4  NA</code></pre>
+<p>Se puede observar diferencia en algunas categorías. Por ejemplo, <strong>es 43% más probable que una persona use la bicicleta solo fines de semana cuando es mujer en comparación que los hombres.</strong></p>
+<p>Analicemos otro ejemplo: Si deseamos conocer el propósito de uso de la bicicleta diferenciando el sexo de la persona, encontramos lo siguiente:</p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="análisis-de-muestra.html#cb126-1" aria-hidden="true" tabindex="-1"></a>tabla <span class="ot">&lt;-</span> design <span class="sc">%&gt;%</span> </span>
+<span id="cb126-2"><a href="análisis-de-muestra.html#cb126-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">S1 =</span> <span class="fu">if_else</span>(S1 <span class="sc">==</span> <span class="dv">1</span>, <span class="st">&quot;Hombre&quot;</span>, <span class="st">&quot;Mujer&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb126-3"><a href="análisis-de-muestra.html#cb126-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(S1), <span class="sc">!</span><span class="fu">is.na</span>(P11)) <span class="sc">%&gt;%</span> </span>
+<span id="cb126-4"><a href="análisis-de-muestra.html#cb126-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(S1, P12) <span class="sc">%&gt;%</span> </span>
+<span id="cb126-5"><a href="análisis-de-muestra.html#cb126-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb126-6"><a href="análisis-de-muestra.html#cb126-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">survey_mean</span>(</span>
+<span id="cb126-7"><a href="análisis-de-muestra.html#cb126-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">na.rm =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb126-8"><a href="análisis-de-muestra.html#cb126-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">vartype =</span> <span class="cn">NULL</span>,</span>
+<span id="cb126-9"><a href="análisis-de-muestra.html#cb126-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">level =</span> <span class="fl">0.95</span>,</span>
+<span id="cb126-10"><a href="análisis-de-muestra.html#cb126-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">deff =</span> <span class="cn">FALSE</span></span>
+<span id="cb126-11"><a href="análisis-de-muestra.html#cb126-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb126-12"><a href="análisis-de-muestra.html#cb126-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb126-13"><a href="análisis-de-muestra.html#cb126-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb126-14"><a href="análisis-de-muestra.html#cb126-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> P12, </span>
+<span id="cb126-15"><a href="análisis-de-muestra.html#cb126-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> mean</span>
+<span id="cb126-16"><a href="análisis-de-muestra.html#cb126-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb126-17"><a href="análisis-de-muestra.html#cb126-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb126-18"><a href="análisis-de-muestra.html#cb126-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.numeric, <span class="sc">~</span><span class="fu">round</span>(.x<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb126-19"><a href="análisis-de-muestra.html#cb126-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(NC, <span class="at">.after =</span> <span class="fu">last_col</span>())</span>
+<span id="cb126-20"><a href="análisis-de-muestra.html#cb126-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb126-21"><a href="análisis-de-muestra.html#cb126-21" aria-hidden="true" tabindex="-1"></a>tabla</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 5
+##   S1     `Actividad recreativa` `Modo de transporte` `Para trabajar`    NC
+##   &lt;chr&gt;                   &lt;dbl&gt;                &lt;dbl&gt;           &lt;dbl&gt; &lt;dbl&gt;
+## 1 Hombre                   54.6                 41.6             3.3   0.5
+## 2 Mujer                    61.4                 34.9             3.6  NA</code></pre>
+<p>Múltiples hallazgos pueden ser extraídos de una tabla cruzada, por ejemplo:</p>
+<ul>
+<li><p>Es 12.5% más probable que una mujer use la bicicleta como actividad recreativa.</p></li>
+<li><p>Es 19.2% más probable que sea usada como modo de transporte general cuando la persona es hombre.</p></li>
+<li><p>En cuanto a uso laboral, no existe una diferencia significativa entre ambos sexos.</p></li>
+</ul>
+<p>Finalmente, los resultados se pueden guardar en un archivo de excel a través del siguiente comando:</p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="análisis-de-muestra.html#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(tabla, <span class="st">&quot;tabla_cruzada_2.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+</div>
+<div id="ejercicios-1" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> Ejercicios<a href="análisis-de-muestra.html#ejercicios-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>No hay mejor manera de aprender que practicar y enseñar, por lo que en esta sección dedicaremos un buen momento a practicar lo aprendido hasta el momento! Esta práctica estará enfocada en 2 aspectos principales: creación de muestras y análisis de resultados.</p>
+<p><strong>PARTE 1</strong></p>
+<p>El participante deberá trabajar en equipo para crear una muestra probabilística a partir del marco de muestreo proporcionado en el curso. Las actividades a seguir son las siguientes:</p>
+<ul>
+<li><p>Leer el marco de muestreo</p></li>
+<li><p>Determinar la población objetivo</p></li>
+<li><p>Limpiar el marco eliminando elementos que no pertenecen a la población objetivo</p></li>
+<li><p>Calcular tamaño de muestra considerando que se tiene un presupuesto fijo <strong>NO NEGOCIABLE</strong> de $500,000.00 MXN. (Suponga que todo este presupuesto es el máximo para uso exclusivo de la encuesta. Todos los costos de personal se encuentran en otro apartado). El costo de cada cuestionario es de $290.00 (IVA incluido).</p></li>
+<li><p>Elegir un diseño de muestreo y extraer la muestra a través de dicho método</p></li>
+<li><p>Calcular factores de expansión asociados a cada individuo de la muestra.</p></li>
+<li><p>Guardar y entregar la muestra en un archivo de excel.</p></li>
+</ul>
+<p><strong>PARTE 2</strong></p>
+<p>La segunda parte de esta práctica supone que ya se ha creado una muestra y el servicio de levantamiento de información ha entregado los resultados en un archivo. Deberá reportar hallazgos de interés considerando estimaciones puntuales, intervalos de confianza, coeficiente de variación y efecto de diseño (deff) en cada uno de los siguientes casos:</p>
+<ul>
+<li><p>Realizar la estimación de 2 preguntas numéricas</p></li>
+<li><p>Realizar la estimación de 2 preguntas categóricas</p></li>
+<li><p>Realizar 2 tablas cruzadas con 2 preguntas de interés cada una</p></li>
+<li><p>Para cada una de las tablas anteriores reportar al menos 1 hallazgo.</p></li>
+<li><p>Guardar y entregar los resultados en un archivo de excel</p></li>
+</ul>
 
 </div>
 </div>
@@ -577,8 +686,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="construcción-de-muestra.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="construcción-de-muestra.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
