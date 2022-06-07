@@ -1,0 +1,152 @@
+# Análisis de muestra
+
+## Captura y limpieza de datos
+
+Una vez que se ha realizado el levantamiento de información, se debe proceder a capturar la información en un conjunto de datos. Es común que se utilice SPSS(.sav), STATA(.DTA) o dbf para realizar la captura de información. Es posible que al realizar la captura de forma manual existas diversos errores, entre los cuales destacan:
+
+* Errores de dedo
+
+* Faltas de ortografía
+
+* Ilegibilidad de respuestas
+
+* Inconsistencias en las respuestas
+
+Cada departamento de investigación deberá definir la política sobre la cual se realizará la corrección de errores encontrados. Es posible disminuir estos errores cuando el levantamiento se realiza a través de tablets pre-programadas en donde el encuestador eliga la opción de respuesta y no se deba de escribir a mano.
+
+## Estimación de resultados
+
+Para analizar los resultados de la encuesta, comenzaremos por leer la tabla de datos desde al archivo en donde se encuentra almacenados. Las funciones más comunes son:
+
+* **read_csv:** Lee archivos csv. Es necesaria la librería *readr*
+
+* **read_xlsx:** Lee archivos xlsx. Es necesaria la librería *readxl*
+
+* **read.dbf:** Lee archivos dbf. Es necesaria la librería *foreign*
+
+* **read.spss:** Lee archivos sav. Es necesaria la librería *foreign*
+
+* **read.dta:** Lee archivos dta. Es necesaria la librería *foreign*
+
+A continuación se muestra el proceso de lectura de datos, los cuales pueden ser descargados a través del siguiente [link](https://drive.google.com/drive/folders/1BjmEGhNcdosC5YW0WYHHsKABOfnpd7m9?usp=sharing):
+
+```{r, warning=FALSE, message=FALSE}
+library(foreign)
+library(tidyverse)
+
+datos <- read.dbf("data/EMC18_Base_Vivienda.dbf")
+
+glimpse(datos)
+```
+
+Es importante notar que este conjunto de datos debe de contener ya la probabilidad de inclusión en la muestra asociado a cada respuesta. En el conjunto anterior tenemos dos ponderadores:
+
+1. **Pond_indi1_ind:** Es el ponderador final que permite estimar resultados a nivel individual
+
+2. **Pond_viv:** Es el ponderador final que permite estimar resultados de viviendas
+
+
+Una vez identificado el ponderador a usar para la estimación de resultados, procedemos a crear el diseño de muestreo en R. Esto permitirá detectar la manera adecuada de proceder con la estimación de resultados. La manera de implementarlo es la siguiente:
+
+```{r, warning=FALSE, message=FALSE}
+library(srvyr)
+
+design <- datos %>% 
+  as_survey_design(
+    ids = Folio_DIAO,
+    weights = Pondi1_ind,
+    strata = S2,
+    pps = "brewer",
+    variance = "HT") %>% 
+  as_survey_rep(
+    type = "bootstrap",
+    replicates = 100
+  )
+
+design
+```
+
+
+El diseño de muestreo ha sido creado. Por lo que a partir de este momento comenzaremos a hacer estimaciones estadísticas. Es importante mencionar que la técnica de estimación de resultados corresponde al estimador [Horvitz-Thompson](https://www150.statcan.gc.ca/n1/pub/12-001-x/2013001/article/11831/section2-eng.htm), el cual se calcula de la siguiente forma:
+
+$$\hat{Y}=\sum_{i=1}^{n}{\frac{X_i}{\pi_i}}=\sum_{i=1}^{n}{X_i \cdot F_i}$$
+**Donde:**
+
+$\hat{Y}=$ Es la estimación de la variable de interés
+
+$X_i=$ Es la variable de interés observada en la muestra
+
+$\pi_i=$ Es la probabilidad de selección del i-ésimo individuo en la muestra
+
+$F_i=$ Es el factor de expansión del i-ésimo individuo. Fué calculado como $\frac{1}{\pi_i}$
+
+Ahora sí, procedemos a realizar estas estimaciones en *R* para conocer los resultados de interés:
+
+```{r}
+design %>% 
+  srvyr::group_by(P7_1) %>% 
+  srvyr::summarize(
+    prop = survey_mean(
+      na.rm = TRUE,
+      vartype = c("se", "ci", "var", "cv"),
+      level = 0.95,
+      deff = TRUE
+    )
+  )
+```
+
+
+
+```{r}
+design %>% 
+  srvyr::summarize(
+    mean = survey_mean(
+      P7_1_1,
+      na.rm = TRUE,
+      vartype = c("se", "ci", "var", "cv"),
+      level = 0.95,
+      deff = TRUE
+    )
+  )
+```
+Probemos con otra pregunta de interés:
+
+```{r}
+design %>% 
+  srvyr::summarize(
+    mean = survey_mean(
+      S10,
+      na.rm = TRUE,
+      vartype = c("se", "ci", "var", "cv"),
+      level = 0.95,
+      deff = TRUE
+    )
+  )
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

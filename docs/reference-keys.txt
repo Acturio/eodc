@@ -47,3 +47,6 @@ mas-sin-remplazo
 mas-con-remplazo
 muestreo-ppt
 muestreo-estratificado-y-ppt
+análisis-de-muestra
+captura-y-limpieza-de-datos
+estimación-de-resultados

@@ -241,7 +241,7 @@ Algunas de las ventajas de utilizar `read_csv()` son:
 
 Veamos un ejemplo: 
 
-La tabla de datos llamada [ITER_NAL_CNPV20]() contiene un conjunto de datos con información del Censo Nacional de Población y Vivienda creado por INEGI en el año 2020. Contiene datos desagregados y agregados en distintos niveles, por lo que **es necesario limpiarlo para obtener un apropiado marco de muestreo.** 
+La tabla de datos llamada [ITER_NAL_CNPV20](https://www.inegi.org.mx/programas/ccpv/2020/?ps=microdatos#Datos_abiertos) contiene un conjunto de datos con información del Censo Nacional de Población y Vivienda creado por INEGI en el año 2020. Contiene datos desagregados y agregados en distintos niveles, por lo que **es necesario limpiarlo para obtener un apropiado marco de muestreo.** 
 
 ```{r}
 

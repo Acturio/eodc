@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 5 Análisis de muestra | Análisis Muestral de Encuestas Origen-Destino</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 5 Análisis de muestra | Análisis Muestral de Encuestas Origen-Destino" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 5 Análisis de muestra | Análisis Muestral de Encuestas Origen-Destino" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Act. Arturo Bringas" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="construcción-de-muestra.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"><img src="img/00-presentacion/logo_puec.jpg" width="240" height="300"></a></li|
+|:-:|  
+<center> Muestreo en encuestas de Origen-Destino </center>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#objetivo"><i class="fa fa-check"></i><b>1.1</b> Objetivo</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#instructor"><i class="fa fa-check"></i><b>1.2</b> Instructor</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#recursos-y-dinámica-de-clase"><i class="fa fa-check"></i><b>1.3</b> Recursos y dinámica de clase</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="tipos-de-muestras.html"><a href="tipos-de-muestras.html"><i class="fa fa-check"></i><b>2</b> Tipos de muestras</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="tipos-de-muestras.html"><a href="tipos-de-muestras.html#qué-es-y-para-qué-sirve-muestreo"><i class="fa fa-check"></i><b>2.1</b> ¿Qué es y para qué sirve muestreo?</a></li>
+<li class="chapter" data-level="2.2" data-path="tipos-de-muestras.html"><a href="tipos-de-muestras.html#ventajas-e-importancia-de-utilizar-muestreo"><i class="fa fa-check"></i><b>2.2</b> Ventajas e importancia de utilizar muestreo</a></li>
+<li class="chapter" data-level="2.3" data-path="tipos-de-muestras.html"><a href="tipos-de-muestras.html#qué-se-requiere-para-formular-un-problema-de-muestreo"><i class="fa fa-check"></i><b>2.3</b> ¿Qué se requiere para formular un problema de muestreo?</a></li>
+<li class="chapter" data-level="2.4" data-path="tipos-de-muestras.html"><a href="tipos-de-muestras.html#tipos-de-muestreo"><i class="fa fa-check"></i><b>2.4</b> Tipos de muestreo</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="tipos-de-muestras.html"><a href="tipos-de-muestras.html#muestreo-no-probabilístico"><i class="fa fa-check"></i><b>2.4.1</b> Muestreo no probabilístico</a></li>
+<li class="chapter" data-level="2.4.2" data-path="tipos-de-muestras.html"><a href="tipos-de-muestras.html#muestreo-probabilístico"><i class="fa fa-check"></i><b>2.4.2</b> Muestreo probabilístico</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="tipos-de-muestras.html"><a href="tipos-de-muestras.html#instrumentos-de-captura-de-datos"><i class="fa fa-check"></i><b>2.5</b> Instrumentos de captura de datos</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="tipos-de-muestras.html"><a href="tipos-de-muestras.html#tipos-de-encuestas-según-la-forma-de-aplicación"><i class="fa fa-check"></i><b>2.5.1</b> Tipos de encuestas según la forma de aplicación</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="introducción-a-r.html"><a href="introducción-a-r.html"><i class="fa fa-check"></i><b>3</b> Introducción a R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="introducción-a-r.html"><a href="introducción-a-r.html#cómo-obtener-r"><i class="fa fa-check"></i><b>3.1</b> ¿Cómo obtener <em>R</em>?</a></li>
+<li class="chapter" data-level="3.2" data-path="introducción-a-r.html"><a href="introducción-a-r.html#qué-es-rstudio"><i class="fa fa-check"></i><b>3.2</b> ¿Qué es RStudio?</a></li>
+<li class="chapter" data-level="3.3" data-path="introducción-a-r.html"><a href="introducción-a-r.html#r-como-lenguaje-orientado-a-objetos"><i class="fa fa-check"></i><b>3.3</b> <em>R</em> como lenguaje orientado a objetos</a></li>
+<li class="chapter" data-level="3.4" data-path="introducción-a-r.html"><a href="introducción-a-r.html#estructuras-de-almacenamiento"><i class="fa fa-check"></i><b>3.4</b> Estructuras de almacenamiento</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="introducción-a-r.html"><a href="introducción-a-r.html#variables"><i class="fa fa-check"></i><b>3.4.1</b> Variables</a></li>
+<li class="chapter" data-level="3.4.2" data-path="introducción-a-r.html"><a href="introducción-a-r.html#vectores"><i class="fa fa-check"></i><b>3.4.2</b> Vectores</a></li>
+<li class="chapter" data-level="3.4.3" data-path="introducción-a-r.html"><a href="introducción-a-r.html#data-frames"><i class="fa fa-check"></i><b>3.4.3</b> Data Frames</a></li>
+<li class="chapter" data-level="3.4.4" data-path="introducción-a-r.html"><a href="introducción-a-r.html#ejercicios"><i class="fa fa-check"></i><b>3.4.4</b> Ejercicios</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="introducción-a-r.html"><a href="introducción-a-r.html#lectura-de-datos"><i class="fa fa-check"></i><b>3.5</b> Lectura de datos</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="introducción-a-r.html"><a href="introducción-a-r.html#archivos-csv"><i class="fa fa-check"></i><b>3.5.1</b> Archivos <em>csv</em></a></li>
+<li class="chapter" data-level="3.5.2" data-path="introducción-a-r.html"><a href="introducción-a-r.html#archivos-xls-y-xlsx"><i class="fa fa-check"></i><b>3.5.2</b> Archivos <em>xls</em> y <em>xlsx</em></a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="introducción-a-r.html"><a href="introducción-a-r.html#consulta-de-datos"><i class="fa fa-check"></i><b>3.6</b> Consulta de datos</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="introducción-a-r.html"><a href="introducción-a-r.html#select"><i class="fa fa-check"></i><b>3.6.1</b> select()</a></li>
+<li class="chapter" data-level="3.6.2" data-path="introducción-a-r.html"><a href="introducción-a-r.html#filter"><i class="fa fa-check"></i><b>3.6.2</b> filter()</a></li>
+<li class="chapter" data-level="3.6.3" data-path="introducción-a-r.html"><a href="introducción-a-r.html#arrange"><i class="fa fa-check"></i><b>3.6.3</b> arrange()</a></li>
+<li class="chapter" data-level="3.6.4" data-path="introducción-a-r.html"><a href="introducción-a-r.html#mutate"><i class="fa fa-check"></i><b>3.6.4</b> mutate()</a></li>
+<li class="chapter" data-level="3.6.5" data-path="introducción-a-r.html"><a href="introducción-a-r.html#summarise"><i class="fa fa-check"></i><b>3.6.5</b> summarise()</a></li>
+<li class="chapter" data-level="3.6.6" data-path="introducción-a-r.html"><a href="introducción-a-r.html#group_by"><i class="fa fa-check"></i><b>3.6.6</b> group_by()</a></li>
+<li class="chapter" data-level="3.6.7" data-path="introducción-a-r.html"><a href="introducción-a-r.html#left_join"><i class="fa fa-check"></i><b>3.6.7</b> left_join()</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html"><i class="fa fa-check"></i><b>4</b> Construcción de muestra</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#marco-de-muestreo"><i class="fa fa-check"></i><b>4.1</b> Marco de muestreo</a></li>
+<li class="chapter" data-level="4.2" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#tamaño-de-muestra"><i class="fa fa-check"></i><b>4.2</b> Tamaño de muestra</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#implementación-en-r"><i class="fa fa-check"></i><b>4.2.1</b> Implementación en R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#distribución-muestral"><i class="fa fa-check"></i><b>4.3</b> Distribución muestral</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#implementación-en-r-1"><i class="fa fa-check"></i><b>4.3.1</b> Implementación en R</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#probabilidades-y-factores"><i class="fa fa-check"></i><b>4.4</b> Probabilidades y Factores</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#probabilidades"><i class="fa fa-check"></i><b>4.4.1</b> Probabilidades</a></li>
+<li class="chapter" data-level="4.4.2" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#factor-de-expansión"><i class="fa fa-check"></i><b>4.4.2</b> Factor de expansión</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#extracción-de-muestra"><i class="fa fa-check"></i><b>4.5</b> Extracción de muestra</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#mas-sin-remplazo"><i class="fa fa-check"></i><b>4.5.1</b> MAS sin remplazo</a></li>
+<li class="chapter" data-level="4.5.2" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#mas-con-remplazo"><i class="fa fa-check"></i><b>4.5.2</b> MAS con remplazo</a></li>
+<li class="chapter" data-level="4.5.3" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#muestreo-ppt"><i class="fa fa-check"></i><b>4.5.3</b> Muestreo PPT</a></li>
+<li class="chapter" data-level="4.5.4" data-path="construcción-de-muestra.html"><a href="construcción-de-muestra.html#muestreo-estratificado-y-ppt"><i class="fa fa-check"></i><b>4.5.4</b> Muestreo estratificado y PPT</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="análisis-de-muestra.html"><a href="análisis-de-muestra.html"><i class="fa fa-check"></i><b>5</b> Análisis de muestra</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="análisis-de-muestra.html"><a href="análisis-de-muestra.html#captura-y-limpieza-de-datos"><i class="fa fa-check"></i><b>5.1</b> Captura y limpieza de datos</a></li>
+<li class="chapter" data-level="5.2" data-path="análisis-de-muestra.html"><a href="análisis-de-muestra.html#estimación-de-resultados"><i class="fa fa-check"></i><b>5.2</b> Estimación de resultados</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="./"><img src="img/00-presentacion/logo_unam.png" width="240"></a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Análisis Muestral de Encuestas Origen-Destino</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="análisis-de-muestra" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Capítulo 5</span> Análisis de muestra<a href="análisis-de-muestra.html#análisis-de-muestra" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="captura-y-limpieza-de-datos" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Captura y limpieza de datos<a href="análisis-de-muestra.html#captura-y-limpieza-de-datos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Una vez que se ha realizado el levantamiento de información, se debe proceder a capturar la información en un conjunto de datos. Es común que se utilice SPSS(.sav), STATA(.DTA) o dbf para realizar la captura de información. Es posible que al realizar la captura de forma manual existas diversos errores, entre los cuales destacan:</p>
+<ul>
+<li><p>Errores de dedo</p></li>
+<li><p>Faltas de ortografía</p></li>
+<li><p>Ilegibilidad de respuestas</p></li>
+<li><p>Inconsistencias en las respuestas</p></li>
+</ul>
+<p>Cada departamento de investigación deberá definir la política sobre la cual se realizará la corrección de errores encontrados. Es posible disminuir estos errores cuando el levantamiento se realiza a través de tablets pre-programadas en donde el encuestador eliga la opción de respuesta y no se deba de escribir a mano.</p>
+</div>
+<div id="estimación-de-resultados" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Estimación de resultados<a href="análisis-de-muestra.html#estimación-de-resultados" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Para analizar los resultados de la encuesta, comenzaremos por leer la tabla de datos desde al archivo en donde se encuentra almacenados. Las funciones más comunes son:</p>
+<ul>
+<li><p><strong>read_csv:</strong> Lee archivos csv. Es necesaria la librería <em>readr</em></p></li>
+<li><p><strong>read_xlsx:</strong> Lee archivos xlsx. Es necesaria la librería <em>readxl</em></p></li>
+<li><p><strong>read.dbf:</strong> Lee archivos dbf. Es necesaria la librería <em>foreign</em></p></li>
+<li><p><strong>read.spss:</strong> Lee archivos sav. Es necesaria la librería <em>foreign</em></p></li>
+<li><p><strong>read.dta:</strong> Lee archivos dta. Es necesaria la librería <em>foreign</em></p></li>
+</ul>
+<p>A continuación se muestra el proceso de lectura de datos, los cuales pueden ser descargados a través del siguiente <a href="https://drive.google.com/drive/folders/1BjmEGhNcdosC5YW0WYHHsKABOfnpd7m9?usp=sharing">link</a>:</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="análisis-de-muestra.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(foreign)</span>
+<span id="cb114-2"><a href="análisis-de-muestra.html#cb114-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb114-3"><a href="análisis-de-muestra.html#cb114-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-4"><a href="análisis-de-muestra.html#cb114-4" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">read.dbf</span>(<span class="st">&quot;data/EMC18_Base_Vivienda.dbf&quot;</span>)</span>
+<span id="cb114-5"><a href="análisis-de-muestra.html#cb114-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-6"><a href="análisis-de-muestra.html#cb114-6" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(datos)</span></code></pre></div>
+<pre><code>## Rows: 1,900
+## Columns: 184
+## $ Folio_DIAO   &lt;int&gt; 702, 692, 1443, 1474, 1547, 1611, 1694, 1746, 1858, 3, 9,…
+## $ FOLIO        &lt;int&gt; 733, 42, 240, 1528, 1859, 609, 1789, 1695, 1626, 1226, 97…
+## $ EDO          &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ MUNI         &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ LOC          &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 11, 1, 1, 1,…
+## $ AGEB         &lt;fct&gt; 2907, 135, 608, 163, 599, 95, 107A, 2189, 1602, 118, 5111…
+## $ MZ           &lt;int&gt; 23, 5, 4, 6, 4, 6, 23, 6, 42, 1, 50, 42, 3, 19, 10, 6, 16…
+## $ CALLE        &lt;fct&gt; NORTE 66, FELIPE MARTEL, GUSTAVO BAZAN, 9 ORIENTE, MARTIN…
+## $ NO_EXT       &lt;fct&gt; NA, 28, 120, 46, 12, 117, 25, 900, 8, 49, 39, 12, 49, NA,…
+## $ NO_INT       &lt;fct&gt; 0, NA, NA, NA, NA, 0, NA, NA, NA, NA, 19, NA, NA, NA, NA,…
+## $ COL          &lt;fct&gt; SALVADOR DIAZ MIRON, 08-ago, SAN PEDRO XALPA, ISIDRO FABE…
+## $ P2_Nue       &lt;fct&gt; En casa, En casa, En casa, En casa, En casa, En casa, En …
+## $ V1_A1        &lt;fct&gt; &quot;Escuela&quot;, &quot;Escuela&quot;, &quot;Escuela&quot;, &quot;Escuela&quot;, &quot;Escuela&quot;, &quot;D…
+## $ V1_A2_HR     &lt;int&gt; 6, 14, 7, 7, 7, 8, 7, 7, 7, 6, 8, 7, 7, 8, 7, 7, 7, 9, 8,…
+## $ V1_A4_HR     &lt;int&gt; 6, 15, 7, 7, 8, 8, 8, 7, 7, 6, 8, 7, 7, 8, 7, 7, 7, 9, 8,…
+## $ V2_A1        &lt;fct&gt; &quot;Casa o vivienda&quot;, &quot;Casa o vivienda&quot;, &quot;Mercado o tianguis…
+## $ V2_A2_HR     &lt;int&gt; 14, 15, 8, 8, 8, 10, 8, 8, 8, 15, 8, 8, 8, 9, 9, 8, 8, 11…
+## $ V2_A4_HR     &lt;int&gt; 14, 16, 8, 8, 8, 10, 8, 8, 8, 15, 9, 8, 8, 9, 9, 8, 8, 11…
+## $ V3_A1        &lt;fct&gt; NA, NA, &quot;Casa o vivienda&quot;, &quot;Mercado o tianguis&quot;, &quot;Casa o …
+## $ V3_A2_HR     &lt;int&gt; NA, NA, 9, 11, 9, 16, 9, 11, 9, 16, 15, 9, 12, 10, 11, 11…
+## $ V3_A4_HR     &lt;int&gt; NA, NA, 9, 11, 9, 16, 9, 11, 9, 16, 15, 9, 12, 10, 11, 11…
+## $ V4_A1        &lt;fct&gt; NA, NA, Escuela, Casa o vivienda, Escuela, Otra vivienda,…
+## $ V4_A2_HR     &lt;int&gt; NA, NA, 13, 11, 12, 17, 12, 11, 12, 17, 16, 12, 12, 12, 1…
+## $ V4_A4_HR     &lt;int&gt; NA, NA, 13, 11, 12, 17, 12, 11, 12, 17, 16, 12, 12, 12, 1…
+## $ V5_A1        &lt;fct&gt; NA, NA, &quot;Casa o vivienda&quot;, &quot;Escuela&quot;, &quot;Casa o vivienda&quot;, …
+## $ V5_A2_HR     &lt;int&gt; NA, NA, 13, 14, 12, 19, 12, 12, 12, 17, 18, 12, 13, 13, 1…
+## $ V5_A4_HR     &lt;int&gt; NA, NA, 13, 14, 12, 19, 12, 12, 13, 17, 18, 13, 13, 13, 1…
+## $ V6_A1        &lt;fct&gt; NA, NA, NA, Casa o vivienda, NA, NA, NA, Casa o vivienda,…
+## $ V6_A2_HR     &lt;int&gt; NA, NA, NA, 14, NA, NA, NA, 13, NA, 21, NA, NA, NA, NA, N…
+## $ V6_A4_HR     &lt;int&gt; NA, NA, NA, 15, NA, NA, NA, 13, NA, 21, NA, NA, NA, NA, N…
+## $ P3           &lt;int&gt; 40, 600, 70, 0, 0, NA, NA, NA, NA, 1000, 200, NA, NA, NA,…
+## $ P4           &lt;fct&gt; Poco, Mucho, Poco, Nada, Nada, Poco, Nada, Nada, Nada, Mu…
+## $ P5_1         &lt;fct&gt; DEPORTE, TRICICLO, TRANSPORTE, RAPIDEZ, NIÐOS, PELIGRO, D…
+## $ P5_1A        &lt;int&gt; 1, 2, 2, 3, 12, 6, 1, 6, 1, 1, 4, 4, 1, 1, 12, 6, 4, 6, 1…
+## $ P6_1         &lt;fct&gt; EJERCICIO, DEPORTISTA, EJERCICIO, CARRERAS, DIVERSION, DE…
+## $ P6_1A        &lt;int&gt; 1, 1, 1, 3, 11, 1, 2, 7, 5, 4, 1, 2, 7, 7, 3, 5, 2, 6, 14…
+## $ P7_1         &lt;fct&gt; No, No, No, No, No, No, No, No, No, No, No, No, No, No, N…
+## $ P7_1_1       &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ P7_1_1A      &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+## $ P7_2         &lt;fct&gt; NA, NA, No, No, No, No, No, No, No, No, No, No, No, No, N…
+## $ P7_2_1       &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ P7_2_1A      &lt;int&gt; NA, NA, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ P7_3         &lt;fct&gt; No, No, No, No, No, No, No, No, No, No, No, No, No, No, N…
+## $ P7_3_1       &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ P7_3_1A      &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+## $ P8           &lt;fct&gt; No, Si, NC, No, No, No, No, No, No, Si, Si, Si, Si, Si, S…
+## $ P9           &lt;fct&gt; NA, No, NA, NA, NA, NA, NA, NA, NA, No, No, No, No, No, N…
+## $ Ciclistas    &lt;int&gt; 2, 3, NA, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2,…
+## $ P10_1a_1     &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ P10_2a_1     &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ P10_3a_1     &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ P11          &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ P11_F        &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ P12          &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ P13a_1       &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ P14_1        &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ P14_2        &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ P14_3        &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ P14_4        &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ P15_1        &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ P15_2        &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ P15_3        &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ P15_4        &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ P15_5        &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ P16          &lt;fct&gt; Recreacion o diversion, Ahorrar tiempo, Ahorrar dinero, A…
+## $ P17          &lt;fct&gt; Que no hay lugares donde dejar la bici, La inseguridad, C…
+## $ P18          &lt;fct&gt; Ni seguro ni inseguro, Inseguro, NS, Seguro, NS, Ni segur…
+## $ P19          &lt;fct&gt; Ni seguro ni inseguro, Inseguro, NS, Inseguro, NS, Muy in…
+## $ P20          &lt;fct&gt; NS, Algunas veces, NS, Algunas veces, NS, Nunca, Nunca, N…
+## $ P21          &lt;fct&gt; NS, Algunas veces, Nunca, Siempre, NS, Nunca, Nunca, Nunc…
+## $ P22          &lt;fct&gt; Nunca, Siempre, Algunas veces, Siempre, NS, Nunca, Nunca,…
+## $ P23          &lt;fct&gt; Nunca, Siempre, Algunas veces, Nunca, NS, Nunca, Nunca, N…
+## $ P24          &lt;fct&gt; Nunca, Siempre, NS, Nunca, NS, Nunca, Algunas veces, Nunc…
+## $ P25          &lt;fct&gt; Nunca, Siempre, Siempre, Siempre, Siempre, NS, Nunca, Alg…
+## $ P26          &lt;fct&gt; Nunca, Siempre, Nunca, Nunca, Nunca, Nunca, Algunas veces…
+## $ S1           &lt;int&gt; 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, …
+## $ S2           &lt;int&gt; 16, 62, 49, 39, 34, 19, 32, 42, 26, 45, 30, 48, 31, 27, 2…
+## $ S3           &lt;fct&gt; Si, Si, Si, Si, Si, Si, Si, Si, Si, Si, Si, Si, Si, Si, S…
+## $ S4           &lt;fct&gt; Preparatoria o Bachillerato, Preparatoria o Bachillerato,…
+## $ S4_ANO       &lt;int&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 1, 3, 3, …
+## $ S10          &lt;int&gt; NA, NA, NA, NA, 2000, 7500, NA, NA, NA, 7400, 8000, NA, N…
+## $ S12          &lt;int&gt; NA, NA, 7800, 6000, 5000, 10000, 5000, 7000, 5000, NA, 14…
+## $ Pondi1_ind   &lt;dbl&gt; 4190.8190, 2794.0450, 747.9473, 1239.2120, 395.1794, 4184…
+## $ Pondi_viv    &lt;dbl&gt; 1255.661, 1487.901, 443.687, 567.181, 134.275, 1116.075, …
+## $ S10_rango    &lt;int&gt; NA, NA, NA, NA, 2, 4, NA, NA, NA, 4, 4, NA, NA, 2, NA, NA…
+## $ S12_rango    &lt;int&gt; NA, NA, 4, 3, 3, 4, 3, 4, 3, NA, 5, 3, NA, 3, 3, NA, 4, 4…
+## $ Ran_Edad     &lt;int&gt; 2, 6, 5, 4, 3, 2, 3, 4, 3, 5, 3, 5, 3, 3, 3, 3, 2, 6, 4, …
+## $ Sum_niv      &lt;int&gt; 9, 9, 6, 6, 6, 6, 12, 9, 6, 6, 12, 6, 9, 6, 6, 9, 9, 6, 6…
+## $ Escola       &lt;int&gt; 12, 12, 9, 9, 9, 9, 15, 12, 9, 9, 15, 9, 12, 9, 9, 10, 10…
+## $ Num_Viajes   &lt;int&gt; 2, 2, 5, 6, 5, 5, 5, 6, 5, 6, 5, 5, 5, 5, 5, 5, 6, 4, 4, …
+## $ Via_Totale   &lt;dbl&gt; 8381.638, 5588.090, 3739.736, 7435.272, 1975.897, 20924.3…
+## $ V1_B1        &lt;fct&gt; En otro modo de transporte, En otro modo de transporte, S…
+## $ V1_Tramos    &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+## $ V1_T1        &lt;fct&gt; &quot;Automovil particular&quot;, &quot;Automovil particular&quot;, &quot;Caminata…
+## $ V1_T2        &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ V1_T3        &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ V1_T4        &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ Modo_V1      &lt;int&gt; 1, 1, 2, 2, 2, 2, 2, 2, 2, 6, 2, 2, 2, 2, 2, 2, 2, 4, 2, …
+## $ Proposito_   &lt;fct&gt; &quot;Relacionados a la escuela&quot;, &quot;Llevar, recoger o acompanar…
+## $ V2_B1        &lt;fct&gt; En otro modo de transporte, En otro modo de transporte, S…
+## $ V2_Tramos    &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+## $ V2_T1        &lt;fct&gt; &quot;Colectivo&quot;, &quot;Automovil particular&quot;, &quot;Caminata&quot;, &quot;Caminat…
+## $ V2_T2        &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ V2_T3        &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ Modo_V2      &lt;int&gt; 4, 1, 2, 2, 2, 2, 2, 2, 2, 6, 4, 2, 2, 2, 2, 2, 2, 4, 2, …
+## $ Proposito_.1 &lt;fct&gt; &quot;Regresar a casa&quot;, &quot;Regresar a casa&quot;, &quot;Adquirir un bien o…
+## $ V3_B1        &lt;fct&gt; NA, NA, Solo caminando, Solo caminando, Solo caminando, S…
+## $ V3_Tramos    &lt;int&gt; NA, NA, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+## $ V3_T1        &lt;fct&gt; NA, NA, &quot;Caminata&quot;, &quot;Caminata&quot;, &quot;Caminata&quot;, &quot;Caminata&quot;, &quot;…
+## $ V3_T2        &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ V3_T3        &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ V3_T4        &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ Modo_V3      &lt;int&gt; NA, NA, 2, 2, 2, 2, 2, 2, 2, 6, 6, 2, 2, 2, 2, 2, 2, 4, 4…
+## $ Proposito_.2 &lt;fct&gt; NA, NA, &quot;Regresar a casa&quot;, &quot;Adquirir un bien o servicio&quot;,…
+## $ V4_B1        &lt;fct&gt; NA, NA, Solo caminando, Solo caminando, Solo caminando, S…
+## $ V4_Tramos    &lt;int&gt; NA, NA, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+## $ V4_T1        &lt;fct&gt; NA, NA, &quot;Caminata&quot;, &quot;Caminata&quot;, &quot;Caminata&quot;, &quot;Caminata&quot;, &quot;…
+## $ V4_T2        &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ V4_T3        &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ V4_T4        &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ Modo_V4      &lt;int&gt; NA, NA, 2, 2, 2, 2, 2, 2, 2, 6, 6, 2, 2, 2, 2, 2, 2, 4, 4…
+## $ Proposito_.3 &lt;fct&gt; NA, NA, &quot;Llevar, recoger o acompanar a alguien&quot;, &quot;Regresa…
+## $ V5_B1        &lt;fct&gt; NA, NA, Solo caminando, Solo caminando, Solo caminando, S…
+## $ V5_Tramos    &lt;int&gt; NA, NA, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, NA, …
+## $ V5_T1        &lt;fct&gt; NA, NA, &quot;Caminata&quot;, &quot;Caminata&quot;, &quot;Caminata&quot;, &quot;Caminata&quot;, &quot;…
+## $ Modo_V5      &lt;int&gt; NA, NA, 2, 2, 2, 2, 2, 2, 2, 6, 1, 2, 2, 2, 2, 2, 2, NA, …
+## $ Proposito_.4 &lt;fct&gt; NA, NA, &quot;Regresar a casa&quot;, &quot;Llevar, recoger o acompanar a…
+## $ V6_B1        &lt;fct&gt; NA, NA, NA, Solo caminando, NA, NA, NA, Solo caminando, N…
+## $ V6_Tramos    &lt;int&gt; NA, NA, NA, 1, NA, NA, NA, 1, NA, 1, NA, NA, NA, NA, NA, …
+## $ V6_T1        &lt;fct&gt; NA, NA, NA, &quot;Caminata&quot;, NA, NA, NA, &quot;Caminata&quot;, NA, &quot;Taxi…
+## $ Modo_V6      &lt;int&gt; NA, NA, NA, 2, NA, NA, NA, 2, NA, 6, NA, NA, NA, NA, NA, …
+## $ Proposito_.5 &lt;fct&gt; NA, NA, NA, &quot;Regresar a casa&quot;, NA, NA, NA, &quot;Regresar a ca…
+## $ Dura_V1      &lt;int&gt; 15, 36, 15, 10, 15, 10, 10, 15, 10, 30, 7, 15, 10, 10, 15…
+## $ Dur_V1_Cat   &lt;int&gt; 1, 3, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 2, 1, …
+## $ Dura_V2      &lt;int&gt; 30, 30, 10, 10, 13, 15, 20, 20, 5, 30, 35, 10, 10, 10, 15…
+## $ Dur_V2_Cat   &lt;int&gt; 2, 2, 1, 1, 1, 1, 2, 2, 1, 2, 3, 1, 1, 1, 1, 1, 2, 3, 1, …
+## $ Dura_V3      &lt;int&gt; NA, NA, 20, 5, 15, 15, 20, 10, 10, 30, 25, 20, 5, 15, 25,…
+## $ Dur_V3_Cat   &lt;int&gt; NA, NA, 2, 1, 1, 1, 2, 1, 1, 2, 2, 2, 1, 1, 2, 1, 2, 2, 3…
+## $ Dura_V4      &lt;int&gt; NA, NA, 15, 15, 15, 20, 10, 15, 10, 10, 20, 20, 5, 10, 15…
+## $ Dur_V4_Cat   &lt;int&gt; NA, NA, 1, 1, 1, 2, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 2, 3, 4…
+## $ Dura_V5      &lt;int&gt; NA, NA, 15, 10, 15, 30, 10, 15, 15, 20, 45, 20, 15, 10, 1…
+## $ Dur_V5_Cat   &lt;int&gt; NA, NA, 1, 1, 1, 2, 1, 1, 1, 2, 3, 2, 1, 1, 1, 1, 1, NA, …
+## $ Dura_V6      &lt;int&gt; NA, NA, NA, 10, NA, NA, NA, 15, NA, 45, NA, NA, NA, NA, N…
+## $ Dur_V6_Cat   &lt;int&gt; NA, NA, NA, 1, NA, NA, NA, 1, NA, 3, NA, NA, NA, NA, NA, …
+## $ V1_B2        &lt;int&gt; NA, NA, 15, 10, 15, 10, 10, 15, 10, NA, 7, 15, 10, 10, 15…
+## $ V1_C1        &lt;int&gt; 2, 0, NA, NA, NA, NA, NA, NA, NA, 0, NA, NA, NA, NA, NA, …
+## $ V1_C5_1      &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ V1_C5_2      &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ V1_C5_3      &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ V1_C5_4      &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ V1_C7        &lt;int&gt; 1, 0, 99, 99, 99, 99, 99, 99, 99, 0, 99, 99, 99, 99, 99, …
+## $ Camina_V1    &lt;int&gt; 3, 0, 15, 10, 15, 10, 10, 15, 10, 0, 7, 15, 10, 10, 15, 1…
+## $ V2_B2        &lt;int&gt; NA, NA, 10, 10, 13, 15, 20, 20, 5, NA, NA, 10, 10, 10, 15…
+## $ V2_C1        &lt;int&gt; 4, 0, NA, NA, NA, NA, NA, NA, NA, 5, 5, NA, NA, NA, NA, N…
+## $ V2_C5_1      &lt;int&gt; 997, 997, NA, NA, NA, NA, NA, NA, NA, 997, 997, NA, NA, N…
+## $ V2_C5_2      &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ V2_C5_3      &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ V2_C7        &lt;int&gt; 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 9…
+## $ Camina_V2    &lt;int&gt; 4, 0, 10, 10, 13, 15, 20, 20, 5, 5, 5, 10, 10, 10, 15, 15…
+## $ V3_B2        &lt;int&gt; NA, NA, 20, 5, 15, 15, 20, 10, 10, NA, NA, 20, 5, 15, 25,…
+## $ V3_C1        &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, 0, 0, NA, NA, NA, NA,…
+## $ V3_C5_1      &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, 997, 997, NA, NA, NA,…
+## $ V3_C5_2      &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ V3_C5_3      &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ V3_C5_4      &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ V3_C7        &lt;int&gt; NA, NA, 99, 99, 99, 99, 99, 99, 99, 2, 0, 99, 99, 99, 99,…
+## $ Camina_V3    &lt;int&gt; NA, NA, 20, 5, 15, 15, 20, 10, 10, 2, 0, 20, 5, 15, 25, 1…
+## $ V4_B2        &lt;int&gt; NA, NA, 15, 15, 15, 20, 10, 15, 10, NA, NA, 20, 5, 10, 15…
+## $ V4_C1        &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, 7, 0, NA, NA, NA, NA,…
+## $ V4_C5_1      &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, 997, 997, NA, NA, NA,…
+## $ V4_C5_2      &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ V4_C5_3      &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…
+## $ V4_C7        &lt;int&gt; NA, NA, 99, 99, 99, 99, 99, 99, 99, 2, 0, 99, 99, 99, 99,…
+## $ Camina_V4    &lt;int&gt; NA, NA, 15, 15, 15, 20, 10, 15, 10, 9, 0, 20, 5, 10, 15, …
+## $ V5_B2        &lt;int&gt; NA, NA, 15, 10, 15, 30, 10, 15, 15, NA, NA, 20, 15, 10, 1…
+## $ V5_C1        &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, 5, 0, NA, NA, NA, NA,…
+## $ V5_C5_1      &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, No aplica, NA, NA, NA…
+## $ V5_C7        &lt;int&gt; NA, NA, 99, 99, 99, 99, 99, 99, 99, 4, 5, 99, 99, 99, 99,…
+## $ Camina_V5    &lt;int&gt; NA, NA, 15, 10, 15, 30, 10, 15, 15, 9, 5, 20, 15, 10, 15,…
+## $ V6_B2        &lt;int&gt; NA, NA, NA, 10, NA, NA, NA, 15, NA, NA, NA, NA, NA, NA, N…
+## $ V6_C1        &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, 7, NA, NA, NA, NA, NA…
+## $ V6_C5_1      &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, No aplica, NA, NA, NA…
+## $ V6_C7        &lt;int&gt; NA, NA, NA, 99, NA, NA, NA, 99, NA, 0, NA, NA, NA, NA, NA…
+## $ Camina_V6    &lt;int&gt; NA, NA, NA, 10, NA, NA, NA, 15, NA, 7, NA, NA, NA, NA, NA…</code></pre>
+<p>Es importante notar que este conjunto de datos debe de contener ya la probabilidad de inclusión en la muestra asociado a cada respuesta. En el conjunto anterior tenemos dos ponderadores:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Pond_indi1_ind:</strong> Es el ponderador final que permite estimar resultados a nivel individual</p></li>
+<li><p><strong>Pond_viv:</strong> Es el ponderador final que permite estimar resultados de viviendas</p></li>
+</ol>
+<p>Una vez identificado el ponderador a usar para la estimación de resultados, procedemos a crear el diseño de muestreo en R. Esto permitirá detectar la manera adecuada de proceder con la estimación de resultados. La manera de implementarlo es la siguiente:</p>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="análisis-de-muestra.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(srvyr)</span>
+<span id="cb116-2"><a href="análisis-de-muestra.html#cb116-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-3"><a href="análisis-de-muestra.html#cb116-3" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> datos <span class="sc">%&gt;%</span> </span>
+<span id="cb116-4"><a href="análisis-de-muestra.html#cb116-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_survey_design</span>(</span>
+<span id="cb116-5"><a href="análisis-de-muestra.html#cb116-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">ids =</span> Folio_DIAO,</span>
+<span id="cb116-6"><a href="análisis-de-muestra.html#cb116-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">weights =</span> Pondi1_ind,</span>
+<span id="cb116-7"><a href="análisis-de-muestra.html#cb116-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">strata =</span> S2,</span>
+<span id="cb116-8"><a href="análisis-de-muestra.html#cb116-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">pps =</span> <span class="st">&quot;brewer&quot;</span>,</span>
+<span id="cb116-9"><a href="análisis-de-muestra.html#cb116-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">variance =</span> <span class="st">&quot;HT&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb116-10"><a href="análisis-de-muestra.html#cb116-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_survey_rep</span>(</span>
+<span id="cb116-11"><a href="análisis-de-muestra.html#cb116-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">&quot;bootstrap&quot;</span>,</span>
+<span id="cb116-12"><a href="análisis-de-muestra.html#cb116-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">replicates =</span> <span class="dv">100</span></span>
+<span id="cb116-13"><a href="análisis-de-muestra.html#cb116-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb116-14"><a href="análisis-de-muestra.html#cb116-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-15"><a href="análisis-de-muestra.html#cb116-15" aria-hidden="true" tabindex="-1"></a>design</span></code></pre></div>
+<pre><code>## Call: Called via srvyr
+## Survey bootstrap with 100 replicates.
+## Data variables: Folio_DIAO (int), FOLIO (int), EDO (lgl), MUNI (lgl), LOC
+##   (int), AGEB (fct), MZ (int), CALLE (fct), NO_EXT (fct), NO_INT (fct), COL
+##   (fct), P2_Nue (fct), V1_A1 (fct), V1_A2_HR (int), V1_A4_HR (int), V2_A1
+##   (fct), V2_A2_HR (int), V2_A4_HR (int), V3_A1 (fct), V3_A2_HR (int), V3_A4_HR
+##   (int), V4_A1 (fct), V4_A2_HR (int), V4_A4_HR (int), V5_A1 (fct), V5_A2_HR
+##   (int), V5_A4_HR (int), V6_A1 (fct), V6_A2_HR (int), V6_A4_HR (int), P3 (int),
+##   P4 (fct), P5_1 (fct), P5_1A (int), P6_1 (fct), P6_1A (int), P7_1 (fct),
+##   P7_1_1 (int), P7_1_1A (int), P7_2 (fct), P7_2_1 (int), P7_2_1A (int), P7_3
+##   (fct), P7_3_1 (int), P7_3_1A (int), P8 (fct), P9 (fct), Ciclistas (int),
+##   P10_1a_1 (fct), P10_2a_1 (fct), P10_3a_1 (fct), P11 (fct), P11_F (fct), P12
+##   (fct), P13a_1 (fct), P14_1 (fct), P14_2 (fct), P14_3 (fct), P14_4 (fct),
+##   P15_1 (fct), P15_2 (fct), P15_3 (fct), P15_4 (fct), P15_5 (fct), P16 (fct),
+##   P17 (fct), P18 (fct), P19 (fct), P20 (fct), P21 (fct), P22 (fct), P23 (fct),
+##   P24 (fct), P25 (fct), P26 (fct), S1 (int), S2 (int), S3 (fct), S4 (fct),
+##   S4_ANO (int), S10 (int), S12 (int), Pondi1_ind (dbl), Pondi_viv (dbl),
+##   S10_rango (int), S12_rango (int), Ran_Edad (int), Sum_niv (int), Escola
+##   (int), Num_Viajes (int), Via_Totale (dbl), V1_B1 (fct), V1_Tramos (int),
+##   V1_T1 (fct), V1_T2 (fct), V1_T3 (fct), V1_T4 (fct), Modo_V1 (int), Proposito_
+##   (fct), V2_B1 (fct), V2_Tramos (int), V2_T1 (fct), V2_T2 (fct), V2_T3 (fct),
+##   Modo_V2 (int), Proposito_.1 (fct), V3_B1 (fct), V3_Tramos (int), V3_T1 (fct),
+##   V3_T2 (fct), V3_T3 (fct), V3_T4 (fct), Modo_V3 (int), Proposito_.2 (fct),
+##   V4_B1 (fct), V4_Tramos (int), V4_T1 (fct), V4_T2 (fct), V4_T3 (fct), V4_T4
+##   (lgl), Modo_V4 (int), Proposito_.3 (fct), V5_B1 (fct), V5_Tramos (int), V5_T1
+##   (fct), Modo_V5 (int), Proposito_.4 (fct), V6_B1 (fct), V6_Tramos (int), V6_T1
+##   (fct), Modo_V6 (int), Proposito_.5 (fct), Dura_V1 (int), Dur_V1_Cat (int),
+##   Dura_V2 (int), Dur_V2_Cat (int), Dura_V3 (int), Dur_V3_Cat (int), Dura_V4
+##   (int), Dur_V4_Cat (int), Dura_V5 (int), Dur_V5_Cat (int), Dura_V6 (int),
+##   Dur_V6_Cat (int), V1_B2 (int), V1_C1 (int), V1_C5_1 (int), V1_C5_2 (int),
+##   V1_C5_3 (fct), V1_C5_4 (fct), V1_C7 (int), Camina_V1 (int), V2_B2 (int),
+##   V2_C1 (int), V2_C5_1 (int), V2_C5_2 (int), V2_C5_3 (fct), V2_C7 (int),
+##   Camina_V2 (int), V3_B2 (int), V3_C1 (int), V3_C5_1 (int), V3_C5_2 (fct),
+##   V3_C5_3 (fct), V3_C5_4 (fct), V3_C7 (int), Camina_V3 (int), V4_B2 (int),
+##   V4_C1 (int), V4_C5_1 (int), V4_C5_2 (fct), V4_C5_3 (fct), V4_C7 (int),
+##   Camina_V4 (int), V5_B2 (int), V5_C1 (int), V5_C5_1 (fct), V5_C7 (int),
+##   Camina_V5 (int), V6_B2 (int), V6_C1 (int), V6_C5_1 (fct), V6_C7 (int),
+##   Camina_V6 (int)</code></pre>
+<p>El diseño de muestreo ha sido creado. Por lo que a partir de este momento comenzaremos a hacer estimaciones estadísticas. Es importante mencionar que la técnica de estimación de resultados corresponde al estimador <a href="https://www150.statcan.gc.ca/n1/pub/12-001-x/2013001/article/11831/section2-eng.htm">Horvitz-Thompson</a>, el cual se calcula de la siguiente forma:</p>
+<p><span class="math display">\[\hat{Y}=\sum_{i=1}^{n}{\frac{X_i}{\pi_i}}=\sum_{i=1}^{n}{X_i \cdot F_i}\]</span>
+<strong>Donde:</strong></p>
+<p><span class="math inline">\(\hat{Y}=\)</span> Es la estimación de la variable de interés</p>
+<p><span class="math inline">\(X_i=\)</span> Es la variable de interés observada en la muestra</p>
+<p><span class="math inline">\(\pi_i=\)</span> Es la probabilidad de selección del i-ésimo individuo en la muestra</p>
+<p><span class="math inline">\(F_i=\)</span> Es el factor de expansión del i-ésimo individuo. Fué calculado como <span class="math inline">\(\frac{1}{\pi_i}\)</span></p>
+<p>Ahora sí, procedemos a realizar estas estimaciones en <em>R</em> para conocer los resultados de interés:</p>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="análisis-de-muestra.html#cb118-1" aria-hidden="true" tabindex="-1"></a>design <span class="sc">%&gt;%</span> </span>
+<span id="cb118-2"><a href="análisis-de-muestra.html#cb118-2" aria-hidden="true" tabindex="-1"></a>  srvyr<span class="sc">::</span><span class="fu">group_by</span>(P7_1) <span class="sc">%&gt;%</span> </span>
+<span id="cb118-3"><a href="análisis-de-muestra.html#cb118-3" aria-hidden="true" tabindex="-1"></a>  srvyr<span class="sc">::</span><span class="fu">summarize</span>(</span>
+<span id="cb118-4"><a href="análisis-de-muestra.html#cb118-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">prop =</span> <span class="fu">survey_mean</span>(</span>
+<span id="cb118-5"><a href="análisis-de-muestra.html#cb118-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">na.rm =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb118-6"><a href="análisis-de-muestra.html#cb118-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>, <span class="st">&quot;var&quot;</span>, <span class="st">&quot;cv&quot;</span>),</span>
+<span id="cb118-7"><a href="análisis-de-muestra.html#cb118-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">level =</span> <span class="fl">0.95</span>,</span>
+<span id="cb118-8"><a href="análisis-de-muestra.html#cb118-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">deff =</span> <span class="cn">TRUE</span></span>
+<span id="cb118-9"><a href="análisis-de-muestra.html#cb118-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb118-10"><a href="análisis-de-muestra.html#cb118-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 8
+##   P7_1   prop prop_se prop_low prop_upp prop_var prop_cv prop_deff
+##   &lt;fct&gt; &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;
+## 1 No    0.532  0.0161    0.500    0.564 0.000258  0.0302      1.97
+## 2 Si    0.468  0.0161    0.436    0.500 0.000258  0.0343      1.97</code></pre>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="análisis-de-muestra.html#cb120-1" aria-hidden="true" tabindex="-1"></a>design <span class="sc">%&gt;%</span> </span>
+<span id="cb120-2"><a href="análisis-de-muestra.html#cb120-2" aria-hidden="true" tabindex="-1"></a>  srvyr<span class="sc">::</span><span class="fu">summarize</span>(</span>
+<span id="cb120-3"><a href="análisis-de-muestra.html#cb120-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">survey_mean</span>(</span>
+<span id="cb120-4"><a href="análisis-de-muestra.html#cb120-4" aria-hidden="true" tabindex="-1"></a>      P7_1_1,</span>
+<span id="cb120-5"><a href="análisis-de-muestra.html#cb120-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">na.rm =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb120-6"><a href="análisis-de-muestra.html#cb120-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>, <span class="st">&quot;var&quot;</span>, <span class="st">&quot;cv&quot;</span>),</span>
+<span id="cb120-7"><a href="análisis-de-muestra.html#cb120-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">level =</span> <span class="fl">0.95</span>,</span>
+<span id="cb120-8"><a href="análisis-de-muestra.html#cb120-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">deff =</span> <span class="cn">TRUE</span></span>
+<span id="cb120-9"><a href="análisis-de-muestra.html#cb120-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb120-10"><a href="análisis-de-muestra.html#cb120-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 7
+##    mean mean_se mean_low mean_upp mean_var mean_cv mean_deff
+##   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;
+## 1  1.23  0.0208     1.19     1.27 0.000434  0.0169      1.27</code></pre>
+<p>Probemos con otra pregunta de interés:</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="análisis-de-muestra.html#cb122-1" aria-hidden="true" tabindex="-1"></a>design <span class="sc">%&gt;%</span> </span>
+<span id="cb122-2"><a href="análisis-de-muestra.html#cb122-2" aria-hidden="true" tabindex="-1"></a>  srvyr<span class="sc">::</span><span class="fu">summarize</span>(</span>
+<span id="cb122-3"><a href="análisis-de-muestra.html#cb122-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">survey_mean</span>(</span>
+<span id="cb122-4"><a href="análisis-de-muestra.html#cb122-4" aria-hidden="true" tabindex="-1"></a>      S10,</span>
+<span id="cb122-5"><a href="análisis-de-muestra.html#cb122-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">na.rm =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb122-6"><a href="análisis-de-muestra.html#cb122-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">vartype =</span> <span class="fu">c</span>(<span class="st">&quot;se&quot;</span>, <span class="st">&quot;ci&quot;</span>, <span class="st">&quot;var&quot;</span>, <span class="st">&quot;cv&quot;</span>),</span>
+<span id="cb122-7"><a href="análisis-de-muestra.html#cb122-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">level =</span> <span class="fl">0.95</span>,</span>
+<span id="cb122-8"><a href="análisis-de-muestra.html#cb122-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">deff =</span> <span class="cn">TRUE</span></span>
+<span id="cb122-9"><a href="análisis-de-muestra.html#cb122-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb122-10"><a href="análisis-de-muestra.html#cb122-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 7
+##    mean mean_se mean_low mean_upp mean_var mean_cv mean_deff
+##   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;
+## 1 6946.    135.    6679.    7214.   18146.  0.0194      1.75</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="construcción-de-muestra.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["unam22_eodc.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
