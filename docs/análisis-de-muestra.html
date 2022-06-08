@@ -622,7 +622,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Analicemos otro ejemplo: Si deseamos conocer el propósito de uso de la bicicleta diferenciando el sexo de la persona, encontramos lo siguiente:</p>
 <div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="análisis-de-muestra.html#cb126-1" aria-hidden="true" tabindex="-1"></a>tabla <span class="ot">&lt;-</span> design <span class="sc">%&gt;%</span> </span>
 <span id="cb126-2"><a href="análisis-de-muestra.html#cb126-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">S1 =</span> <span class="fu">if_else</span>(S1 <span class="sc">==</span> <span class="dv">1</span>, <span class="st">&quot;Hombre&quot;</span>, <span class="st">&quot;Mujer&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb126-3"><a href="análisis-de-muestra.html#cb126-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(S1), <span class="sc">!</span><span class="fu">is.na</span>(P11)) <span class="sc">%&gt;%</span> </span>
+<span id="cb126-3"><a href="análisis-de-muestra.html#cb126-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(S1), <span class="sc">!</span><span class="fu">is.na</span>(P12)) <span class="sc">%&gt;%</span> </span>
 <span id="cb126-4"><a href="análisis-de-muestra.html#cb126-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(S1, P12) <span class="sc">%&gt;%</span> </span>
 <span id="cb126-5"><a href="análisis-de-muestra.html#cb126-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb126-6"><a href="análisis-de-muestra.html#cb126-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">survey_mean</span>(</span>
@@ -664,7 +664,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Leer el marco de muestreo</p></li>
 <li><p>Determinar la población objetivo</p>
 <ul>
-<li><p>Equipo 1: Poblatión total</p></li>
+<li><p>Equipo 1: Población total</p></li>
 <li><p>Equipo 2: 18 años y más</p></li>
 <li><p>Equipo 3: 65 años y más</p></li>
 </ul></li>

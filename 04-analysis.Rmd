@@ -174,7 +174,7 @@ Analicemos otro ejemplo: Si deseamos conocer el propósito de uso de la biciclet
 ```{r}
 tabla <- design %>% 
   mutate(S1 = if_else(S1 == 1, "Hombre", "Mujer")) %>% 
-  filter(!is.na(S1), !is.na(P11)) %>% 
+  filter(!is.na(S1), !is.na(P12)) %>% 
   group_by(S1, P12) %>% 
   summarise(
     mean = survey_mean(
@@ -222,7 +222,7 @@ El participante deberá trabajar en equipo para crear una muestra probabilístic
 
 * Determinar la población objetivo
   
-  * Equipo 1: Poblatión total
+  * Equipo 1: Población total
   
   * Equipo 2: 18 años y más
   
