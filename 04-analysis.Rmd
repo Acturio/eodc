@@ -221,6 +221,12 @@ El participante deberá trabajar en equipo para crear una muestra probabilístic
 * Leer el marco de muestreo
 
 * Determinar la población objetivo
+  
+  * Equipo 1: Poblatión total
+  
+  * Equipo 2: 18 años y más
+  
+  * Equipo 3: 65 años y más
 
 * Limpiar el marco eliminando elementos que no pertenecen a la población objetivo
 
